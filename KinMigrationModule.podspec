@@ -1,21 +1,17 @@
 Pod::Spec.new do |s|
-  s.name             = 'KinMigrationModule'
-  s.version          = '0.0.1'
-  s.summary          = 'Pod for the Kin migration.'
-
-  s.description      = <<-DESC
+  s.name         = 'KinMigrationModule'
+  s.version      = '0.0.1'
+  s.summary      = 'Pod for the Kin migration.'
+  s.description  = <<-DESC
   Pod for the KinCore to KinSDK migration.
-                       DESC
+                   DESC
 
-  s.homepage         = 'https://github.com/kinfoundation/kin-migration-module-ios'
-  s.license          = { :type => 'MIT', :file => 'LICENSE.md' }
-  s.author           = { 'Kin Foundation' => 'kin@kik.com' }
-  s.source           = { :git => 'https://github.com/kinfoundation/kin-migration-module-ios.git', :tag => "#{s.version}", :submodules => true  }
+  s.homepage     = 'https://github.com/kinfoundation/kin-migration-module-ios'
+  s.license      = { :type => 'MIT', :file => 'LICENSE.md' }
+  s.author       = { 'Kin Foundation' => 'kin@kik.com' }
+  s.source       = { :git => 'https://github.com/kinfoundation/kin-migration-module-ios.git', :tag => "#{s.version}", :submodules => true  }
 
-  # s.source_files     = 'KinSDK/KinSDK/source/*.swift',
-  #                      'KinSDK/KinSDK/source/blockchain/**/*.swift',
-  #                      'KinSDK/KinSDK/source/third-party/SHA256.swift',
-  #                      'KinSDK/KinSDK/source/third-party/keychain-swift/KeychainSwift/*.swift'
+  s.source_files = 'KinMigrationModule/KinMigrationModule/*.swift'
 
   s.dependency 'Sodium'
 
