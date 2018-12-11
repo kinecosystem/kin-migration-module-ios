@@ -18,9 +18,5 @@ end
 target 'KinMigrationSampleApp' do
   project 'KinMigrationSampleApp/KinMigrationSampleApp.xcodeproj'
 
-  pod 'KinSDK', :path => '../kin-sdk-ios/'
-  pod 'KinCoreSDK', :path => '../kin-core-ios/'
-  pod 'StellarKit', :path => '../kin-core-ios/KinSDK/StellarKit/'
-  pod 'StellarErrors', :path => '../kin-core-ios/KinSDK/StellarKit/'
-  pod 'Sodium'
+  pod 'KinMigrationModule', :path => './'
 end
