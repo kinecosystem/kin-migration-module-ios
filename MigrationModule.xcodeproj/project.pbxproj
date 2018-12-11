@@ -1,0 +1,578 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6815F2D021BF973500B9439A /* MigrationModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6815F2C621BF973500B9439A /* MigrationModule.framework */; };
+		6815F2D521BF973500B9439A /* MigrationModuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F2D421BF973500B9439A /* MigrationModuleTests.swift */; };
+		6815F2D721BF973500B9439A /* MigrationModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 6815F2C921BF973500B9439A /* MigrationModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6815F2EE21BF985600B9439A /* WrappedKinCoreAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F2E321BF985600B9439A /* WrappedKinCoreAccounts.swift */; };
+		6815F2EF21BF985600B9439A /* WrappedKinCoreWatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F2E421BF985600B9439A /* WrappedKinCoreWatchers.swift */; };
+		6815F2F021BF985600B9439A /* WrappedKinCorePaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F2E521BF985600B9439A /* WrappedKinCorePaymentInfo.swift */; };
+		6815F2F121BF985600B9439A /* WrappedKinCoreAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F2E621BF985600B9439A /* WrappedKinCoreAccount.swift */; };
+		6815F2F221BF985600B9439A /* WrappedKinCoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F2E721BF985600B9439A /* WrappedKinCoreClient.swift */; };
+		6815F2F321BF985600B9439A /* WrappedKinSDKPaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F2E921BF985600B9439A /* WrappedKinSDKPaymentInfo.swift */; };
+		6815F2F421BF985600B9439A /* WrappedKinSDKClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F2EA21BF985600B9439A /* WrappedKinSDKClient.swift */; };
+		6815F2F521BF985600B9439A /* WrappedKinSDKAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F2EB21BF985600B9439A /* WrappedKinSDKAccount.swift */; };
+		6815F2F621BF985600B9439A /* WrappedKinSDKWatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F2EC21BF985600B9439A /* WrappedKinSDKWatchers.swift */; };
+		6815F2F721BF985600B9439A /* WrappedKinSDKAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F2ED21BF985600B9439A /* WrappedKinSDKAccounts.swift */; };
+		6815F2FB21BF986500B9439A /* KinClientFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F2F821BF986500B9439A /* KinClientFactory.swift */; };
+		6815F2FC21BF986500B9439A /* KinMigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F2F921BF986500B9439A /* KinMigrationManager.swift */; };
+		6815F2FD21BF986500B9439A /* KinTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F2FA21BF986500B9439A /* KinTypes.swift */; };
+		F5FAD4D3623F3668692D7BC7 /* Pods_MigrationModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BD7880911249B3A3412559 /* Pods_MigrationModule.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6815F2D121BF973500B9439A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6815F2BD21BF973400B9439A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6815F2C521BF973500B9439A;
+			remoteInfo = MigrationModule;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1A36976E6B3518E50374B4C8 /* Pods-MigrationModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MigrationModule.release.xcconfig"; path = "Pods/Target Support Files/Pods-MigrationModule/Pods-MigrationModule.release.xcconfig"; sourceTree = "<group>"; };
+		30BD7880911249B3A3412559 /* Pods_MigrationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MigrationModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		31812221122E1B7721FEE411 /* Pods-MigrationModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MigrationModule.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MigrationModule/Pods-MigrationModule.debug.xcconfig"; sourceTree = "<group>"; };
+		6815F2C621BF973500B9439A /* MigrationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MigrationModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6815F2C921BF973500B9439A /* MigrationModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MigrationModule.h; sourceTree = "<group>"; };
+		6815F2CA21BF973500B9439A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6815F2CF21BF973500B9439A /* MigrationModuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MigrationModuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6815F2D421BF973500B9439A /* MigrationModuleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationModuleTests.swift; sourceTree = "<group>"; };
+		6815F2D621BF973500B9439A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6815F2E321BF985600B9439A /* WrappedKinCoreAccounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappedKinCoreAccounts.swift; sourceTree = "<group>"; };
+		6815F2E421BF985600B9439A /* WrappedKinCoreWatchers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappedKinCoreWatchers.swift; sourceTree = "<group>"; };
+		6815F2E521BF985600B9439A /* WrappedKinCorePaymentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappedKinCorePaymentInfo.swift; sourceTree = "<group>"; };
+		6815F2E621BF985600B9439A /* WrappedKinCoreAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappedKinCoreAccount.swift; sourceTree = "<group>"; };
+		6815F2E721BF985600B9439A /* WrappedKinCoreClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappedKinCoreClient.swift; sourceTree = "<group>"; };
+		6815F2E921BF985600B9439A /* WrappedKinSDKPaymentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappedKinSDKPaymentInfo.swift; sourceTree = "<group>"; };
+		6815F2EA21BF985600B9439A /* WrappedKinSDKClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappedKinSDKClient.swift; sourceTree = "<group>"; };
+		6815F2EB21BF985600B9439A /* WrappedKinSDKAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappedKinSDKAccount.swift; sourceTree = "<group>"; };
+		6815F2EC21BF985600B9439A /* WrappedKinSDKWatchers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappedKinSDKWatchers.swift; sourceTree = "<group>"; };
+		6815F2ED21BF985600B9439A /* WrappedKinSDKAccounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappedKinSDKAccounts.swift; sourceTree = "<group>"; };
+		6815F2F821BF986500B9439A /* KinClientFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinClientFactory.swift; sourceTree = "<group>"; };
+		6815F2F921BF986500B9439A /* KinMigrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinMigrationManager.swift; sourceTree = "<group>"; };
+		6815F2FA21BF986500B9439A /* KinTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinTypes.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6815F2C321BF973500B9439A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5FAD4D3623F3668692D7BC7 /* Pods_MigrationModule.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6815F2CC21BF973500B9439A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6815F2D021BF973500B9439A /* MigrationModule.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6815F2BC21BF973400B9439A = {
+			isa = PBXGroup;
+			children = (
+				6815F2C821BF973500B9439A /* MigrationModule */,
+				6815F2D321BF973500B9439A /* MigrationModuleTests */,
+				6815F2C721BF973500B9439A /* Products */,
+				EA79F6E0E2D7D207E59732BB /* Pods */,
+				AF9343C30148495827A0D01B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6815F2C721BF973500B9439A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6815F2C621BF973500B9439A /* MigrationModule.framework */,
+				6815F2CF21BF973500B9439A /* MigrationModuleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6815F2C821BF973500B9439A /* MigrationModule */ = {
+			isa = PBXGroup;
+			children = (
+				6815F2F821BF986500B9439A /* KinClientFactory.swift */,
+				6815F2F921BF986500B9439A /* KinMigrationManager.swift */,
+				6815F2FA21BF986500B9439A /* KinTypes.swift */,
+				6815F2C921BF973500B9439A /* MigrationModule.h */,
+				6815F2E221BF985600B9439A /* WrappedKinCore */,
+				6815F2E821BF985600B9439A /* WrappedKinSDK */,
+				6815F2CA21BF973500B9439A /* Info.plist */,
+			);
+			path = MigrationModule;
+			sourceTree = "<group>";
+		};
+		6815F2D321BF973500B9439A /* MigrationModuleTests */ = {
+			isa = PBXGroup;
+			children = (
+				6815F2D421BF973500B9439A /* MigrationModuleTests.swift */,
+				6815F2D621BF973500B9439A /* Info.plist */,
+			);
+			path = MigrationModuleTests;
+			sourceTree = "<group>";
+		};
+		6815F2E221BF985600B9439A /* WrappedKinCore */ = {
+			isa = PBXGroup;
+			children = (
+				6815F2E321BF985600B9439A /* WrappedKinCoreAccounts.swift */,
+				6815F2E421BF985600B9439A /* WrappedKinCoreWatchers.swift */,
+				6815F2E521BF985600B9439A /* WrappedKinCorePaymentInfo.swift */,
+				6815F2E621BF985600B9439A /* WrappedKinCoreAccount.swift */,
+				6815F2E721BF985600B9439A /* WrappedKinCoreClient.swift */,
+			);
+			path = WrappedKinCore;
+			sourceTree = "<group>";
+		};
+		6815F2E821BF985600B9439A /* WrappedKinSDK */ = {
+			isa = PBXGroup;
+			children = (
+				6815F2E921BF985600B9439A /* WrappedKinSDKPaymentInfo.swift */,
+				6815F2EA21BF985600B9439A /* WrappedKinSDKClient.swift */,
+				6815F2EB21BF985600B9439A /* WrappedKinSDKAccount.swift */,
+				6815F2EC21BF985600B9439A /* WrappedKinSDKWatchers.swift */,
+				6815F2ED21BF985600B9439A /* WrappedKinSDKAccounts.swift */,
+			);
+			path = WrappedKinSDK;
+			sourceTree = "<group>";
+		};
+		AF9343C30148495827A0D01B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30BD7880911249B3A3412559 /* Pods_MigrationModule.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA79F6E0E2D7D207E59732BB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				31812221122E1B7721FEE411 /* Pods-MigrationModule.debug.xcconfig */,
+				1A36976E6B3518E50374B4C8 /* Pods-MigrationModule.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6815F2C121BF973500B9439A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6815F2D721BF973500B9439A /* MigrationModule.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6815F2C521BF973500B9439A /* MigrationModule */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6815F2DA21BF973500B9439A /* Build configuration list for PBXNativeTarget "MigrationModule" */;
+			buildPhases = (
+				A9DA5A1F05472B9300547712 /* [CP] Check Pods Manifest.lock */,
+				6815F2C121BF973500B9439A /* Headers */,
+				6815F2C221BF973500B9439A /* Sources */,
+				6815F2C321BF973500B9439A /* Frameworks */,
+				6815F2C421BF973500B9439A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MigrationModule;
+			productName = MigrationModule;
+			productReference = 6815F2C621BF973500B9439A /* MigrationModule.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		6815F2CE21BF973500B9439A /* MigrationModuleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6815F2DD21BF973500B9439A /* Build configuration list for PBXNativeTarget "MigrationModuleTests" */;
+			buildPhases = (
+				6815F2CB21BF973500B9439A /* Sources */,
+				6815F2CC21BF973500B9439A /* Frameworks */,
+				6815F2CD21BF973500B9439A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6815F2D221BF973500B9439A /* PBXTargetDependency */,
+			);
+			name = MigrationModuleTests;
+			productName = MigrationModuleTests;
+			productReference = 6815F2CF21BF973500B9439A /* MigrationModuleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6815F2BD21BF973400B9439A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Kin Foundation";
+				TargetAttributes = {
+					6815F2C521BF973500B9439A = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					6815F2CE21BF973500B9439A = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 6815F2C021BF973400B9439A /* Build configuration list for PBXProject "MigrationModule" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6815F2BC21BF973400B9439A;
+			productRefGroup = 6815F2C721BF973500B9439A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6815F2C521BF973500B9439A /* MigrationModule */,
+				6815F2CE21BF973500B9439A /* MigrationModuleTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6815F2C421BF973500B9439A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6815F2CD21BF973500B9439A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A9DA5A1F05472B9300547712 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MigrationModule-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6815F2C221BF973500B9439A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6815F2F321BF985600B9439A /* WrappedKinSDKPaymentInfo.swift in Sources */,
+				6815F2F521BF985600B9439A /* WrappedKinSDKAccount.swift in Sources */,
+				6815F2EF21BF985600B9439A /* WrappedKinCoreWatchers.swift in Sources */,
+				6815F2F121BF985600B9439A /* WrappedKinCoreAccount.swift in Sources */,
+				6815F2F421BF985600B9439A /* WrappedKinSDKClient.swift in Sources */,
+				6815F2FB21BF986500B9439A /* KinClientFactory.swift in Sources */,
+				6815F2F721BF985600B9439A /* WrappedKinSDKAccounts.swift in Sources */,
+				6815F2FD21BF986500B9439A /* KinTypes.swift in Sources */,
+				6815F2FC21BF986500B9439A /* KinMigrationManager.swift in Sources */,
+				6815F2F021BF985600B9439A /* WrappedKinCorePaymentInfo.swift in Sources */,
+				6815F2F221BF985600B9439A /* WrappedKinCoreClient.swift in Sources */,
+				6815F2EE21BF985600B9439A /* WrappedKinCoreAccounts.swift in Sources */,
+				6815F2F621BF985600B9439A /* WrappedKinSDKWatchers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6815F2CB21BF973500B9439A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6815F2D521BF973500B9439A /* MigrationModuleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6815F2D221BF973500B9439A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6815F2C521BF973500B9439A /* MigrationModule */;
+			targetProxy = 6815F2D121BF973500B9439A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		6815F2D821BF973500B9439A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6815F2D921BF973500B9439A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6815F2DB21BF973500B9439A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31812221122E1B7721FEE411 /* Pods-MigrationModule.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MigrationModule/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinfoundation.MigrationModule;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6815F2DC21BF973500B9439A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A36976E6B3518E50374B4C8 /* Pods-MigrationModule.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MigrationModule/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinfoundation.MigrationModule;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6815F2DE21BF973500B9439A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MigrationModuleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinfoundation.MigrationModuleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6815F2DF21BF973500B9439A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MigrationModuleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinfoundation.MigrationModuleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6815F2C021BF973400B9439A /* Build configuration list for PBXProject "MigrationModule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6815F2D821BF973500B9439A /* Debug */,
+				6815F2D921BF973500B9439A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6815F2DA21BF973500B9439A /* Build configuration list for PBXNativeTarget "MigrationModule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6815F2DB21BF973500B9439A /* Debug */,
+				6815F2DC21BF973500B9439A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6815F2DD21BF973500B9439A /* Build configuration list for PBXNativeTarget "MigrationModuleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6815F2DE21BF973500B9439A /* Debug */,
+				6815F2DF21BF973500B9439A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6815F2BD21BF973400B9439A /* Project object */;
+}
