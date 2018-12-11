@@ -3,10 +3,10 @@
 
 use_frameworks!
 
-workspace 'MigrationModule'
+workspace 'KinMigrationModule'
 
-target 'MigrationModule' do
-  project 'MigrationModule/MigrationModule.xcodeproj'
+target 'KinMigrationModule' do
+  project 'KinMigrationModule/KinMigrationModule.xcodeproj'
 
   pod 'KinSDK', :path => '../kin-sdk-ios/'
   pod 'KinCoreSDK', :path => '../kin-core-ios/'
@@ -15,8 +15,8 @@ target 'MigrationModule' do
   pod 'Sodium'
 end
 
-target 'MigrationSampleApp' do
-  project 'MigrationSampleApp/MigrationSampleApp.xcodeproj'
+target 'KinMigrationSampleApp' do
+  project 'KinMigrationSampleApp/KinMigrationSampleApp.xcodeproj'
 
   pod 'KinSDK', :path => '../kin-sdk-ios/'
   pod 'KinCoreSDK', :path => '../kin-core-ios/'

@@ -7,125 +7,125 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2FAC77412C91F973AC3D061D /* Pods_MigrationSampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD0136E0ECA888AFFBF6C053 /* Pods_MigrationSampleApp.framework */; };
-		6815F37121BFA2C000B9439A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F37021BFA2C000B9439A /* AppDelegate.swift */; };
-		6815F37321BFA2C000B9439A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F37221BFA2C000B9439A /* ViewController.swift */; };
-		6815F37621BFA2C000B9439A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6815F37421BFA2C000B9439A /* Main.storyboard */; };
-		6815F37821BFA2C000B9439A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6815F37721BFA2C000B9439A /* Assets.xcassets */; };
-		6815F37B21BFA2C000B9439A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6815F37921BFA2C000B9439A /* LaunchScreen.storyboard */; };
+		6815F45D21BFB87600B9439A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F45C21BFB87600B9439A /* AppDelegate.swift */; };
+		6815F45F21BFB87600B9439A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F45E21BFB87600B9439A /* ViewController.swift */; };
+		6815F46221BFB87600B9439A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6815F46021BFB87600B9439A /* Main.storyboard */; };
+		6815F46421BFB87600B9439A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6815F46321BFB87600B9439A /* Assets.xcassets */; };
+		6815F46721BFB87600B9439A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6815F46521BFB87600B9439A /* LaunchScreen.storyboard */; };
+		F5EE07D48B3326CCFE3079E4 /* Pods_KinMigrationSampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8088B5A8ED9E70280CB7AC3B /* Pods_KinMigrationSampleApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1FA0A79C4F47B37644E83114 /* Pods-MigrationSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MigrationSampleApp.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-MigrationSampleApp/Pods-MigrationSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
-		6815F36D21BFA2C000B9439A /* MigrationSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MigrationSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6815F37021BFA2C000B9439A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6815F37221BFA2C000B9439A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		6815F37521BFA2C000B9439A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6815F37721BFA2C000B9439A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6815F37A21BFA2C000B9439A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		6815F37C21BFA2C000B9439A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A91F8601E75A5547F8DAEFA2 /* Pods-MigrationSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MigrationSampleApp.release.xcconfig"; path = "../Pods/Target Support Files/Pods-MigrationSampleApp/Pods-MigrationSampleApp.release.xcconfig"; sourceTree = "<group>"; };
-		CD0136E0ECA888AFFBF6C053 /* Pods_MigrationSampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MigrationSampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6815F45921BFB87600B9439A /* KinMigrationSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KinMigrationSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6815F45C21BFB87600B9439A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6815F45E21BFB87600B9439A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6815F46121BFB87600B9439A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6815F46321BFB87600B9439A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6815F46621BFB87600B9439A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6815F46821BFB87600B9439A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8088B5A8ED9E70280CB7AC3B /* Pods_KinMigrationSampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinMigrationSampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E850E42F14D42F9C3FD2B53 /* Pods-KinMigrationSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinMigrationSampleApp.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-KinMigrationSampleApp/Pods-KinMigrationSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
+		F46902B063ECA97AF78B489C /* Pods-KinMigrationSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinMigrationSampleApp.release.xcconfig"; path = "../Pods/Target Support Files/Pods-KinMigrationSampleApp/Pods-KinMigrationSampleApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		6815F36A21BFA2C000B9439A /* Frameworks */ = {
+		6815F45621BFB87600B9439A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FAC77412C91F973AC3D061D /* Pods_MigrationSampleApp.framework in Frameworks */,
+				F5EE07D48B3326CCFE3079E4 /* Pods_KinMigrationSampleApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		21194DC09FA0D65A9F26D8F5 /* Pods */ = {
+		360F44E42D38C39F36E8B4AE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1FA0A79C4F47B37644E83114 /* Pods-MigrationSampleApp.debug.xcconfig */,
-				A91F8601E75A5547F8DAEFA2 /* Pods-MigrationSampleApp.release.xcconfig */,
+				9E850E42F14D42F9C3FD2B53 /* Pods-KinMigrationSampleApp.debug.xcconfig */,
+				F46902B063ECA97AF78B489C /* Pods-KinMigrationSampleApp.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		6815F36421BFA2C000B9439A = {
+		402CA8A8A0419215C3C0529B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6815F36F21BFA2C000B9439A /* MigrationSampleApp */,
-				6815F36E21BFA2C000B9439A /* Products */,
-				21194DC09FA0D65A9F26D8F5 /* Pods */,
-				95A9E7BCDD20487831988CF4 /* Frameworks */,
+				8088B5A8ED9E70280CB7AC3B /* Pods_KinMigrationSampleApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6815F45021BFB87600B9439A = {
+			isa = PBXGroup;
+			children = (
+				6815F45B21BFB87600B9439A /* KinMigrationSampleApp */,
+				6815F45A21BFB87600B9439A /* Products */,
+				360F44E42D38C39F36E8B4AE /* Pods */,
+				402CA8A8A0419215C3C0529B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		6815F36E21BFA2C000B9439A /* Products */ = {
+		6815F45A21BFB87600B9439A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6815F36D21BFA2C000B9439A /* MigrationSampleApp.app */,
+				6815F45921BFB87600B9439A /* KinMigrationSampleApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6815F36F21BFA2C000B9439A /* MigrationSampleApp */ = {
+		6815F45B21BFB87600B9439A /* KinMigrationSampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				6815F37021BFA2C000B9439A /* AppDelegate.swift */,
-				6815F37221BFA2C000B9439A /* ViewController.swift */,
-				6815F37421BFA2C000B9439A /* Main.storyboard */,
-				6815F37721BFA2C000B9439A /* Assets.xcassets */,
-				6815F37921BFA2C000B9439A /* LaunchScreen.storyboard */,
-				6815F37C21BFA2C000B9439A /* Info.plist */,
+				6815F45C21BFB87600B9439A /* AppDelegate.swift */,
+				6815F45E21BFB87600B9439A /* ViewController.swift */,
+				6815F46021BFB87600B9439A /* Main.storyboard */,
+				6815F46321BFB87600B9439A /* Assets.xcassets */,
+				6815F46521BFB87600B9439A /* LaunchScreen.storyboard */,
+				6815F46821BFB87600B9439A /* Info.plist */,
 			);
-			path = MigrationSampleApp;
-			sourceTree = "<group>";
-		};
-		95A9E7BCDD20487831988CF4 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				CD0136E0ECA888AFFBF6C053 /* Pods_MigrationSampleApp.framework */,
-			);
-			name = Frameworks;
+			path = KinMigrationSampleApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6815F36C21BFA2C000B9439A /* MigrationSampleApp */ = {
+		6815F45821BFB87600B9439A /* KinMigrationSampleApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6815F37F21BFA2C000B9439A /* Build configuration list for PBXNativeTarget "MigrationSampleApp" */;
+			buildConfigurationList = 6815F46B21BFB87600B9439A /* Build configuration list for PBXNativeTarget "KinMigrationSampleApp" */;
 			buildPhases = (
-				2BA9426209053E418C06239F /* [CP] Check Pods Manifest.lock */,
-				6815F36921BFA2C000B9439A /* Sources */,
-				6815F36A21BFA2C000B9439A /* Frameworks */,
-				6815F36B21BFA2C000B9439A /* Resources */,
-				B6B10D4E9AC19F70718554DC /* [CP] Embed Pods Frameworks */,
+				716E543D5C40F1898417A817 /* [CP] Check Pods Manifest.lock */,
+				6815F45521BFB87600B9439A /* Sources */,
+				6815F45621BFB87600B9439A /* Frameworks */,
+				6815F45721BFB87600B9439A /* Resources */,
+				9A1EE34126FE3317FAEB060E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = MigrationSampleApp;
-			productName = MigrationSampleApp;
-			productReference = 6815F36D21BFA2C000B9439A /* MigrationSampleApp.app */;
+			name = KinMigrationSampleApp;
+			productName = KinMigrationSampleApp;
+			productReference = 6815F45921BFB87600B9439A /* KinMigrationSampleApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		6815F36521BFA2C000B9439A /* Project object */ = {
+		6815F45121BFB87600B9439A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Kin Foundation";
 				TargetAttributes = {
-					6815F36C21BFA2C000B9439A = {
+					6815F45821BFB87600B9439A = {
 						CreatedOnToolsVersion = 10.1;
 					};
 				};
 			};
-			buildConfigurationList = 6815F36821BFA2C000B9439A /* Build configuration list for PBXProject "MigrationSampleApp" */;
+			buildConfigurationList = 6815F45421BFB87600B9439A /* Build configuration list for PBXProject "KinMigrationSampleApp" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -133,31 +133,31 @@
 				en,
 				Base,
 			);
-			mainGroup = 6815F36421BFA2C000B9439A;
-			productRefGroup = 6815F36E21BFA2C000B9439A /* Products */;
+			mainGroup = 6815F45021BFB87600B9439A;
+			productRefGroup = 6815F45A21BFB87600B9439A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6815F36C21BFA2C000B9439A /* MigrationSampleApp */,
+				6815F45821BFB87600B9439A /* KinMigrationSampleApp */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		6815F36B21BFA2C000B9439A /* Resources */ = {
+		6815F45721BFB87600B9439A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6815F37B21BFA2C000B9439A /* LaunchScreen.storyboard in Resources */,
-				6815F37821BFA2C000B9439A /* Assets.xcassets in Resources */,
-				6815F37621BFA2C000B9439A /* Main.storyboard in Resources */,
+				6815F46721BFB87600B9439A /* LaunchScreen.storyboard in Resources */,
+				6815F46421BFB87600B9439A /* Assets.xcassets in Resources */,
+				6815F46221BFB87600B9439A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2BA9426209053E418C06239F /* [CP] Check Pods Manifest.lock */ = {
+		716E543D5C40F1898417A817 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -172,14 +172,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MigrationSampleApp-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-KinMigrationSampleApp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B6B10D4E9AC19F70718554DC /* [CP] Embed Pods Frameworks */ = {
+		9A1EE34126FE3317FAEB060E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -187,7 +187,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/../Pods/Target Support Files/Pods-MigrationSampleApp/Pods-MigrationSampleApp-frameworks.sh",
+				"${SRCROOT}/../Pods/Target Support Files/Pods-KinMigrationSampleApp/Pods-KinMigrationSampleApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/KinCoreSDK/KinCoreSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/KinSDK/KinSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/KinUtil/KinUtil.framework",
@@ -208,36 +208,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-MigrationSampleApp/Pods-MigrationSampleApp-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-KinMigrationSampleApp/Pods-KinMigrationSampleApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		6815F36921BFA2C000B9439A /* Sources */ = {
+		6815F45521BFB87600B9439A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6815F37321BFA2C000B9439A /* ViewController.swift in Sources */,
-				6815F37121BFA2C000B9439A /* AppDelegate.swift in Sources */,
+				6815F45F21BFB87600B9439A /* ViewController.swift in Sources */,
+				6815F45D21BFB87600B9439A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6815F37421BFA2C000B9439A /* Main.storyboard */ = {
+		6815F46021BFB87600B9439A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6815F37521BFA2C000B9439A /* Base */,
+				6815F46121BFB87600B9439A /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		6815F37921BFA2C000B9439A /* LaunchScreen.storyboard */ = {
+		6815F46521BFB87600B9439A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6815F37A21BFA2C000B9439A /* Base */,
+				6815F46621BFB87600B9439A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -245,7 +245,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		6815F37D21BFA2C000B9439A /* Debug */ = {
+		6815F46921BFB87600B9439A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -306,7 +306,7 @@
 			};
 			name = Debug;
 		};
-		6815F37E21BFA2C000B9439A /* Release */ = {
+		6815F46A21BFB87600B9439A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -361,36 +361,36 @@
 			};
 			name = Release;
 		};
-		6815F38021BFA2C000B9439A /* Debug */ = {
+		6815F46C21BFB87600B9439A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1FA0A79C4F47B37644E83114 /* Pods-MigrationSampleApp.debug.xcconfig */;
+			baseConfigurationReference = 9E850E42F14D42F9C3FD2B53 /* Pods-KinMigrationSampleApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = MigrationSampleApp/Info.plist;
+				INFOPLIST_FILE = KinMigrationSampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kinfoundation.MigrationSampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinfoundation.KinMigrationSampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		6815F38121BFA2C000B9439A /* Release */ = {
+		6815F46D21BFB87600B9439A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A91F8601E75A5547F8DAEFA2 /* Pods-MigrationSampleApp.release.xcconfig */;
+			baseConfigurationReference = F46902B063ECA97AF78B489C /* Pods-KinMigrationSampleApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = MigrationSampleApp/Info.plist;
+				INFOPLIST_FILE = KinMigrationSampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kinfoundation.MigrationSampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinfoundation.KinMigrationSampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -400,25 +400,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6815F36821BFA2C000B9439A /* Build configuration list for PBXProject "MigrationSampleApp" */ = {
+		6815F45421BFB87600B9439A /* Build configuration list for PBXProject "KinMigrationSampleApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6815F37D21BFA2C000B9439A /* Debug */,
-				6815F37E21BFA2C000B9439A /* Release */,
+				6815F46921BFB87600B9439A /* Debug */,
+				6815F46A21BFB87600B9439A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6815F37F21BFA2C000B9439A /* Build configuration list for PBXNativeTarget "MigrationSampleApp" */ = {
+		6815F46B21BFB87600B9439A /* Build configuration list for PBXNativeTarget "KinMigrationSampleApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6815F38021BFA2C000B9439A /* Debug */,
-				6815F38121BFA2C000B9439A /* Release */,
+				6815F46C21BFB87600B9439A /* Debug */,
+				6815F46D21BFB87600B9439A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 6815F36521BFA2C000B9439A /* Project object */;
+	rootObject = 6815F45121BFB87600B9439A /* Project object */;
 }

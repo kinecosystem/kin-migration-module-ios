@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_MigrationSampleAppVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_MigrationSampleAppVersionString[];
+FOUNDATION_EXPORT double Pods_KinMigrationModuleVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_KinMigrationModuleVersionString[];
 

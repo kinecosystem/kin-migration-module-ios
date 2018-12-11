@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  MigrationSampleApp
+//  KinMigrationSampleApp
 //
 //  Created by Corey Werner on 11/12/2018.
 //  Copyright © 2018 Kin Foundation. All rights reserved.

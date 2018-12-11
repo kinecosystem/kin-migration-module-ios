@@ -1,15 +1,15 @@
 //
-//  MigrationModuleTests.swift
-//  MigrationModuleTests
+//  KinMigrationModuleTests.swift
+//  KinMigrationModuleTests
 //
 //  Created by Corey Werner on 11/12/2018.
 //  Copyright © 2018 Kin Foundation. All rights reserved.
 //
 
 import XCTest
-@testable import MigrationModule
+@testable import KinMigrationModule
 
-class MigrationModuleTests: XCTestCase {
+class KinMigrationModuleTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
