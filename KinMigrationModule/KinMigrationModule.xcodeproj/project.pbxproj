@@ -144,11 +144,11 @@
 		6815F47C21BFBA7100B9439A /* WrappedKinCore */ = {
 			isa = PBXGroup;
 			children = (
-				6815F47D21BFBA7100B9439A /* WrappedKinCoreAccounts.swift */,
-				6815F47E21BFBA7100B9439A /* WrappedKinCoreWatchers.swift */,
-				6815F47F21BFBA7100B9439A /* WrappedKinCorePaymentInfo.swift */,
 				6815F48021BFBA7100B9439A /* WrappedKinCoreAccount.swift */,
+				6815F47D21BFBA7100B9439A /* WrappedKinCoreAccounts.swift */,
 				6815F48121BFBA7100B9439A /* WrappedKinCoreClient.swift */,
+				6815F47F21BFBA7100B9439A /* WrappedKinCorePaymentInfo.swift */,
+				6815F47E21BFBA7100B9439A /* WrappedKinCoreWatchers.swift */,
 			);
 			path = WrappedKinCore;
 			sourceTree = "<group>";
@@ -156,11 +156,11 @@
 		6815F48221BFBA7100B9439A /* WrappedKinSDK */ = {
 			isa = PBXGroup;
 			children = (
-				6815F48321BFBA7100B9439A /* WrappedKinSDKPaymentInfo.swift */,
-				6815F48421BFBA7100B9439A /* WrappedKinSDKClient.swift */,
 				6815F48521BFBA7100B9439A /* WrappedKinSDKAccount.swift */,
-				6815F48621BFBA7100B9439A /* WrappedKinSDKWatchers.swift */,
 				6815F48721BFBA7100B9439A /* WrappedKinSDKAccounts.swift */,
+				6815F48421BFBA7100B9439A /* WrappedKinSDKClient.swift */,
+				6815F48321BFBA7100B9439A /* WrappedKinSDKPaymentInfo.swift */,
+				6815F48621BFBA7100B9439A /* WrappedKinSDKWatchers.swift */,
 			);
 			path = WrappedKinSDK;
 			sourceTree = "<group>";

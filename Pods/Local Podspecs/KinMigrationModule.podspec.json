@@ -16,9 +16,15 @@
     "tag": "0.0.1",
     "submodules": true
   },
-  "source_files": "KinMigrationModule/KinMigrationModule/*.swift",
+  "source_files": "KinMigrationModule/KinMigrationModule/**/*.swift",
   "dependencies": {
     "Sodium": [
+
+    ],
+    "KinSDK": [
+
+    ],
+    "KinCoreSDK": [
 
     ]
   },

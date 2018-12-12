@@ -14,19 +14,22 @@ public protocol KinMigrationManagerDelegate: NSObjectProtocol {
 }
 
 public class KinMigrationManager {
-    public weak var delegate: KinMigrationManagerDelegate?
-
-    private var version: Version? {
+    public weak var delegate: KinMigrationManagerDelegate? {
         didSet {
-            guard let version = version else {
-                return
+            if needsToCreateClient {
+                needsToCreateClient = false
+                createClientIfPossible()
             }
-
-            delegate?.kinMigrationManagerCanCreateClient(self, factory: KinClientFactory(version: version))
         }
     }
 
-    private(set) var state: State = .ready {
+    fileprivate(set) var version: Version? {
+        didSet {
+            createClientIfPossible()
+        }
+    }
+
+    fileprivate(set) var state: State = .ready {
         didSet {
             syncState()
         }
@@ -38,10 +41,23 @@ public class KinMigrationManager {
         self.versionURL = versionURL
 
         if isMigrated {
+            needsToCreateClient = true
             version = .kin3
         }
         else {
             syncState()
+        }
+    }
+
+    /**
+     If the migration has already happened, this flag will have the client creation
+     delegate called after all required properties have been set.
+     */
+    private var needsToCreateClient = false
+
+    private func createClientIfPossible() {
+        if let delegate = delegate, let version = version {
+            delegate.kinMigrationManagerCanCreateClient(self, factory: KinClientFactory(version: version))
         }
     }
 }
@@ -65,7 +81,7 @@ extension KinMigrationManager {
         case completed
     }
 
-    private func syncState() {
+    fileprivate func syncState() {
         switch state {
         case .ready:
             requestVersion()
@@ -92,13 +108,10 @@ extension KinMigrationManager {
 
 extension KinMigrationManager {
     public enum Error: Swift.Error {
-//        case versionResponseFailed (Swift.Error)
-//        case burnableResponseFailed (Swift.Error)
-        case burnResponseFailed
-//        case migrateableResponseFailed (Swift.Error)
-        case migrateResponseFailed
         case responseFailed (Swift.Error)
         case decodingFailed (Swift.Error)
+        case burnResponseFailed
+        case migrateResponseFailed
         case internalInconsistency
     }
 }
@@ -108,13 +121,12 @@ extension KinMigrationManager {
 extension KinMigrationManager {
     private static let failedRetryChances = 3
 
-    private func requestVersion() {
+    fileprivate func requestVersion() {
         perform(URLRequest(url: versionURL), responseType: Version.self)
             .then { [weak self] version in
                 // ???: when setting the version here, it allows the KinClient to be created. does that cause problems?
                 self?.version = version
                 self?.state = .burnable
-                self?.requestIsKin3Account()
             }
             .error { [weak self] error in
                 guard let strongSelf = self else {
@@ -125,28 +137,7 @@ extension KinMigrationManager {
         }
     }
 
-    private func requestIsKin3Account() {
-        let urlRequest = URLRequest(url: URL(string: "")!)
-
-        perform(urlRequest, responseType: Bool.self)
-            .then { [weak self] isKin3 in
-                if isKin3 {
-                    self?.state = .completed
-                }
-                else {
-                    self?.state = .burnable
-                }
-            }
-            .error { [weak self] error in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                strongSelf.delegate?.kinMigrationManagerError(strongSelf, error: error)
-        }
-    }
-
-    private func requestBurnAccount() { // requestBurnAccoiuntIfNeeded
+    fileprivate func requestBurnAccount() {
         let urlRequest = URLRequest(url: URL(string: "")!)
 
         perform(urlRequest, responseType: Bool.self)
@@ -155,7 +146,6 @@ extension KinMigrationManager {
                     self?.state = .migrateable
                 }
                 else if let strongSelf = self {
-                    // TODO: is this error good?
                     strongSelf.delegate?.kinMigrationManagerError(strongSelf, error: Error.burnResponseFailed)
                 }
             }
@@ -168,7 +158,7 @@ extension KinMigrationManager {
         }
     }
 
-    private func requestMigrateAccount() {
+    fileprivate func requestMigrateAccount() {
         let urlRequest = URLRequest(url: URL(string: "")!)
 
         perform(urlRequest, responseType: Bool.self)
@@ -177,7 +167,6 @@ extension KinMigrationManager {
                     self?.state = .completed
                 }
                 else if let strongSelf = self {
-                    // TODO: is this error good?
                     strongSelf.delegate?.kinMigrationManagerError(strongSelf, error: Error.migrateResponseFailed)
                 }
             }

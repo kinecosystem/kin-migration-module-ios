@@ -143,11 +143,21 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/KinCoreSDK/KinCoreSDK.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/KinSDK/KinSDK.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/KinUtil/KinUtil.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StellarErrors/StellarErrors.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StellarKit/StellarKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinMigrationModule/KinMigrationModule.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/KinCoreSDK/KinCoreSDK.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/KinSDK/KinSDK.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/KinUtil/KinUtil.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StellarErrors/StellarErrors.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/StellarKit/StellarKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinMigrationModule/KinMigrationModule.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

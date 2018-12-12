@@ -10,11 +10,11 @@ import UIKit
 import KinMigrationModule
 
 class ViewController: UIViewController {
+    let migrationManager = KinMigrationManager(versionURL: URL(string: "http://kin.org")!)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let migrationManager = KinMigrationManager(versionURL: URL(string: "")!)
         migrationManager.delegate = self
     }
 
