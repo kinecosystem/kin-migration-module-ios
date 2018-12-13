@@ -8,24 +8,8 @@
 
 import KinCoreSDK
 
-internal class WrappedKinCoreAccount: KinAccountProtocol {
+class WrappedKinCoreAccount: KinAccountProtocol {
     let account: KinCoreSDK.KinAccount
-
-    init(_ kinAccount: KinCoreSDK.KinAccount) {
-        self.account = kinAccount
-    }
-
-    func export(passphrase: String) throws -> String {
-        return try account.export(passphrase: passphrase)
-    }
-
-    func status() -> Promise<AccountStatus> {
-        return account.status().then { return Promise($0.mapToKinMigration) }
-    }
-
-    func balance() -> Promise<Kin> {
-        return account.balance()
-    }
 
     var publicAddress: String {
         return account.publicAddress
@@ -40,10 +24,28 @@ internal class WrappedKinCoreAccount: KinAccountProtocol {
         }
     }
 
-    // MARK:
+    init(_ kinAccount: KinCoreSDK.KinAccount) {
+        self.account = kinAccount
+    }
+
+    func status() -> Promise<AccountStatus> {
+        return account.status().then { return Promise($0.mapToKinMigration) }
+    }
+
+    func balance() -> Promise<Kin> {
+        return account.balance()
+    }
+
+    // MARK: Transaction
 
     func sendTransaction(to recipient: String, kin: Kin, memo: String?, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId> {
         return account.sendTransaction(to: recipient, kin: kin, memo: memo)
+    }
+
+    // MARK: Export
+
+    func export(passphrase: String) throws -> String {
+        return try account.export(passphrase: passphrase)
     }
 
     // MARK: Watchers
@@ -61,8 +63,8 @@ internal class WrappedKinCoreAccount: KinAccountProtocol {
     }
 }
 
-internal extension KinCoreSDK.AccountStatus {
-    var mapToKinMigration: AccountStatus {
+extension KinCoreSDK.AccountStatus {
+    fileprivate var mapToKinMigration: AccountStatus {
         switch self {
         case .notCreated:
             return .notCreated

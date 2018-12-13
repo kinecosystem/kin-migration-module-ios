@@ -8,7 +8,7 @@
 
 import KinSDK
 
-internal class WrappedKinSDKClient: KinClientProtocol {
+class WrappedKinSDKClient: KinClientProtocol {
     let client: KinSDK.KinClient
 
     private(set) var url: URL

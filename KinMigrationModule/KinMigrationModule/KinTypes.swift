@@ -19,13 +19,13 @@ public typealias TransactionEnvelope = KinSDK.TransactionEnvelope
 public typealias WhitelistEnvelope = KinSDK.WhitelistEnvelope
 
 public protocol KinClientProtocol {
+    var url: URL { get }
+    var network: Network { get }
+    var accounts: KinAccountsProtocol { get }
     func addAccount() throws -> KinAccountProtocol
     func deleteAccount(at index: Int) throws
     func importAccount(_ jsonString: String, passphrase: String) throws -> KinAccountProtocol
     func deleteKeystore()
-    var accounts: KinAccountsProtocol { get }
-    var url: URL { get }
-    var network: Network { get }
 }
 
 public protocol KinAccountsProtocol {
@@ -33,21 +33,21 @@ public protocol KinAccountsProtocol {
     var count: Int { get }
     var first: KinAccountProtocol? { get }
     var last: KinAccountProtocol? { get }
-    func makeIterator() -> AnyIterator<KinAccountProtocol?>
     var startIndex: Int { get }
     var endIndex: Int { get }
+    func makeIterator() -> AnyIterator<KinAccountProtocol?>
 }
 
 public protocol KinAccountProtocol {
-    func sendTransaction(to recipient: String, kin: Kin, memo: String?, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId>
-    func export(passphrase: String) throws -> String
+    var publicAddress: String { get }
+    var extra: Data? { get set }
     func status() -> Promise<AccountStatus>
     func balance() -> Promise<Kin>
+    func sendTransaction(to recipient: String, kin: Kin, memo: String?, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId>
+    func export(passphrase: String) throws -> String
     func watchCreation() throws -> Promise<Void>
     func watchBalance(_ balance: Kin?) throws -> BalanceWatchProtocol
     func watchPayments(cursor: String?) throws -> PaymentWatchProtocol
-    var publicAddress: String { get }
-    var extra: Data? { get set }
 }
 
 public typealias WhitelistClosure = (TransactionEnvelope)->(Promise<TransactionEnvelope>)

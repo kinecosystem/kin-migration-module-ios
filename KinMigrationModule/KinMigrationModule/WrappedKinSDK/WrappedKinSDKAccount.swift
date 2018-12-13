@@ -8,24 +8,8 @@
 
 import KinSDK
 
-internal class WrappedKinSDKAccount: KinAccountProtocol {
+class WrappedKinSDKAccount: KinAccountProtocol {
     let account: KinSDK.KinAccount
-
-    init(_ kinAccount: KinSDK.KinAccount) {
-        self.account = kinAccount
-    }
-
-    func export(passphrase: String) throws -> String {
-        return try account.export(passphrase: passphrase)
-    }
-
-    func status() -> Promise<AccountStatus> {
-        return account.status().then { return Promise($0.mapToKinMigration) }
-    }
-
-    func balance() -> Promise<Kin> {
-        return account.balance()
-    }
 
     var publicAddress: String {
         return account.publicAddress
@@ -40,7 +24,19 @@ internal class WrappedKinSDKAccount: KinAccountProtocol {
         }
     }
 
-    // MARK:
+    init(_ kinAccount: KinSDK.KinAccount) {
+        self.account = kinAccount
+    }
+
+    func status() -> Promise<AccountStatus> {
+        return account.status().then { return Promise($0.mapToKinMigration) }
+    }
+
+    func balance() -> Promise<Kin> {
+        return account.balance()
+    }
+
+    // MARK: Transaction
 
     func sendTransaction(to recipient: String, kin: Kin, memo: String?, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId> {
         let promise: Promise<TransactionId> = Promise()
@@ -66,6 +62,12 @@ internal class WrappedKinSDKAccount: KinAccountProtocol {
         return promise
     }
 
+    // MARK: Export
+
+    func export(passphrase: String) throws -> String {
+        return try account.export(passphrase: passphrase)
+    }
+
     // MARK: Watchers
 
     func watchCreation() throws -> Promise<Void> {
@@ -81,8 +83,8 @@ internal class WrappedKinSDKAccount: KinAccountProtocol {
     }
 }
 
-internal extension KinSDK.AccountStatus {
-    var mapToKinMigration: AccountStatus {
+extension KinSDK.AccountStatus {
+    fileprivate var mapToKinMigration: AccountStatus {
         switch self {
         case .created:
             return .created

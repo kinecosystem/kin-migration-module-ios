@@ -10,7 +10,7 @@ import KinCoreSDK
 import KinUtil
 import StellarKit
 
-internal class WrappedKinCoreClient: KinClientProtocol {
+class WrappedKinCoreClient: KinClientProtocol {
     let client: KinCoreSDK.KinClient
 
     private(set) var url: URL
@@ -62,8 +62,8 @@ internal class WrappedKinCoreClient: KinClientProtocol {
     }
 }
 
-internal extension Network {
-    var mapToKinCore: KinCoreSDK.NetworkId {
+extension Network {
+    fileprivate var mapToKinCore: KinCoreSDK.NetworkId {
         switch self {
         case .mainNet:
             return .mainNet

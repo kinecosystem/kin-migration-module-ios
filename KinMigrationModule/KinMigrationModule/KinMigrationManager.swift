@@ -16,6 +16,10 @@ public protocol KinMigrationManagerDelegate: NSObjectProtocol {
 public class KinMigrationManager {
     public weak var delegate: KinMigrationManagerDelegate? {
         didSet {
+            // !!!: Debug
+            version = .kin3
+            // End Debug
+
             if needsToCreateClient {
                 needsToCreateClient = false
                 createClientIfPossible()

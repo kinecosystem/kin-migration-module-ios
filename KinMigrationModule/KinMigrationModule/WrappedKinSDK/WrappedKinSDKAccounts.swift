@@ -8,11 +8,28 @@
 
 import KinSDK
 
-internal class WrappedKinSDKAccounts: KinAccountsProtocol {
+class WrappedKinSDKAccounts: KinAccountsProtocol {
     let accounts: KinSDK.KinAccounts
+
+    var count: Int {
+        return accounts.count
+    }
+
+    var first: KinAccountProtocol? {
+        return wrappedAccount(accounts.first)
+    }
+
+    var last: KinAccountProtocol? {
+        return wrappedAccount(accounts.last)
+    }
 
     init(_ kinAccounts: KinSDK.KinAccounts) {
         self.accounts = kinAccounts
+        restoreWrappedAccount()
+    }
+
+    subscript(index: Int) -> KinAccountProtocol? {
+        return wrappedAccount(accounts[index])
     }
 
     // MARK: Wrapped Accounts
@@ -33,6 +50,7 @@ internal class WrappedKinSDKAccounts: KinAccountsProtocol {
         return nil
     }
 
+    @discardableResult
     func addWrappedAccount(_ account: KinSDK.KinAccount) -> WrappedKinSDKAccount {
         let wrappedAccount = WrappedKinSDKAccount(account)
         wrappedAccounts.append(wrappedAccount)
@@ -45,23 +63,25 @@ internal class WrappedKinSDKAccounts: KinAccountsProtocol {
         }
     }
 
-    // MARK:
-
-    subscript(index: Int) -> KinAccountProtocol? {
-        return wrappedAccount(accounts[index])
+    private func restoreWrappedAccount() {
+        for i in 0..<count {
+            if let account = accounts[i] {
+                addWrappedAccount(account)
+            }
+        }
     }
 
-    var count: Int {
-        return accounts.count
+    // MARK: Random Access Collection
+
+    var startIndex: Int {
+        return accounts.startIndex
     }
 
-    var first: KinAccountProtocol? {
-        return wrappedAccount(accounts.first)
+    var endIndex: Int {
+        return accounts.endIndex
     }
 
-    var last: KinAccountProtocol? {
-        return wrappedAccount(accounts.last)
-    }
+    // MARK: Sequence
 
     func makeIterator() -> AnyIterator<KinAccountProtocol?> {
         let wrappedAccounts = accounts.makeIterator().map { wrappedAccount($0) }
@@ -74,13 +94,5 @@ internal class WrappedKinSDKAccounts: KinAccountsProtocol {
 
             return wrappedAccount
         }
-    }
-
-    var startIndex: Int {
-        return accounts.startIndex
-    }
-
-    var endIndex: Int {
-        return accounts.endIndex
     }
 }

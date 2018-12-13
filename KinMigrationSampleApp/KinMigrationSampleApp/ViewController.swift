@@ -46,14 +46,14 @@ class ViewController: UIViewController {
 
 extension ViewController: KinMigrationManagerDelegate {
     func kinMigrationManagerCanCreateClient(_ kinMigrationManager: KinMigrationManager, factory: KinClientFactory) {
-        guard let appId = try? AppId("") else {
+        guard let appId = try? AppId("aaaa") else {
             return
         }
 
-        let client = factory.KinClient(with: URL(string: "")!, network: .testNet, appId: appId)
+        let client = factory.KinClient(with: URL(string: "http://kin.org")!, network: .testNet, appId: appId)
 
-        if let account = try? client.addAccount() {
-            let url = URL(string: "")!
+        if let account = try? client.accounts.first ?? client.addAccount() {
+            let url = URL(string: "http://kin.org")!
             let whitelist = self.whitelist(url: url, network: client.network)
 
             account.sendTransaction(to: "", kin: 100, memo: nil, whitelist: whitelist)
