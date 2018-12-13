@@ -10,7 +10,7 @@ import UIKit
 import KinMigrationModule
 
 class ViewController: UIViewController {
-    let migrationManager = KinMigrationManager(versionURL: URL(string: "http://kin.org")!)
+    let migrationManager = KinMigrationManager(versionURL: URL.dev.version)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +28,14 @@ class ViewController: UIViewController {
             request.httpMethod = "POST"
             request.httpBody = try? JSONEncoder().encode(whitelistEnvelope)
 
-            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
                 do {
                     promise.signal(try TransactionEnvelope.decodeResponse(data: data, error: error))
                 }
                 catch {
                     promise.signal(error)
                 }
-            }
-
-            task.resume()
+            }.resume()
 
             return promise
         }
@@ -46,15 +44,14 @@ class ViewController: UIViewController {
 
 extension ViewController: KinMigrationManagerDelegate {
     func kinMigrationManagerCanCreateClient(_ kinMigrationManager: KinMigrationManager, factory: KinClientFactory) {
-        guard let appId = try? AppId("aaaa") else {
+        guard let appId: AppId = .dev else {
             return
         }
 
-        let client = factory.KinClient(with: URL(string: "http://kin.org")!, network: .testNet, appId: appId)
+        let client = factory.KinClient(with: URL.dev.node, network: .testNet, appId: appId)
 
         if let account = try? client.accounts.first ?? client.addAccount() {
-            let url = URL(string: "http://kin.org")!
-            let whitelist = self.whitelist(url: url, network: client.network)
+            let whitelist = self.whitelist(url: URL.dev.whitelist, network: client.network)
 
             account.sendTransaction(to: "", kin: 100, memo: nil, whitelist: whitelist)
                 .then { transactionId -> Void in
