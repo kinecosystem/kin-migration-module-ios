@@ -9,16 +9,44 @@
 import KinMigrationModule
 
 extension AppId {
-    static let dev = try? AppId("test")
+    init(network: Network) throws {
+        switch network {
+        case .testNet: try self.init("test")
+        case .mainNet: try self.init("test") // TODO:
+        default:       fatalError()
+        }
+    }
 }
 
 extension URL {
-    static let dev = Dev()
+    static func node(_ network: Network) -> URL {
+        switch network {
+        case .mainNet: return URL(string: "https://horizon-ecosystem.kininfrastructure.com")!
+        case .testNet: return URL(string: "http://horizon-testnet.kininfrastructure.com")!
+        default:       fatalError()
+        }
+    }
 
-    class Dev {
-        let node = URL(string: "http://horizon-testnet.kininfrastructure.com")!
-        let version = URL(string: "http://kin.org")! // TODO:
-        let friendBot = URL(string: "http://friendbot-testnet.kininfrastructure.com")!
-        let whitelist = URL(string: "http://kin.org")! // TODO:
+    static func version(_ network: Network) -> URL {
+        switch network { // TODO:
+        case .mainNet: return URL(string: "http://kin.org")!
+        case .testNet: return URL(string: "http://kin.org")!
+        default:       fatalError()
+        }
+    }
+
+    static func friendBot(_ network: Network) -> URL {
+        switch network {
+        case .testNet: return URL(string: "http://friendbot-testnet.kininfrastructure.com")!
+        default:       fatalError("Friend bot is only supported on test net.")
+        }
+    }
+
+    static func whitelist(_ network: Network) -> URL {
+        switch network { // TODO:
+        case .mainNet: return URL(string: "http://kin.org")!
+        case .testNet: return URL(string: "http://kin.org")!
+        default:       fatalError()
+        }
     }
 }
