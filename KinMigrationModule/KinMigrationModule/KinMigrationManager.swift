@@ -14,22 +14,20 @@ public protocol KinMigrationManagerDelegate: NSObjectProtocol {
 }
 
 public class KinMigrationManager {
-    public weak var delegate: KinMigrationManagerDelegate? {
-        didSet {
-            // !!!: Debug
-            version = .kin3
-            // End Debug
+    public weak var delegate: KinMigrationManagerDelegate?
 
-            if needsToCreateClient {
-                needsToCreateClient = false
-                createClientIfPossible()
-            }
-        }
+    public init() {
+
     }
 
+    /**
+     The version should be set only once.
+     */
     fileprivate(set) var version: Version? {
         didSet {
-            createClientIfPossible()
+            if let version = version {
+                delegate?.kinMigrationManagerCanCreateClient(self, factory: KinClientFactory(version: version))
+            }
         }
     }
 
@@ -39,29 +37,24 @@ public class KinMigrationManager {
         }
     }
 
-    let versionURL: URL
+    fileprivate var versionURL: URL?
 
-    public init(versionURL: URL) {
+    public func start(withVersionURL versionURL: URL) throws {
+        guard self.versionURL != versionURL else {
+            return
+        }
+
         self.versionURL = versionURL
 
+        guard delegate != nil else {
+            throw Error.invailedDelegate
+        }
+
         if isMigrated {
-            needsToCreateClient = true
             version = .kin3
         }
         else {
             syncState()
-        }
-    }
-
-    /**
-     If the migration has already happened, this flag will have the client creation
-     delegate called after all required properties have been set.
-     */
-    private var needsToCreateClient = false
-
-    private func createClientIfPossible() {
-        if let delegate = delegate, let version = version {
-            delegate.kinMigrationManagerCanCreateClient(self, factory: KinClientFactory(version: version))
         }
     }
 }
@@ -112,6 +105,7 @@ extension KinMigrationManager {
 
 extension KinMigrationManager {
     public enum Error: Swift.Error {
+        case invailedDelegate
         case responseFailed (Swift.Error)
         case decodingFailed (Swift.Error)
         case burnResponseFailed
@@ -126,6 +120,18 @@ extension KinMigrationManager {
     private static let failedRetryChances = 3
 
     fileprivate func requestVersion() {
+        guard let versionURL = versionURL else {
+            return
+        }
+
+        // !!!: DEBUG
+        guard false else {
+            version = .kin3
+            state = .burnable
+            return
+        }
+
+
         perform(URLRequest(url: versionURL), responseType: Version.self)
             .then { [weak self] version in
                 // ???: when setting the version here, it allows the KinClient to be created. does that cause problems?
@@ -142,7 +148,7 @@ extension KinMigrationManager {
     }
 
     fileprivate func requestBurnAccount() {
-        let urlRequest = URLRequest(url: URL(string: "")!)
+        let urlRequest = URLRequest(url: URL(string: "http://kin.org")!)
 
         perform(urlRequest, responseType: Bool.self)
             .then { [weak self] isBurned in
@@ -163,7 +169,7 @@ extension KinMigrationManager {
     }
 
     fileprivate func requestMigrateAccount() {
-        let urlRequest = URLRequest(url: URL(string: "")!)
+        let urlRequest = URLRequest(url: URL(string: "http://kin.org")!)
 
         perform(urlRequest, responseType: Bool.self)
             .then { [weak self] isMigrated in

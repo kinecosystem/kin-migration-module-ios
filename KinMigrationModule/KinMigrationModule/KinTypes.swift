@@ -35,7 +35,7 @@ public protocol KinAccountsProtocol {
     var last: KinAccountProtocol? { get }
     var startIndex: Int { get }
     var endIndex: Int { get }
-    func makeIterator() -> AnyIterator<KinAccountProtocol?>
+    func makeIterator() -> AnyIterator<KinAccountProtocol>
 }
 
 public protocol KinAccountProtocol {

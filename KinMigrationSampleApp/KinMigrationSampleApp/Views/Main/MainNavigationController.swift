@@ -10,7 +10,10 @@ import UIKit
 import KinMigrationModule
 
 class MainNavigationController: UINavigationController {
+    let migrationController = MigrationController()
     let networkViewController = NetworkViewController()
+
+    private let loaderView = UIActivityIndicatorView(style: .whiteLarge)
 
     convenience init() {
         self.init(nibName: nil, bundle: nil)
@@ -23,6 +26,8 @@ class MainNavigationController: UINavigationController {
         networkViewController.mainButton.addTarget(self, action: #selector(buttonAction(_:)), for: .touchUpInside)
 
         viewControllers = [networkViewController]
+
+        migrationController.delegate = self
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -35,8 +40,62 @@ class MainNavigationController: UINavigationController {
 extension MainNavigationController {
     @objc
     private func buttonAction(_ button: UIButton) {
-        // TODO: create the migration manager here and pass it to the account list vc, instead of account vc.
+        presentLoaderView()
+
         let network: Network = button == networkViewController.mainButton ? .mainNet : .testNet
-        pushViewController(AccountViewController(network: network), animated: true)
+        migrationController.startManager(on: network)
+    }
+}
+
+// MARK: - Migration Controller
+
+extension MainNavigationController: MigrationControllerDelegate {
+    func migrationController(_ controller: MigrationController, didCreateClient client: KinClientProtocol) {
+        dismissLoaderView()
+
+        let viewController = AccountListViewController(with: client)
+        viewController.delegate = self
+        pushViewController(viewController, animated: true)
+    }
+}
+
+// MARK: - Account List View Controller
+
+extension MainNavigationController: AccountListViewControllerDelegate {
+    func accountListViewController(_ viewController: AccountListViewController, didSelect account: KinAccountProtocol) {
+        guard let network = migrationController.network else {
+            return
+        }
+
+        let viewController = AccountViewController(network: network)
+        pushViewController(viewController, animated: true)
+    }
+}
+
+// MARK: - Loader
+
+extension MainNavigationController {
+    fileprivate func presentLoaderView() {
+        guard loaderView.superview == nil else {
+            return
+        }
+
+        loaderView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        loaderView.translatesAutoresizingMaskIntoConstraints = false
+        loaderView.startAnimating()
+        view.addSubview(loaderView)
+        loaderView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        loaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        loaderView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        loaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
+
+    fileprivate func dismissLoaderView() {
+        guard loaderView.superview != nil else {
+            return
+        }
+
+        loaderView.stopAnimating()
+        loaderView.removeFromSuperview()
     }
 }

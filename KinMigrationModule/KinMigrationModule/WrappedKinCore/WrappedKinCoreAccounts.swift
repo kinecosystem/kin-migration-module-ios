@@ -83,16 +83,7 @@ class WrappedKinCoreAccounts: KinAccountsProtocol {
     
     // MARK: Sequence
 
-    func makeIterator() -> AnyIterator<KinAccountProtocol?> {
-        let wrappedAccounts = accounts.makeIterator().map { wrappedAccount($0) }
-        var index = 0
-
-        return AnyIterator {
-            let wrappedAccount = wrappedAccounts[index]
-
-            index += 1
-
-            return wrappedAccount
-        }
+    func makeIterator() -> AnyIterator<KinAccountProtocol> {
+        return AnyIterator(stride(from: 0, to: self.count, by: 1).lazy.compactMap { self[$0] }.makeIterator())
     }
 }
