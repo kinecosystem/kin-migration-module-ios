@@ -33,7 +33,9 @@ class WrappedKinSDKAccount: KinAccountProtocol {
     }
 
     func balance() -> Promise<Kin> {
-        return account.balance()
+        let e = KinSDK.KinError.balanceQueryFailed(StellarError.missingAccount)
+        return Promise(KinError(error: e))
+//        return account.balance()
     }
 
     // MARK: Transaction

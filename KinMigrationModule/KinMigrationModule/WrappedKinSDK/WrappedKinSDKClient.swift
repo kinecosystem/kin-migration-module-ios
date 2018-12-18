@@ -34,13 +34,7 @@ class WrappedKinSDKClient: KinClientProtocol {
             return wrappedAccounts.addWrappedAccount(try client.addAccount())
         }
         catch {
-            throw error
-//            if let error = error as? KinSDK.KinError {
-//                throw KinMigrationError(error: error)
-//            }
-//            else {
-//                throw KinMigrationError(error: error)
-//            }
+            throw KinError(error: error)
         }
     }
 

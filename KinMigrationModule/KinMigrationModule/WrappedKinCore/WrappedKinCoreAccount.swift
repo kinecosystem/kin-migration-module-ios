@@ -7,6 +7,7 @@
 //
 
 import KinCoreSDK
+import StellarErrors
 
 class WrappedKinCoreAccount: KinAccountProtocol {
     let account: KinCoreSDK.KinAccount
@@ -33,7 +34,9 @@ class WrappedKinCoreAccount: KinAccountProtocol {
     }
 
     func balance() -> Promise<Kin> {
-        return account.balance()
+        let e = KinCoreSDK.KinError.balanceQueryFailed(StellarError.missingAccount)
+        return Promise(KinError(error: e))
+//        return account.balance()
     }
 
     // MARK: Transaction
