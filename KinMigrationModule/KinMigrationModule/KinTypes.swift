@@ -159,10 +159,34 @@ extension KinError: LocalizedError {
             return "Internal Inconsistency"
         case .unknown:
             return "Unknown Error"
+
+        case .memoTooLong:
+            return "Memo Too Long"
+        case .missingAccount:
+            return "Missing Account"
+        case .missingPublicKey:
+            return "Missing Public Key"
+        case .missingHash:
+            return "Missing Hash"
+        case .missingSequence:
+            return "Missing Sequence"
+        case .missingBalance:
+            return "Missing Balance"
+        case .missingSignClosure:
+            return "Missing Sign Closure"
+        case .urlEncodingFailed:
+            return "URL Encoding Failed"
+        case .dataEncodingFailed:
+            return "Data Encoding Failed"
+        case .dataDencodingFailed:
+            return "Data Dencoding Failed"
+        case .destinationNotReadyForAsset:
+            return "Destination Not Ready For Asset"
+        case .unknownError:
+            return "Unknown Error"
+
         case .wrappedError:
             return "Wrapped Error"
-        default:
-            return "" // TODO:
         }
     }
 }

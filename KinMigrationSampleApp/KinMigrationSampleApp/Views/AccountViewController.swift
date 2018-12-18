@@ -134,12 +134,11 @@ extension AccountViewController {
                 }
 
                 if case KinError.missingAccount = error {
-                    cell.detailTextLabel?.text = "Missing Account"
+                    cell.detailTextLabel?.text = error.localizedDescription
                 }
-                else {
-                    cell.detailTextLabel?.text = "?"
+                else if case KinError.missingBalance = error {
+                    cell.detailTextLabel?.text = error.localizedDescription
                 }
-
         }
     }
 }
