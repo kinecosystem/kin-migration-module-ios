@@ -30,7 +30,18 @@ class WrappedKinSDKClient: KinClientProtocol {
     }
 
     func addAccount() throws -> KinAccountProtocol {
-        return wrappedAccounts.addWrappedAccount(try client.addAccount())
+        do {
+            return wrappedAccounts.addWrappedAccount(try client.addAccount())
+        }
+        catch {
+            throw error
+//            if let error = error as? KinSDK.KinError {
+//                throw KinMigrationError(error: error)
+//            }
+//            else {
+//                throw KinMigrationError(error: error)
+//            }
+        }
     }
 
     func deleteAccount(at index: Int) throws {

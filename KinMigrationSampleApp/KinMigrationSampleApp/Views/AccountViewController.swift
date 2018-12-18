@@ -133,14 +133,14 @@ extension AccountViewController {
                     return
                 }
 
-                if case KinError.balanceQueryFailed(let e) = error {
-                    if case StellarError.missingAccount = e {
-                        cell.detailTextLabel?.text = "Missing Account"
-                    }
-                    else {
-                        cell.detailTextLabel?.text = "?"
-                    }
-                }
+//                if case KinError.balanceQueryFailed(let e) = error {
+//                    if case StellarError.missingAccount = e {
+//                        cell.detailTextLabel?.text = "Missing Account"
+//                    }
+//                    else {
+//                        cell.detailTextLabel?.text = "?"
+//                    }
+//                }
         }
     }
 }
