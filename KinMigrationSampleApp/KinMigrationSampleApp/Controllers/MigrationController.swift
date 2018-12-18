@@ -15,15 +15,15 @@ protocol MigrationControllerDelegate: NSObjectProtocol {
 class MigrationController: NSObject {
     weak var delegate: MigrationControllerDelegate?
 
-    private(set) var network: Network?
+    private(set) var environment: Environment?
     private var migrationManager: KinMigrationManager?
 
-    func startManager(on network: Network) {
-        self.network = network
+    func startManager(with environment: Environment) {
+        self.environment = environment
 
         let migrationManager = KinMigrationManager()
         migrationManager.delegate = self
-        try? migrationManager.start(withVersionURL: .version(network))
+        try? migrationManager.start(withVersionURL: .version(environment))
         self.migrationManager = migrationManager
     }
 }
@@ -32,7 +32,7 @@ class MigrationController: NSObject {
 
 extension MigrationController: KinMigrationManagerDelegate {
     func kinMigrationManagerCanCreateClient(_ kinMigrationManager: KinMigrationManager, factory: KinClientFactory) {
-        guard let network = network else {
+        guard let network = environment?.network else {
             return
         }
 
@@ -40,8 +40,8 @@ extension MigrationController: KinMigrationManagerDelegate {
             return
         }
 
-        let client = factory.KinClient(with: .node(network), network: network, appId: appId)
-
+        let client = factory.KinClient(network: network, appId: appId)
+        
         delegate?.migrationController(self, didCreateClient: client)
 
 //        if let account = try? client.accounts.first ?? client.addAccount() {
@@ -61,27 +61,27 @@ extension MigrationController: KinMigrationManagerDelegate {
 
 // MARK: - Whitelist
 
-extension MigrationController {
-    private func whitelist(url: URL, network: Network) -> WhitelistClosure {
-        return { transactionEnvelope -> Promise<TransactionEnvelope> in
-            let promise: Promise<TransactionEnvelope> = Promise()
-            let whitelistEnvelope = WhitelistEnvelope(transactionEnvelope: transactionEnvelope, networkId: network.id)
-
-            var request = URLRequest(url: url)
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.httpMethod = "POST"
-            request.httpBody = try? JSONEncoder().encode(whitelistEnvelope)
-
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
-                do {
-                    promise.signal(try TransactionEnvelope.decodeResponse(data: data, error: error))
-                }
-                catch {
-                    promise.signal(error)
-                }
-                }.resume()
-
-            return promise
-        }
-    }
-}
+//extension MigrationController {
+//    private func whitelist(url: URL, network: Network) -> WhitelistClosure {
+//        return { transactionEnvelope -> Promise<TransactionEnvelope> in
+//            let promise: Promise<TransactionEnvelope> = Promise()
+//            let whitelistEnvelope = WhitelistEnvelope(transactionEnvelope: transactionEnvelope, networkId: network.id)
+//
+//            var request = URLRequest(url: url)
+//            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//            request.httpMethod = "POST"
+//            request.httpBody = try? JSONEncoder().encode(whitelistEnvelope)
+//
+//            URLSession.shared.dataTask(with: request) { (data, response, error) in
+//                do {
+//                    promise.signal(try TransactionEnvelope.decodeResponse(data: data, error: error))
+//                }
+//                catch {
+//                    promise.signal(error)
+//                }
+//                }.resume()
+//
+//            return promise
+//        }
+//    }
+//}

@@ -22,7 +22,8 @@ class MainNavigationController: UINavigationController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
-        networkViewController.testButton.addTarget(self, action: #selector(buttonAction(_:)), for: .touchUpInside)
+        networkViewController.testV2Button.addTarget(self, action: #selector(buttonAction(_:)), for: .touchUpInside)
+        networkViewController.testV3Button.addTarget(self, action: #selector(buttonAction(_:)), for: .touchUpInside)
         networkViewController.mainButton.addTarget(self, action: #selector(buttonAction(_:)), for: .touchUpInside)
 
         viewControllers = [networkViewController]
@@ -42,8 +43,19 @@ extension MainNavigationController {
     private func buttonAction(_ button: UIButton) {
         presentLoaderView()
 
-        let network: Network = button == networkViewController.mainButton ? .mainNet : .testNet
-        migrationController.startManager(on: network)
+        let environment: Environment
+
+        if button == networkViewController.testV2Button {
+            environment = .testKinCore
+        }
+        else if button == networkViewController.testV3Button {
+            environment = .testKinSDK
+        }
+        else {
+            environment = .mainKinCore
+        }
+
+        migrationController.startManager(with: environment)
     }
 }
 
@@ -55,6 +67,11 @@ extension MainNavigationController: MigrationControllerDelegate {
 
         let viewController = AccountListViewController(with: client)
         viewController.delegate = self
+
+        if let network = controller.environment?.network {
+            viewController.title = "\(network.description.capitalized) Accounts"
+        }
+
         pushViewController(viewController, animated: true)
     }
 }
@@ -63,11 +80,11 @@ extension MainNavigationController: MigrationControllerDelegate {
 
 extension MainNavigationController: AccountListViewControllerDelegate {
     func accountListViewController(_ viewController: AccountListViewController, didSelect account: KinAccountProtocol) {
-        guard let network = migrationController.network else {
+        guard let environment = migrationController.environment else {
             return
         }
 
-        let viewController = AccountViewController(network: network)
+        let viewController = AccountViewController(account, environment: environment)
         pushViewController(viewController, animated: true)
     }
 }

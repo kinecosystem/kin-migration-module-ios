@@ -15,11 +15,34 @@ public class KinClientFactory {
         self.version = version
     }
 
-    public func KinClient(with url: URL, network: Network, appId: AppId) -> KinClientProtocol {
+    private func blockchainURL(_ network: Network) -> URL {
+        switch network {
+        case .custom(let urlString):
+            return URL(string: urlString)!
+        case .mainNet:
+            switch version {
+            case .kinCore:
+                return URL(string: "https://horizon-ecosystem.kininfrastructure.com")!
+            case .kinSDK:
+                return URL(string: "http://kin.org")!
+            }
+        default:
+            switch version {
+            case .kinCore:
+                return URL(string: "http://horizon-playground.kininfrastructure.com")!
+            case .kinSDK:
+                return URL(string: "http://horizon-testnet.kininfrastructure.com")!
+            }
+        }
+    }
+
+    public func KinClient(network: Network, appId: AppId) -> KinClientProtocol {
+        let url = blockchainURL(network)
+
         switch version {
-        case .kin2:
+        case .kinCore:
             return WrappedKinCoreClient(with: url, network: network)
-        case .kin3:
+        case .kinSDK:
             return WrappedKinSDKClient(with: url, network: network, appId: appId)
         }
     }

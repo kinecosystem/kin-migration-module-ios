@@ -51,7 +51,7 @@ public class KinMigrationManager {
         }
 
         if isMigrated {
-            version = .kin3
+            version = .kinSDK
         }
         else {
             syncState()
@@ -63,8 +63,8 @@ public class KinMigrationManager {
 
 extension KinMigrationManager {
     enum Version: String, Codable {
-        case kin2
-        case kin3
+        case kinCore
+        case kinSDK
     }
 }
 
@@ -124,20 +124,14 @@ extension KinMigrationManager {
             return
         }
 
-        // !!!: DEBUG
-        guard false else {
-            version = .kin3
-            state = .burnable
-            return
-        }
-
-
         perform(URLRequest(url: versionURL), responseType: Version.self)
-            .then { [weak self] version in
-                // ???: when setting the version here, it allows the KinClient to be created. does that cause problems?
+            .then(on: .main, { [weak self] version in
                 self?.version = version
-                self?.state = .burnable
-            }
+
+                if version == .kinSDK {
+                    self?.state = .burnable
+                }
+            })
             .error { [weak self] error in
                 guard let strongSelf = self else {
                     return
@@ -148,17 +142,21 @@ extension KinMigrationManager {
     }
 
     fileprivate func requestBurnAccount() {
+        guard version == .kinSDK else {
+            return
+        }
+
         let urlRequest = URLRequest(url: URL(string: "http://kin.org")!)
 
         perform(urlRequest, responseType: Bool.self)
-            .then { [weak self] isBurned in
+            .then(on: .main, { [weak self] isBurned in
                 if isBurned {
                     self?.state = .migrateable
                 }
                 else if let strongSelf = self {
                     strongSelf.delegate?.kinMigrationManagerError(strongSelf, error: Error.burnResponseFailed)
                 }
-            }
+            })
             .error { [weak self] error in
                 guard let strongSelf = self else {
                     return
@@ -169,17 +167,21 @@ extension KinMigrationManager {
     }
 
     fileprivate func requestMigrateAccount() {
+        guard version == .kinSDK else {
+            return
+        }
+
         let urlRequest = URLRequest(url: URL(string: "http://kin.org")!)
 
         perform(urlRequest, responseType: Bool.self)
-            .then { [weak self] isMigrated in
+            .then(on: .main, { [weak self] isMigrated in
                 if isMigrated {
                     self?.state = .completed
                 }
                 else if let strongSelf = self {
                     strongSelf.delegate?.kinMigrationManagerError(strongSelf, error: Error.migrateResponseFailed)
                 }
-            }
+            })
             .error { [weak self] error in
                 guard let strongSelf = self else {
                     return
@@ -189,10 +191,10 @@ extension KinMigrationManager {
         }
     }
 
-    private func perform<T: Decodable>(_ urlRequest: URLRequest, responseType: T.Type, retryChances: Int = failedRetryChances) -> Promise<T> {
+    private func perform<T: Codable>(_ urlRequest: URLRequest, responseType: T.Type, retryChances: Int = failedRetryChances) -> Promise<T> {
         let promise = Promise<T>()
 
-        URLSession.shared.dataTask(with: urlRequest) { [weak self] (data, response, error) in
+        URLSession.shared.dataTask(with: urlRequest) { [weak self] (data, _, error) in
             if let error = error {
                 if retryChances > 0, let strongSelf = self {
                     strongSelf.perform(urlRequest, responseType: T.self, retryChances: retryChances - 1)
@@ -211,7 +213,8 @@ extension KinMigrationManager {
             }
 
             do {
-                promise.signal(try JSONDecoder().decode(T.self, from: data))
+                let response = try JSONDecoder().decode(KinResponse<T>.self, from: data)
+                promise.signal(response.success)
             }
             catch {
                 promise.signal(Error.decodingFailed(error))

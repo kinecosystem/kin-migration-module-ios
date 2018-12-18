@@ -13,10 +13,14 @@ public typealias Kin = KinSDK.Kin
 public typealias AppId = KinSDK.AppId
 public typealias Network = KinSDK.Network
 public typealias Node = KinSDK.Stellar.Node
-public typealias Promise = KinUtil.Promise
 public typealias TransactionId = KinSDK.TransactionId
 public typealias TransactionEnvelope = KinSDK.TransactionEnvelope
 public typealias WhitelistEnvelope = KinSDK.WhitelistEnvelope
+public typealias KinError = KinSDK.KinError
+
+public typealias LinkBag = KinUtil.LinkBag
+public typealias Promise = KinUtil.Promise
+public typealias Observable<T> = KinUtil.Observable<T>
 
 public protocol KinClientProtocol {
     var url: URL { get }
@@ -78,4 +82,8 @@ public protocol PaymentInfoProtocol {
     var destination: String { get }
     var memoText: String? { get }
     var memoData: Data? { get }
+}
+
+internal struct KinResponse<T: Codable>: Codable {
+    let success: T
 }

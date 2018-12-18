@@ -35,6 +35,7 @@ class AccountListViewController: UITableViewController {
 
         view.backgroundColor = .white
 
+        tableView.tableFooterView = UIView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
 }
@@ -82,7 +83,7 @@ extension AccountListViewController {
     }
 }
 
-// MARK: - Table View Datasource
+// MARK: - Table View Data Source
 
 extension AccountListViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
