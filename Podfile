@@ -20,6 +20,4 @@ target 'KinMigrationSampleApp' do
   project 'KinMigrationSampleApp/KinMigrationSampleApp.xcodeproj'
 
   pod 'KinMigrationModule', :path => './'
-  pod 'KinSDK', :path => '../kin-sdk-ios/'
-  pod 'KinCoreSDK', :path => '../kin-core-ios/'
 end
