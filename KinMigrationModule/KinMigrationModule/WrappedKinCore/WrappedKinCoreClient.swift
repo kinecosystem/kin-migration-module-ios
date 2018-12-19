@@ -33,14 +33,7 @@ class WrappedKinCoreClient: KinClientProtocol {
 
     func addAccount() throws -> KinAccountProtocol {
         do {
-            let wrappedAccount = wrappedAccounts.addWrappedAccount(try client.addAccount())
-
-            // ???: is there a problem activating the account like this
-            try wrappedAccount.watchCreation().then {
-                wrappedAccount.account.activate()
-            }
-
-            return wrappedAccount
+            return wrappedAccounts.addWrappedAccount(try client.addAccount())
         }
         catch {
             throw KinError(error: error)
