@@ -87,6 +87,28 @@ extension AccountViewController {
     }
 
     @discardableResult
+    private func activateAccount() -> Promise<Void> {
+        let promise = Promise<Void>()
+
+        _ = try? account.watchCreation()
+            .then { [weak self] _ -> Promise<Void> in
+                guard let strongSelf = self else {
+                    return promise.signal(KinError.internalInconsistency)
+                }
+
+                return strongSelf.account.activate()
+            }
+            .then {
+                promise.signal(Void())
+            }
+            .error { error in
+                promise.signal(error)
+        }
+
+        return promise
+    }
+
+    @discardableResult
     private func fundAccount() -> Promise<Void> {
         let promise = Promise<Void>()
         let url: URL = .fund(environment, publicAddress: account.publicAddress, amount: 5000)
@@ -133,10 +155,10 @@ extension AccountViewController {
                     return
                 }
 
-                if case KinError.missingAccount = error {
-                    cell.detailTextLabel?.text = error.localizedDescription
+                if case KinError.invalidAmount = error {
+                    cell.detailTextLabel?.text = "N/A"
                 }
-                else if case KinError.missingBalance = error {
+                else {
                     cell.detailTextLabel?.text = error.localizedDescription
                 }
         }
@@ -246,11 +268,16 @@ extension AccountViewController {
             let cell = tableView.cellForRow(at: indexPath)
             cell?.detailTextLabel?.text = "Creating..."
 
-            createAccount().then(on: .main, { [weak self] in
-                cell?.detailTextLabel?.text = nil
-                self?.updateAccountBalance()
-                tableView.deselectRow(at: indexPath, animated: true)
-            })
+            createAccount()
+                .then(on: .main, { [weak self] in
+                    cell?.detailTextLabel?.text = "Activating..."
+                    self?.activateAccount()
+                })
+                .then(on: .main) { [weak self] in
+                    cell?.detailTextLabel?.text = nil
+                    self?.updateAccountBalance()
+                    tableView.deselectRow(at: indexPath, animated: true)
+            }
             
         default:
             break
