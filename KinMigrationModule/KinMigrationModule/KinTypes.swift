@@ -44,6 +44,7 @@ public protocol KinAccountsProtocol {
 public protocol KinAccountProtocol {
     var publicAddress: String { get }
     var extra: Data? { get set }
+    func activate() -> Promise<Void> // KinCore only
     func status() -> Promise<AccountStatus>
     func balance() -> Promise<Kin>
     func sendTransaction(to recipient: String, kin: Kin, memo: String?, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId>
@@ -58,8 +59,7 @@ public typealias WhitelistClosure = (TransactionEnvelope)->(Promise<TransactionE
 public enum AccountStatus: Int {
     case notCreated
     case created
-    // KinCore only
-    case notActivated
+    case notActivated // KinCore only
 }
 
 public protocol BalanceWatchProtocol {

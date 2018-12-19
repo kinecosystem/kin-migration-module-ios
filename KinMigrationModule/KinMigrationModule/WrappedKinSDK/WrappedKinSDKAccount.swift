@@ -28,6 +28,10 @@ class WrappedKinSDKAccount: KinAccountProtocol {
         self.account = kinAccount
     }
 
+    func activate() -> Promise<Void> {
+        return Promise(Void())
+    }
+
     func status() -> Promise<AccountStatus> {
         let promise = Promise<AccountStatus>()
 

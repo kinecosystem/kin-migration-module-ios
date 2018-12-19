@@ -233,6 +233,7 @@ extension AccountViewController {
         switch row {
         case .publicAddress:
             UIPasteboard.general.string = account.publicAddress
+            tableView.deselectRow(at: indexPath, animated: true)
 
         case .sendTransaction:
             break
@@ -248,6 +249,7 @@ extension AccountViewController {
             createAccount().then(on: .main, { [weak self] in
                 cell?.detailTextLabel?.text = nil
                 self?.updateAccountBalance()
+                tableView.deselectRow(at: indexPath, animated: true)
             })
             
         default:

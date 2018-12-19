@@ -29,6 +29,20 @@ class WrappedKinCoreAccount: KinAccountProtocol {
         self.account = kinAccount
     }
 
+    func activate() -> Promise<Void> {
+        let promise = Promise<Void>()
+
+        account.activate()
+            .then { transactionHash in
+                promise.signal(Void())
+            }
+            .error { error in
+                promise.signal(KinError(error: error))
+        }
+
+        return promise
+    }
+
     func status() -> Promise<AccountStatus> {
         let promise = Promise<AccountStatus>()
 
