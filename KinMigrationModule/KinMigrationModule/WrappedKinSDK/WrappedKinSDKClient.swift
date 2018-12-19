@@ -43,12 +43,22 @@ class WrappedKinSDKClient: KinClientProtocol {
             wrappedAccounts.deleteWrappedAccount(account)
         }
 
-        try client.deleteAccount(at: index)
+        do {
+            try client.deleteAccount(at: index)
+        }
+        catch {
+            throw KinError(error: error)
+        }
     }
 
     func importAccount(_ jsonString: String, passphrase: String) throws -> KinAccountProtocol {
-        let account = try client.importAccount(jsonString, passphrase: passphrase)
-        return wrappedAccounts.addWrappedAccount(account)
+        do {
+            let account = try client.importAccount(jsonString, passphrase: passphrase)
+            return wrappedAccounts.addWrappedAccount(account)
+        }
+        catch {
+            throw KinError(error: error)
+        }
     }
 
     // MARK: Keystore

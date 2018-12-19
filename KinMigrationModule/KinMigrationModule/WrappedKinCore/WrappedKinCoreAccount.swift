@@ -30,7 +30,17 @@ class WrappedKinCoreAccount: KinAccountProtocol {
     }
 
     func status() -> Promise<AccountStatus> {
-        return account.status().then { return Promise($0.mapToKinMigration) }
+        let promise = Promise<AccountStatus>()
+
+        account.status()
+            .then { accountStatus in
+                promise.signal(accountStatus.mapToKinMigration)
+            }
+            .error { error in
+                promise.signal(KinError(error: error))
+        }
+
+        return promise
     }
 
     func balance() -> Promise<Kin> {
@@ -50,27 +60,67 @@ class WrappedKinCoreAccount: KinAccountProtocol {
     // MARK: Transaction
 
     func sendTransaction(to recipient: String, kin: Kin, memo: String?, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId> {
-        return account.sendTransaction(to: recipient, kin: kin, memo: memo)
+        let promise = Promise<TransactionId>()
+
+        account.sendTransaction(to: recipient, kin: kin, memo: memo)
+            .then { transactionId in
+                promise.signal(transactionId)
+            }
+            .error { error in
+                promise.signal(KinError(error: error))
+        }
+
+        return promise
     }
 
     // MARK: Export
 
     func export(passphrase: String) throws -> String {
-        return try account.export(passphrase: passphrase)
+        do {
+            return try account.export(passphrase: passphrase)
+        }
+        catch {
+            throw KinError(error: error)
+        }
     }
 
     // MARK: Watchers
 
     func watchCreation() throws -> Promise<Void> {
-        return try account.watchCreation()
+        do {
+            let promise = Promise<Void>()
+
+            try account.watchCreation()
+                .then { _ in
+                    promise.signal(Void())
+                }
+                .error { error in
+                    promise.signal(KinError(error: error))
+            }
+
+            return promise
+        }
+        catch {
+            throw KinError(error: error)
+        }
     }
 
     func watchBalance(_ balance: Kin?) throws -> BalanceWatchProtocol {
-        return WrappedKinCoreBalanceWatch(try account.watchBalance(balance))
+        do {
+            return WrappedKinCoreBalanceWatch(try account.watchBalance(balance))
+        }
+        catch {
+            throw KinError(error: error)
+        }
     }
 
     func watchPayments(cursor: String?) throws -> PaymentWatchProtocol {
-        return WrappedKinCorePaymentWatch(try account.watchPayments(cursor: cursor))
+        do {
+            return WrappedKinCorePaymentWatch(try account.watchPayments(cursor: cursor))
+        }
+        catch {
+            throw KinError(error: error)
+        }
     }
 }
 

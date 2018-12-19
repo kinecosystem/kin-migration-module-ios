@@ -32,14 +32,19 @@ class WrappedKinCoreClient: KinClientProtocol {
     }
 
     func addAccount() throws -> KinAccountProtocol {
-        let wrappedAccount = wrappedAccounts.addWrappedAccount(try client.addAccount())
+        do {
+            let wrappedAccount = wrappedAccounts.addWrappedAccount(try client.addAccount())
 
-        // ???: is there a problem activating the account like this
-        try wrappedAccount.watchCreation().then {
-            wrappedAccount.account.activate()
+            // ???: is there a problem activating the account like this
+            try wrappedAccount.watchCreation().then {
+                wrappedAccount.account.activate()
+            }
+
+            return wrappedAccount
         }
-
-        return wrappedAccount
+        catch {
+            throw KinError(error: error)
+        }
     }
 
     func deleteAccount(at index: Int) throws {
@@ -47,12 +52,22 @@ class WrappedKinCoreClient: KinClientProtocol {
             wrappedAccounts.deleteWrappedAccount(account)
         }
 
-        try client.deleteAccount(at: index)
+        do {
+            try client.deleteAccount(at: index)
+        }
+        catch {
+            throw KinError(error: error)
+        }
     }
 
     func importAccount(_ jsonString: String, passphrase: String) throws -> KinAccountProtocol {
-        let account = try client.importAccount(jsonString, passphrase: passphrase)
-        return wrappedAccounts.addWrappedAccount(account)
+        do {
+            let account = try client.importAccount(jsonString, passphrase: passphrase)
+            return wrappedAccounts.addWrappedAccount(account)
+        }
+        catch {
+            throw KinError(error: error)
+        }
     }
 
     // MARK: Keystore

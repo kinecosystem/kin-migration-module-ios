@@ -29,7 +29,17 @@ class WrappedKinSDKAccount: KinAccountProtocol {
     }
 
     func status() -> Promise<AccountStatus> {
-        return account.status().then { return Promise($0.mapToKinMigration) }
+        let promise = Promise<AccountStatus>()
+
+        account.status()
+            .then { accountStatus in
+                promise.signal(accountStatus.mapToKinMigration)
+            }
+            .error { error in
+                promise.signal(KinError(error: error))
+        }
+
+        return promise
     }
 
     func balance() -> Promise<Kin> {
@@ -49,7 +59,7 @@ class WrappedKinSDKAccount: KinAccountProtocol {
     // MARK: Transaction
 
     func sendTransaction(to recipient: String, kin: Kin, memo: String?, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId> {
-        let promise: Promise<TransactionId> = Promise()
+        let promise = Promise<TransactionId>()
 
         account.generateTransaction(to: recipient, kin: kin, memo: memo)
             .then { transactionEnvelope -> Promise<TransactionEnvelope> in
@@ -66,7 +76,7 @@ class WrappedKinSDKAccount: KinAccountProtocol {
                 promise.signal(transactionId)
             }
             .error { error in
-                promise.signal(error)
+                promise.signal(KinError(error: error))
         }
 
         return promise
@@ -75,21 +85,51 @@ class WrappedKinSDKAccount: KinAccountProtocol {
     // MARK: Export
 
     func export(passphrase: String) throws -> String {
-        return try account.export(passphrase: passphrase)
+        do {
+            return try account.export(passphrase: passphrase)
+        }
+        catch {
+            throw KinError(error: error)
+        }
     }
 
     // MARK: Watchers
 
     func watchCreation() throws -> Promise<Void> {
-        return try account.watchCreation()
+        do {
+            let promise = Promise<Void>()
+
+            try account.watchCreation()
+                .then { _ in
+                    promise.signal(Void())
+                }
+                .error { error in
+                    promise.signal(KinError(error: error))
+            }
+
+            return promise
+        }
+        catch {
+            throw KinError(error: error)
+        }
     }
 
     func watchBalance(_ balance: Kin?) throws -> BalanceWatchProtocol {
-        return WrappedKinSDKBalanceWatch(try account.watchBalance(balance))
+        do {
+            return WrappedKinSDKBalanceWatch(try account.watchBalance(balance))
+        }
+        catch {
+            throw KinError(error: error)
+        }
     }
 
     func watchPayments(cursor: String?) throws -> PaymentWatchProtocol {
-        return WrappedKinSDKPaymentWatch(try account.watchPayments(cursor: cursor))
+        do {
+            return WrappedKinSDKPaymentWatch(try account.watchPayments(cursor: cursor))
+        }
+        catch {
+            throw KinError(error: error)
+        }
     }
 }
 
