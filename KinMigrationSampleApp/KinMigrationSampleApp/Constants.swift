@@ -64,10 +64,9 @@ extension URL {
 
     static func whitelist(_ environment: Environment) -> URL {
         switch environment { // TODO:
-        case .testKinCore: return URL(string: "http://kin.org")!
-        case .testKinSDK:  return URL(string: "http://kin.org")!
-        case .mainKinCore: return URL(string: "http://kin.org")!
+        case .testKinSDK:  return URL(string: "http://10.4.59.1:3003/whitelist")!
         case .mainKinSDK:  return URL(string: "http://kin.org")!
+        default:           fatalError("Whitelisting is only for Kin 3")
         }
     }
 }
