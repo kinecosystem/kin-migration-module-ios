@@ -92,8 +92,8 @@ internal struct KinResponse<T: Codable>: Codable {
 
 // TODO: move to own class after fixing compiler issue
 
-import KinCoreSDK
-import StellarErrors
+//import KinCoreSDK
+//import StellarErrors
 
 public enum KinError: Error {
     // Kin Errors
@@ -197,15 +197,16 @@ extension KinError {
     }
 
     private static func mapError(_ error: Error) -> KinError? {
-        if let error = error as? StellarErrors.StellarError {
+//        if let error = error as? StellarErrors.StellarError {
+//            return stellarError(error)
+//        }
+//        else
+            if let error = error as? KinSDK.StellarError {
             return stellarError(error)
         }
-        else if let error = error as? KinSDK.StellarError {
-            return stellarError(error)
-        }
-        else if let error = error as? KinCoreSDK.KinError {
-            return kinError(error)
-        }
+//        else if let error = error as? KinCoreSDK.KinError {
+//            return kinError(error)
+//        }
         else if let error = error as? KinSDK.KinError {
             return kinError(error)
         }
@@ -214,32 +215,32 @@ extension KinError {
         }
     }
 
-    private static func kinError(_ error: KinCoreSDK.KinError) -> KinError {
-        switch error {
-        case .accountCreationFailed (let e):
-            return KinError.mapError(e) ?? .accountCreationFailed(e)
-        case .accountDeletionFailed (let e):
-            return KinError.mapError(e) ?? .accountDeletionFailed(e)
-        case .activationFailed (let e):
-            return KinError.mapError(e) ?? .activationFailed(e)
-        case .paymentFailed (let e):
-            return KinError.mapError(e) ?? .paymentFailed(e)
-        case .balanceQueryFailed (let e):
-            return KinError.mapError(e) ?? .balanceQueryFailed(e)
-        case .invalidAmount:
-            return .invalidAmount
-        case .insufficientFunds:
-            return .insufficientFunds
-        case .accountDeleted:
-            return .accountDeleted
-        case .signingFailed:
-            return .signingFailed
-        case .internalInconsistency:
-            return .internalInconsistency
-        case .unknown:
-            return .unknown
-        }
-    }
+//    private static func kinError(_ error: KinCoreSDK.KinError) -> KinError {
+//        switch error {
+//        case .accountCreationFailed (let e):
+//            return KinError.mapError(e) ?? .accountCreationFailed(e)
+//        case .accountDeletionFailed (let e):
+//            return KinError.mapError(e) ?? .accountDeletionFailed(e)
+//        case .activationFailed (let e):
+//            return KinError.mapError(e) ?? .activationFailed(e)
+//        case .paymentFailed (let e):
+//            return KinError.mapError(e) ?? .paymentFailed(e)
+//        case .balanceQueryFailed (let e):
+//            return KinError.mapError(e) ?? .balanceQueryFailed(e)
+//        case .invalidAmount:
+//            return .invalidAmount
+//        case .insufficientFunds:
+//            return .insufficientFunds
+//        case .accountDeleted:
+//            return .accountDeleted
+//        case .signingFailed:
+//            return .signingFailed
+//        case .internalInconsistency:
+//            return .internalInconsistency
+//        case .unknown:
+//            return .unknown
+//        }
+//    }
 
     private static func kinError(_ error: KinSDK.KinError) -> KinError {
         switch error {
@@ -270,36 +271,36 @@ extension KinError {
         }
     }
 
-    private static func stellarError(_ error: StellarErrors.StellarError) -> KinError {
-        switch error {
-        case .memoTooLong (let object):
-            return .memoTooLong(object)
-        case .missingAccount:
-            return .missingAccount
-        case .missingPublicKey:
-            return .missingPublicKey
-        case .missingHash:
-            return .missingHash
-        case .missingSequence:
-            return .missingSequence
-        case .missingBalance:
-            return .missingBalance
-        case .missingSignClosure:
-            return .missingSignClosure
-        case .urlEncodingFailed:
-            return .urlEncodingFailed
-        case .dataEncodingFailed:
-            return .dataEncodingFailed
-        case .signingFailed:
-            return .signingFailed
-        case .destinationNotReadyForAsset (let e, _):
-            return KinError.mapError(e) ?? .destinationNotReadyForAsset(e)
-        case .unknownError (let object):
-            return .unknownError(object)
-        case .internalInconsistency:
-            return .internalInconsistency
-        }
-    }
+//    private static func stellarError(_ error: StellarErrors.StellarError) -> KinError {
+//        switch error {
+//        case .memoTooLong (let object):
+//            return .memoTooLong(object)
+//        case .missingAccount:
+//            return .missingAccount
+//        case .missingPublicKey:
+//            return .missingPublicKey
+//        case .missingHash:
+//            return .missingHash
+//        case .missingSequence:
+//            return .missingSequence
+//        case .missingBalance:
+//            return .missingBalance
+//        case .missingSignClosure:
+//            return .missingSignClosure
+//        case .urlEncodingFailed:
+//            return .urlEncodingFailed
+//        case .dataEncodingFailed:
+//            return .dataEncodingFailed
+//        case .signingFailed:
+//            return .signingFailed
+//        case .destinationNotReadyForAsset (let e, _):
+//            return KinError.mapError(e) ?? .destinationNotReadyForAsset(e)
+//        case .unknownError (let object):
+//            return .unknownError(object)
+//        case .internalInconsistency:
+//            return .internalInconsistency
+//        }
+//    }
 
     private static func stellarError(_ error: KinSDK.StellarError) -> KinError {
         switch error {
