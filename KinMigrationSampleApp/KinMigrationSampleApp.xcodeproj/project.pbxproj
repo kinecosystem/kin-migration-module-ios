@@ -10,6 +10,7 @@
 		6815F45D21BFB87600B9439A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F45C21BFB87600B9439A /* AppDelegate.swift */; };
 		6815F46421BFB87600B9439A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6815F46321BFB87600B9439A /* Assets.xcassets */; };
 		6815F46721BFB87600B9439A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6815F46521BFB87600B9439A /* LaunchScreen.storyboard */; };
+		6824E88121CA718700E094F5 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6824E88021CA718700E094F5 /* TransactionTableViewCell.swift */; };
 		687617E921C23B11006FEDEE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687617E821C23B11006FEDEE /* Constants.swift */; };
 		687617F421C2573F006FEDEE /* NetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687617F321C2573F006FEDEE /* NetworkViewController.swift */; };
 		687617F821C25ABF006FEDEE /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687617F721C25ABF006FEDEE /* MainNavigationController.swift */; };
@@ -28,6 +29,7 @@
 		6815F46321BFB87600B9439A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6815F46621BFB87600B9439A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6815F46821BFB87600B9439A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6824E88021CA718700E094F5 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		687617E821C23B11006FEDEE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		687617F321C2573F006FEDEE /* NetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewController.swift; sourceTree = "<group>"; };
 		687617F721C25ABF006FEDEE /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				6876180D21C78C51006FEDEE /* SubtitleTableViewCell.swift */,
+				6824E88021CA718700E094F5 /* TransactionTableViewCell.swift */,
 				6876180B21C78C32006FEDEE /* Value1TableViewCell.swift */,
 			);
 			path = TableViewCell;
@@ -265,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6876180521C61581006FEDEE /* MigrationController.swift in Sources */,
+				6824E88121CA718700E094F5 /* TransactionTableViewCell.swift in Sources */,
 				687617F821C25ABF006FEDEE /* MainNavigationController.swift in Sources */,
 				687617FB21C25EBC006FEDEE /* AccountViewController.swift in Sources */,
 				6876180221C29220006FEDEE /* AccountListViewController.swift in Sources */,

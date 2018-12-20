@@ -11,12 +11,6 @@ import KinMigrationModule
 
 class TransactionHistoryViewController: UITableViewController {
     private let account: KinAccountProtocol
-
-    private var filteredTxs: [PaymentInfoProtocol]?
-
-    private var watch: PaymentWatchProtocol?
-    private var memoFilter = Observable<String?>()
-    private let linkBag = LinkBag()
     
     private let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -29,6 +23,8 @@ class TransactionHistoryViewController: UITableViewController {
         self.account = account
 
         super.init(nibName: nil, bundle: nil)
+
+        watchTransactions()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -38,23 +34,36 @@ class TransactionHistoryViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let textField = UITextField()
-        textField.delegate = self
+        let searchBar = UISearchBar()
+        searchBar.delegate = self
+        searchBar.placeholder = "Filter Transactions"
+        searchBar.sizeToFit()
 
-        tableView.tableHeaderView = textField
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.tableHeaderView = searchBar
+        tableView.allowsSelection = false
+        tableView.keyboardDismissMode = .onDrag
+        tableView.register(TransactionTableViewCell.self, forCellReuseIdentifier: "cell")
+    }
 
+    // MARK: Transactions
+
+    private var watch: PaymentWatchProtocol?
+    private var transactions: [PaymentInfoProtocol] = []
+    private var memoFilter = Observable<String?>()
+    private let linkBag = LinkBag()
+
+    private func watchTransactions() {
         watch = try? account.watchPayments(cursor: nil)
         watch?.emitter
             .accumulate(limit: 100)
             .combine(with: memoFilter)
             .map({ (payments, filterText) -> [PaymentInfoProtocol]? in
                 return payments?.reversed().filter({ payment -> Bool in
-                    guard let filterText = filterText else {
+                    guard let filterText = filterText as? String else {
                         return true
                     }
 
-                    if let filterText = filterText, !filterText.isEmpty {
+                    if !filterText.isEmpty {
                         return payment.memoText?.contains(filterText) ?? false
                     }
 
@@ -62,7 +71,9 @@ class TransactionHistoryViewController: UITableViewController {
                 })
             })
             .on(next: { [weak self] payments in
-                self?.filteredTxs = payments
+                if let payments = payments {
+                    self?.transactions = payments
+                }
             })
             .on(queue: .main, next: { [weak self] _ in
                 self?.tableView.reloadData()
@@ -74,48 +85,42 @@ class TransactionHistoryViewController: UITableViewController {
 // MARK: - Table View Data Source
 
 extension TransactionHistoryViewController {
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredTxs?.count ?? 0
+        return transactions.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let tx = filteredTxs?[indexPath.row]
-//
-//        let cell: TxCell
-//
-//        let reuseIdentifier = tx.debit ? "OutgoingCell" : "IncomingCell"
-//
-//        cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! TxCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-//        cell.addressLabel.text = tx.source == kinAccount.publicAddress ? tx.destination : tx.source
-//        cell.amountLabel.text = String(describing: tx.amount)
-//        cell.dateLabel.text = formatter.string(from: tx.createdAt)
-//
-//        cell.memoLabel.text = tx.memoText
+        if let cell = cell as? TransactionTableViewCell {
+            let tx = transactions[indexPath.row]
 
-        return UITableViewCell()
+            cell.contentView.backgroundColor = tx.debit ? .outgoingCell : .incomingCell
+            cell.addressLabel.text = tx.source == account.publicAddress ? tx.destination : tx.source
+            cell.amountLabel.text = "\(tx.amount) KIN"
+            cell.dateLabel.text = formatter.string(from: tx.createdAt)
+            cell.memoLabel.text = tx.memoText
+        }
+
+        return cell
     }
 }
 
-// MARK: - Text Field Delegate
+// MARK: - Search Bar Delegate
 
-extension TransactionHistoryViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+extension TransactionHistoryViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        memoFilter.next(searchText.trimmingCharacters(in: .whitespaces))
     }
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        memoFilter.next((textField.text as NSString?)?.replacingCharacters(in: range, with: string))
-        return true
-    }
-
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         memoFilter.next(nil)
-        return true
     }
+}
+
+// MARK: -
+
+extension UIColor {
+    fileprivate static let outgoingCell = UIColor(red: 255/255, green: 240/255, blue: 240/255, alpha: 1)
+    fileprivate static let incomingCell = UIColor(red: 240/255, green: 255/255, blue: 240/255, alpha: 1)
 }
