@@ -43,15 +43,6 @@ extension MigrationController: KinMigrationManagerDelegate {
         let client = factory.KinClient(network: network, appId: appId)
         
         delegate?.migrationController(self, didCreateClient: client)
-
-//        if let account = try? client.accounts.first ?? client.addAccount() {
-//            let whitelist = self.whitelist(url: .whitelist(network), network: network)
-//
-//            account.sendTransaction(to: "", kin: 100, memo: nil, whitelist: whitelist)
-//                .then { transactionId -> Void in
-//
-//            }
-//        }
     }
 
     func kinMigrationManagerError(_ kinMigrationManager: KinMigrationManager, error: Error) {
@@ -61,27 +52,27 @@ extension MigrationController: KinMigrationManagerDelegate {
 
 // MARK: - Whitelist
 
-//extension MigrationController {
-//    private func whitelist(url: URL, network: Network) -> WhitelistClosure {
-//        return { transactionEnvelope -> Promise<TransactionEnvelope> in
-//            let promise: Promise<TransactionEnvelope> = Promise()
-//            let whitelistEnvelope = WhitelistEnvelope(transactionEnvelope: transactionEnvelope, networkId: network.id)
-//
-//            var request = URLRequest(url: url)
-//            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//            request.httpMethod = "POST"
-//            request.httpBody = try? JSONEncoder().encode(whitelistEnvelope)
-//
-//            URLSession.shared.dataTask(with: request) { (data, response, error) in
-//                do {
-//                    promise.signal(try TransactionEnvelope.decodeResponse(data: data, error: error))
-//                }
-//                catch {
-//                    promise.signal(error)
-//                }
-//                }.resume()
-//
-//            return promise
-//        }
-//    }
-//}
+extension MigrationController {
+    static func whitelist(url: URL, network: Network) -> WhitelistClosure {
+        return { transactionEnvelope -> Promise<TransactionEnvelope> in
+            let promise: Promise<TransactionEnvelope> = Promise()
+            let whitelistEnvelope = WhitelistEnvelope(transactionEnvelope: transactionEnvelope, networkId: network.id)
+
+            var request = URLRequest(url: url)
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = try? JSONEncoder().encode(whitelistEnvelope)
+
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                do {
+                    promise.signal(try TransactionEnvelope.decodeResponse(data: data, error: error))
+                }
+                catch {
+                    promise.signal(error)
+                }
+                }.resume()
+
+            return promise
+        }
+    }
+}

@@ -11,6 +11,8 @@
 		6815F46421BFB87600B9439A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6815F46321BFB87600B9439A /* Assets.xcassets */; };
 		6815F46721BFB87600B9439A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6815F46521BFB87600B9439A /* LaunchScreen.storyboard */; };
 		6824E88121CA718700E094F5 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6824E88021CA718700E094F5 /* TransactionTableViewCell.swift */; };
+		6824E88421CB7C6800E094F5 /* SendTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6824E88321CB7C6800E094F5 /* SendTransactionViewController.swift */; };
+		6824E88921CBC3B900E094F5 /* SendTransactionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6824E88821CBC3B900E094F5 /* SendTransactionButton.swift */; };
 		687617E921C23B11006FEDEE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687617E821C23B11006FEDEE /* Constants.swift */; };
 		687617F421C2573F006FEDEE /* NetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687617F321C2573F006FEDEE /* NetworkViewController.swift */; };
 		687617F821C25ABF006FEDEE /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687617F721C25ABF006FEDEE /* MainNavigationController.swift */; };
@@ -30,6 +32,8 @@
 		6815F46621BFB87600B9439A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6815F46821BFB87600B9439A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6824E88021CA718700E094F5 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
+		6824E88321CB7C6800E094F5 /* SendTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTransactionViewController.swift; sourceTree = "<group>"; };
+		6824E88821CBC3B900E094F5 /* SendTransactionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTransactionButton.swift; sourceTree = "<group>"; };
 		687617E821C23B11006FEDEE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		687617F321C2573F006FEDEE /* NetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewController.swift; sourceTree = "<group>"; };
 		687617F721C25ABF006FEDEE /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 				6876180121C29220006FEDEE /* AccountListViewController.swift */,
 				687617F721C25ABF006FEDEE /* MainNavigationController.swift */,
 				687617F321C2573F006FEDEE /* NetworkViewController.swift */,
+				6824E88821CBC3B900E094F5 /* SendTransactionButton.swift */,
+				6824E88321CB7C6800E094F5 /* SendTransactionViewController.swift */,
 				6876180F21C79B58006FEDEE /* TableViewCell */,
 				6876181021C7CFFA006FEDEE /* TransactionHistoryViewController.swift */,
 			);
@@ -272,9 +278,11 @@
 				687617F821C25ABF006FEDEE /* MainNavigationController.swift in Sources */,
 				687617FB21C25EBC006FEDEE /* AccountViewController.swift in Sources */,
 				6876180221C29220006FEDEE /* AccountListViewController.swift in Sources */,
+				6824E88421CB7C6800E094F5 /* SendTransactionViewController.swift in Sources */,
 				6815F45D21BFB87600B9439A /* AppDelegate.swift in Sources */,
 				687617E921C23B11006FEDEE /* Constants.swift in Sources */,
 				6876181121C7CFFA006FEDEE /* TransactionHistoryViewController.swift in Sources */,
+				6824E88921CBC3B900E094F5 /* SendTransactionButton.swift in Sources */,
 				6876180E21C78C51006FEDEE /* SubtitleTableViewCell.swift in Sources */,
 				687617F421C2573F006FEDEE /* NetworkViewController.swift in Sources */,
 				6876180C21C78C32006FEDEE /* Value1TableViewCell.swift in Sources */,

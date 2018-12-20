@@ -24,6 +24,20 @@ extension Environment {
             return .mainNet
         }
     }
+
+    enum Blockchain {
+        case stellar
+        case kin
+    }
+
+    var blockchain: Blockchain {
+        switch self {
+        case .testKinCore, .mainKinCore:
+            return .stellar
+        case .testKinSDK, .mainKinSDK:
+            return .kin
+        }
+    }
 }
 
 extension AppId {

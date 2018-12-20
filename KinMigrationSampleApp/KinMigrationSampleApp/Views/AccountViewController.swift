@@ -14,6 +14,9 @@ class AccountViewController: UITableViewController {
     let account: KinAccountProtocol
     let environment: Environment
 
+    private var watch: BalanceWatchProtocol?
+    private let linkBag = LinkBag()
+
     private let datasource: [Row]
     private var balance: Kin?
 
@@ -41,6 +44,7 @@ class AccountViewController: UITableViewController {
 
         super.init(nibName: nil, bundle: nil)
 
+        watchAccountBalance()
         updateAccountBalance()
     }
 
@@ -163,6 +167,15 @@ extension AccountViewController {
                 }
         }
     }
+
+    private func watchAccountBalance() {
+        self.watch = try? account.watchBalance(nil)
+        self.watch?.emitter
+            .on(queue: .main, next: { [weak self] balance in
+                self?.updateAccountBalance()
+            })
+            .add(to: linkBag)
+    }
 }
 
 // MARK: - Data Source
@@ -258,7 +271,8 @@ extension AccountViewController {
             tableView.deselectRow(at: indexPath, animated: true)
 
         case .sendTransaction:
-            break
+            let viewController = SendTransactionViewController(account: account, environment: environment)
+            navigationController?.pushViewController(viewController, animated: true)
 
         case .transactionHistory:
             let viewController = TransactionHistoryViewController(account: account)
