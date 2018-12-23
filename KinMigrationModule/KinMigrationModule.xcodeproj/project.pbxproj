@@ -35,13 +35,6 @@
 			remoteGlobalIDString = 6815F43521BFB83E00B9439A;
 			remoteInfo = KinMigrationModule;
 		};
-		6815F47221BFB87800B9439A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6815F46E21BFB87600B9439A /* KinMigrationSampleApp.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6815F45921BFB87600B9439A;
-			remoteInfo = KinMigrationSampleApp;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -51,7 +44,6 @@
 		6815F43F21BFB83E00B9439A /* KinMigrationModuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KinMigrationModuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6815F44421BFB83E00B9439A /* KinMigrationModuleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinMigrationModuleTests.swift; sourceTree = "<group>"; };
 		6815F44621BFB83E00B9439A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6815F46E21BFB87600B9439A /* KinMigrationSampleApp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KinMigrationSampleApp.xcodeproj; path = ../KinMigrationSampleApp/KinMigrationSampleApp.xcodeproj; sourceTree = "<group>"; };
 		6815F47621BFBA6200B9439A /* KinMigrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinMigrationManager.swift; sourceTree = "<group>"; };
 		6815F47721BFBA6200B9439A /* KinClientFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinClientFactory.swift; sourceTree = "<group>"; };
 		6815F47A21BFBA6B00B9439A /* KinTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinTypes.swift; sourceTree = "<group>"; };
@@ -94,7 +86,6 @@
 		6815F42C21BFB83E00B9439A = {
 			isa = PBXGroup;
 			children = (
-				6815F46E21BFB87600B9439A /* KinMigrationSampleApp.xcodeproj */,
 				6815F43821BFB83E00B9439A /* KinMigrationModule */,
 				6815F44321BFB83E00B9439A /* KinMigrationModuleTests */,
 				6815F43721BFB83E00B9439A /* Products */,
@@ -134,14 +125,6 @@
 				6815F44621BFB83E00B9439A /* Info.plist */,
 			);
 			path = KinMigrationModuleTests;
-			sourceTree = "<group>";
-		};
-		6815F46F21BFB87600B9439A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6815F47321BFB87800B9439A /* KinMigrationSampleApp.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		6815F47C21BFBA7100B9439A /* WrappedKinCore */ = {
@@ -265,12 +248,6 @@
 			mainGroup = 6815F42C21BFB83E00B9439A;
 			productRefGroup = 6815F43721BFB83E00B9439A /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 6815F46F21BFB87600B9439A /* Products */;
-					ProjectRef = 6815F46E21BFB87600B9439A /* KinMigrationSampleApp.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				6815F43521BFB83E00B9439A /* KinMigrationModule */,
@@ -278,16 +255,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		6815F47321BFB87800B9439A /* KinMigrationSampleApp.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = KinMigrationSampleApp.app;
-			remoteRef = 6815F47221BFB87800B9439A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6815F43421BFB83E00B9439A /* Resources */ = {
