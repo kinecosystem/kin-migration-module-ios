@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '9.0'
 
 use_frameworks!
 inhibit_all_warnings!
@@ -14,6 +14,11 @@ target 'KinMigrationModule' do
   pod 'StellarKit', :path => '../kin-core-ios/KinSDK/StellarKit/'
   pod 'StellarErrors', :path => '../kin-core-ios/KinSDK/StellarKit/'
   pod 'Sodium'
+
+  # Fixes the framework tests failing to build
+  target 'KinMigrationModuleTests' do
+    inherit! :search_paths
+  end
 end
 
 target 'KinMigrationSampleApp' do
