@@ -18,9 +18,13 @@ enum Environment {
 extension Environment {
     var network: Network {
         switch self {
-        case .testKinCore, .testKinSDK:
+        case .testKinCore:
+            return .playground
+        case .testKinSDK:
             return .testNet
-        case .mainKinCore, .mainKinSDK:
+        case .mainKinCore:
+            return .mainNet
+        case .mainKinSDK:
             return .mainNet
         }
     }
@@ -43,9 +47,10 @@ extension Environment {
 extension AppId {
     init(network: Network) throws {
         switch network {
-        case .testNet: try self.init("test")
-        case .mainNet: try self.init("test") // TODO:
-        default:       fatalError()
+        case .testNet:    try self.init("test")
+        case .mainNet:    try self.init("test") // TODO:
+        case .playground: try self.init("test")
+        default:          fatalError()
         }
     }
 }
@@ -69,9 +74,9 @@ extension URL {
     }
 
     static func fund(_ environment: Environment, publicAddress: String, amount: Kin) -> URL {
-        switch environment { // TODO:
-        case .testKinCore: return URL(string: "http://kin.org?addr=\(publicAddress)&amount=\(amount)")!
-        case .testKinSDK:  return URL(string: "http://kin.org?addr=\(publicAddress)&amount=\(amount)")!
+        switch environment {
+        case .testKinCore: return URL(string: "http://faucet-playground.kininfrastructure.com/fund?account=\(publicAddress)&amount=\(amount)")!
+        case .testKinSDK:  return URL(string: "http://kin.org?addr=\(publicAddress)&amount=\(amount)")! // TODO:
         default:           fatalError("Funding is only supported on test net.")
         }
     }

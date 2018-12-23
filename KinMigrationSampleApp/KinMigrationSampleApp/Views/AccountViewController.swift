@@ -115,7 +115,7 @@ extension AccountViewController {
     @discardableResult
     private func fundAccount() -> Promise<Void> {
         let promise = Promise<Void>()
-        let url: URL = .fund(environment, publicAddress: account.publicAddress, amount: 5000)
+        let url: URL = .fund(environment, publicAddress: account.publicAddress, amount: 10000)
 
         URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
             if let error = error {
@@ -134,7 +134,10 @@ extension AccountViewController {
         return promise
     }
 
-    private func updateAccountBalance() {
+    @discardableResult
+    private func updateAccountBalance() -> Promise<Void> {
+        let promise = Promise<Void>()
+
         account.balance()
             .then(on: .main, { [weak self] balance in
                 guard let strongSelf = self else {
@@ -143,6 +146,8 @@ extension AccountViewController {
 
                 strongSelf.balance = balance
                 strongSelf.tableView.reloadData()
+
+                promise.signal(Void())
             })
             .error { [weak self] error in
                 guard let strongSelf = self else {
@@ -165,7 +170,11 @@ extension AccountViewController {
                 else {
                     cell.detailTextLabel?.text = error.localizedDescription
                 }
+
+                promise.signal(error)
         }
+
+        return promise
     }
 
     private func watchAccountBalance() {
@@ -283,13 +292,36 @@ extension AccountViewController {
             cell?.detailTextLabel?.text = "Creating..."
 
             createAccount()
-                .then(on: .main, { [weak self] in
+                .then(on: .main, { [weak self] _ -> Promise<Void> in
+                    guard let strongSelf = self else {
+                        return Promise(Error.internalInconsistency)
+                    }
+
                     cell?.detailTextLabel?.text = "Activating..."
-                    self?.activateAccount()
+                    return strongSelf.activateAccount()
                 })
-                .then(on: .main) { [weak self] in
+                .then(on: .main) { [weak self] _ -> Promise<Void> in
+                    guard let strongSelf = self else {
+                        return Promise(Error.internalInconsistency)
+                    }
+
+                    guard strongSelf.environment == .testKinCore else {
+                        return Promise(Void())
+                    }
+
+                    cell?.detailTextLabel?.text = "Funding..."
+                    return strongSelf.fundAccount()
+                }
+                .then(on: .main) { [weak self] _ -> Promise<Void> in
+                    guard let strongSelf = self else {
+                        return Promise(Error.internalInconsistency)
+                    }
+
+                    cell?.detailTextLabel?.text = "Updating..."
+                    return strongSelf.updateAccountBalance()
+                }
+                .then(on: .main) { _ in
                     cell?.detailTextLabel?.text = nil
-                    self?.updateAccountBalance()
                     tableView.deselectRow(at: indexPath, animated: true)
             }
             
