@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5D94ACBA1A71CB67261266AF /* Pods_KinMigrationModuleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB3D7AD1D82ACC9637D16A04 /* Pods_KinMigrationModuleTests.framework */; };
+		681547AC21CFC23C000EDD9B /* KinMigrationModuleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681547AB21CFC23C000EDD9B /* KinMigrationModuleHelper.swift */; };
 		6815F44021BFB83E00B9439A /* KinMigrationModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6815F43621BFB83E00B9439A /* KinMigrationModule.framework */; };
 		6815F44521BFB83E00B9439A /* KinMigrationModuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F44421BFB83E00B9439A /* KinMigrationModuleTests.swift */; };
 		6815F44721BFB83E00B9439A /* KinMigrationModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 6815F43921BFB83E00B9439A /* KinMigrationModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		681547AB21CFC23C000EDD9B /* KinMigrationModuleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinMigrationModuleHelper.swift; sourceTree = "<group>"; };
 		6815F43621BFB83E00B9439A /* KinMigrationModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KinMigrationModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6815F43921BFB83E00B9439A /* KinMigrationModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinMigrationModule.h; sourceTree = "<group>"; };
 		6815F43A21BFB83E00B9439A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 		6815F44321BFB83E00B9439A /* KinMigrationModuleTests */ = {
 			isa = PBXGroup;
 			children = (
+				681547AB21CFC23C000EDD9B /* KinMigrationModuleHelper.swift */,
 				6815F44421BFB83E00B9439A /* KinMigrationModuleTests.swift */,
 				6815F44621BFB83E00B9439A /* Info.plist */,
 			);
@@ -389,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6815F44521BFB83E00B9439A /* KinMigrationModuleTests.swift in Sources */,
+				681547AC21CFC23C000EDD9B /* KinMigrationModuleHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
