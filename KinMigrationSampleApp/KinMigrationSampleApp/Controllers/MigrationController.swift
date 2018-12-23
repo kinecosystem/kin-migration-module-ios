@@ -46,7 +46,9 @@ extension MigrationController: KinMigrationManagerDelegate {
     }
 
     func kinMigrationManagerError(_ kinMigrationManager: KinMigrationManager, error: Error) {
-
+        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true)
     }
 }
 
@@ -70,7 +72,7 @@ extension MigrationController {
                 catch {
                     promise.signal(error)
                 }
-                }.resume()
+            }.resume()
 
             return promise
         }
