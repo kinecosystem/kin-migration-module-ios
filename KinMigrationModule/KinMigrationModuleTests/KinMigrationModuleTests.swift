@@ -36,7 +36,7 @@ class KinMigrationModuleHelper: NSObject {
 extension KinMigrationModuleHelper: KinMigrationManagerDelegate {
     func kinMigrationManagerCanCreateClient(_ kinMigrationManager: KinMigrationManager, factory: KinClientFactory) {
         do {
-            let appId = try AppId("test")
+            let appId = try AppId(appIdValue)
             let client = factory.KinClient(network: network, appId: appId)
             promise.signal(client)
         }
