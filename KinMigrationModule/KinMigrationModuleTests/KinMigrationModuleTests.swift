@@ -40,14 +40,9 @@ class KinMigrationModuleTests: XCTestCase {
         kinSDKClient()
             .then { kinClient in
                 expectation.fulfill()
-            }
-            .error { error in
-                // !!!: client creation passes but this error is called because the burn url is wrong. find a solution to allow this error to exist
-//                XCTFail(error.localizedDescription)
         }
 
-        waitForExpectations(timeout: 10)
-//        wait(for: [e], timeout: 10)
+        waitForExpectations(timeout: 5)
     }
 
     func testCreateKinSDKAccount() {
@@ -63,9 +58,6 @@ class KinMigrationModuleTests: XCTestCase {
                     XCTFail(error.localizedDescription)
                 }
             }
-            .error { error in
-//                XCTFail(error.localizedDescription)
-        }
 
         wait(for: [expectation], timeout: 10)
     }
