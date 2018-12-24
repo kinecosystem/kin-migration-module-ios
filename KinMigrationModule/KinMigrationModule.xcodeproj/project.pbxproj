@@ -26,6 +26,11 @@
 		6815F49021BFBA7100B9439A /* WrappedKinSDKWatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F48621BFBA7100B9439A /* WrappedKinSDKWatchers.swift */; };
 		6815F49121BFBA7100B9439A /* WrappedKinSDKAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6815F48721BFBA7100B9439A /* WrappedKinSDKAccounts.swift */; };
 		6824E87D21CA252400E094F5 /* KinError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6824E87C21CA252400E094F5 /* KinError.swift */; };
+		68963E0221D0B59D0092C68D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68963E0121D0B59D0092C68D /* AppDelegate.swift */; };
+		68963E0421D0B59D0092C68D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68963E0321D0B59D0092C68D /* ViewController.swift */; };
+		68963E0721D0B59D0092C68D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68963E0521D0B59D0092C68D /* Main.storyboard */; };
+		68963E0921D0B5A00092C68D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68963E0821D0B5A00092C68D /* Assets.xcassets */; };
+		68963E0C21D0B5A00092C68D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68963E0A21D0B5A00092C68D /* LaunchScreen.storyboard */; };
 		9E1002277EBFF6FD41C0EEEF /* Pods_KinMigrationModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B821922D53478D730309B2C1 /* Pods_KinMigrationModule.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +41,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6815F43521BFB83E00B9439A;
 			remoteInfo = KinMigrationModule;
+		};
+		68963E1121D0B5BD0092C68D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6815F42D21BFB83E00B9439A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68963DFE21D0B59D0092C68D;
+			remoteInfo = KinMigrationModuleTestsApp;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -61,6 +73,13 @@
 		6815F48621BFBA7100B9439A /* WrappedKinSDKWatchers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappedKinSDKWatchers.swift; sourceTree = "<group>"; };
 		6815F48721BFBA7100B9439A /* WrappedKinSDKAccounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappedKinSDKAccounts.swift; sourceTree = "<group>"; };
 		6824E87C21CA252400E094F5 /* KinError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinError.swift; sourceTree = "<group>"; };
+		68963DFF21D0B59D0092C68D /* KinMigrationModuleTestsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KinMigrationModuleTestsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		68963E0121D0B59D0092C68D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		68963E0321D0B59D0092C68D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		68963E0621D0B59D0092C68D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		68963E0821D0B5A00092C68D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		68963E0B21D0B5A00092C68D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		68963E0D21D0B5A00092C68D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D3A5D3864A2A1FE24506181 /* Pods-KinMigrationModuleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinMigrationModuleTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-KinMigrationModuleTests/Pods-KinMigrationModuleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		98810B14914AC4A2E455506F /* Pods-KinMigrationModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinMigrationModule.release.xcconfig"; path = "../Pods/Target Support Files/Pods-KinMigrationModule/Pods-KinMigrationModule.release.xcconfig"; sourceTree = "<group>"; };
 		9A16B5EBD178BA959364A0C5 /* Pods-KinMigrationModuleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinMigrationModuleTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-KinMigrationModuleTests/Pods-KinMigrationModuleTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -87,6 +106,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		68963DFC21D0B59D0092C68D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -95,6 +121,7 @@
 			children = (
 				6815F43821BFB83E00B9439A /* KinMigrationModule */,
 				6815F44321BFB83E00B9439A /* KinMigrationModuleTests */,
+				68963E0021D0B59D0092C68D /* KinMigrationModuleTestsApp */,
 				6815F43721BFB83E00B9439A /* Products */,
 				8041874FD14529C2C2EFE11D /* Pods */,
 				FA4542854C3F852161350341 /* Frameworks */,
@@ -106,6 +133,7 @@
 			children = (
 				6815F43621BFB83E00B9439A /* KinMigrationModule.framework */,
 				6815F43F21BFB83E00B9439A /* KinMigrationModuleTests.xctest */,
+				68963DFF21D0B59D0092C68D /* KinMigrationModuleTestsApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -157,6 +185,19 @@
 				6815F48621BFBA7100B9439A /* WrappedKinSDKWatchers.swift */,
 			);
 			path = WrappedKinSDK;
+			sourceTree = "<group>";
+		};
+		68963E0021D0B59D0092C68D /* KinMigrationModuleTestsApp */ = {
+			isa = PBXGroup;
+			children = (
+				68963E0121D0B59D0092C68D /* AppDelegate.swift */,
+				68963E0321D0B59D0092C68D /* ViewController.swift */,
+				68963E0521D0B59D0092C68D /* Main.storyboard */,
+				68963E0821D0B5A00092C68D /* Assets.xcassets */,
+				68963E0A21D0B5A00092C68D /* LaunchScreen.storyboard */,
+				68963E0D21D0B5A00092C68D /* Info.plist */,
+			);
+			path = KinMigrationModuleTestsApp;
 			sourceTree = "<group>";
 		};
 		8041874FD14529C2C2EFE11D /* Pods */ = {
@@ -226,11 +267,29 @@
 			);
 			dependencies = (
 				6815F44221BFB83E00B9439A /* PBXTargetDependency */,
+				68963E1221D0B5BD0092C68D /* PBXTargetDependency */,
 			);
 			name = KinMigrationModuleTests;
 			productName = KinMigrationModuleTests;
 			productReference = 6815F43F21BFB83E00B9439A /* KinMigrationModuleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		68963DFE21D0B59D0092C68D /* KinMigrationModuleTestsApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68963E0E21D0B5A00092C68D /* Build configuration list for PBXNativeTarget "KinMigrationModuleTestsApp" */;
+			buildPhases = (
+				68963DFB21D0B59D0092C68D /* Sources */,
+				68963DFC21D0B59D0092C68D /* Frameworks */,
+				68963DFD21D0B59D0092C68D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KinMigrationModuleTestsApp;
+			productName = KinMigrationModuleTestsApp;
+			productReference = 68963DFF21D0B59D0092C68D /* KinMigrationModuleTestsApp.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -248,6 +307,10 @@
 					};
 					6815F43E21BFB83E00B9439A = {
 						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 68963DFE21D0B59D0092C68D;
+					};
+					68963DFE21D0B59D0092C68D = {
+						CreatedOnToolsVersion = 10.1;
 					};
 				};
 			};
@@ -257,6 +320,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 6815F42C21BFB83E00B9439A;
 			productRefGroup = 6815F43721BFB83E00B9439A /* Products */;
@@ -265,6 +329,7 @@
 			targets = (
 				6815F43521BFB83E00B9439A /* KinMigrationModule */,
 				6815F43E21BFB83E00B9439A /* KinMigrationModuleTests */,
+				68963DFE21D0B59D0092C68D /* KinMigrationModuleTestsApp */,
 			);
 		};
 /* End PBXProject section */
@@ -281,6 +346,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68963DFD21D0B59D0092C68D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68963E0C21D0B5A00092C68D /* LaunchScreen.storyboard in Resources */,
+				68963E0921D0B5A00092C68D /* Assets.xcassets in Resources */,
+				68963E0721D0B59D0092C68D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,6 +471,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		68963DFB21D0B59D0092C68D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68963E0421D0B59D0092C68D /* ViewController.swift in Sources */,
+				68963E0221D0B59D0092C68D /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -404,7 +488,31 @@
 			target = 6815F43521BFB83E00B9439A /* KinMigrationModule */;
 			targetProxy = 6815F44121BFB83E00B9439A /* PBXContainerItemProxy */;
 		};
+		68963E1221D0B5BD0092C68D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68963DFE21D0B59D0092C68D /* KinMigrationModuleTestsApp */;
+			targetProxy = 68963E1121D0B5BD0092C68D /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		68963E0521D0B59D0092C68D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68963E0621D0B59D0092C68D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		68963E0A21D0B5A00092C68D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68963E0B21D0B5A00092C68D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		6815F44821BFB83E00B9439A /* Debug */ = {
@@ -597,6 +705,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KinMigrationModuleTestsApp.app/KinMigrationModuleTestsApp";
 			};
 			name = Debug;
 		};
@@ -612,6 +721,41 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kinfoundation.KinMigrationModuleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KinMigrationModuleTestsApp.app/KinMigrationModuleTestsApp";
+			};
+			name = Release;
+		};
+		68963E0F21D0B5A00092C68D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = KinMigrationModuleTestsApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinfoundation.KinMigrationModuleTestsApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		68963E1021D0B5A00092C68D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = KinMigrationModuleTestsApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinfoundation.KinMigrationModuleTestsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -644,6 +788,15 @@
 			buildConfigurations = (
 				6815F44E21BFB83E00B9439A /* Debug */,
 				6815F44F21BFB83E00B9439A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68963E0E21D0B5A00092C68D /* Build configuration list for PBXNativeTarget "KinMigrationModuleTestsApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68963E0F21D0B5A00092C68D /* Debug */,
+				68963E1021D0B5A00092C68D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
