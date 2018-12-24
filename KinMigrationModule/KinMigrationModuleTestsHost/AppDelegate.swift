@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  KinMigrationModuleTestsApp
+//  KinMigrationModuleTestsHost
 //
 //  Created by Corey Werner on 24/12/2018.
 //  Copyright © 2018 Kin Foundation. All rights reserved.
