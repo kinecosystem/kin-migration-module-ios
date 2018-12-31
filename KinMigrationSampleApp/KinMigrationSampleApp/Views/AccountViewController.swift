@@ -14,6 +14,7 @@ class AccountViewController: UITableViewController {
     let account: KinAccountProtocol
     let environment: Environment
 
+    private let createAccountPromise = Promise<Void>()
     private var watch: BalanceWatchProtocol?
     private let linkBag = LinkBag()
 
@@ -24,26 +25,27 @@ class AccountViewController: UITableViewController {
         self.account = account
         self.environment = environment
 
-        if environment.network == .mainNet {
-            datasource = [
+        datasource = {
+            var datasource: [Row] = [
                 .publicAddress,
                 .balance,
                 .sendTransaction,
                 .transactionHistory
             ]
-        }
-        else {
-            datasource = [
-                .publicAddress,
-                .balance,
-                .sendTransaction,
-                .transactionHistory,
-                .createAccount
-            ]
-        }
+            
+            if environment.network != .mainNet {
+                datasource.append(.createAccount)
+            }
+            if environment.blockchain == .stellar {
+                datasource.append(.burnAccount)
+            }
+
+            return datasource
+        }()
 
         super.init(nibName: nil, bundle: nil)
 
+//        watchAccountActivation()
         watchAccountBalance()
         updateAccountBalance()
     }
@@ -90,6 +92,16 @@ extension AccountViewController {
         return promise
     }
 
+    private func watchAccountActivation() {
+        _ = try? account.watchCreation()
+            .then { [weak self]  in
+                self?.createAccountPromise.signal(Void())
+            }
+            .error { [weak self] error in
+                self?.createAccountPromise.signal(error)
+            }
+    }
+
     @discardableResult
     private func activateAccount() -> Promise<Void> {
         let promise = Promise<Void>()
@@ -134,6 +146,10 @@ extension AccountViewController {
         return promise
     }
 
+    private func burnAccount() -> Promise<String?> {
+        return account.burn()
+    }
+
     @discardableResult
     private func updateAccountBalance() -> Promise<Void> {
         let promise = Promise<Void>()
@@ -150,28 +166,30 @@ extension AccountViewController {
                 promise.signal(Void())
             })
             .error { [weak self] error in
-                guard let strongSelf = self else {
-                    return
-                }
+                DispatchQueue.main.async {
+                    guard let strongSelf = self else {
+                        return
+                    }
 
-                guard let balanceIndex = strongSelf.datasource.firstIndex(of: .balance) else {
-                    return
-                }
+                    guard let balanceIndex = strongSelf.datasource.firstIndex(of: .balance) else {
+                        return
+                    }
 
-                let indexPath = IndexPath(row: balanceIndex, section: 0)
+                    let indexPath = IndexPath(row: balanceIndex, section: 0)
 
-                guard let cell = strongSelf.tableView.cellForRow(at: indexPath) else {
-                    return
-                }
+                    guard let cell = strongSelf.tableView.cellForRow(at: indexPath) else {
+                        return
+                    }
 
-                if case KinError.invalidAmount = error {
-                    cell.detailTextLabel?.text = "N/A"
-                }
-                else {
-                    cell.detailTextLabel?.text = error.localizedDescription
-                }
+                    if case KinError.invalidAmount = error {
+                        cell.detailTextLabel?.text = "N/A"
+                    }
+                    else {
+                        cell.detailTextLabel?.text = error.localizedDescription
+                    }
 
-                promise.signal(error)
+                    promise.signal(error)
+                }
         }
 
         return promise
@@ -196,6 +214,7 @@ extension AccountViewController {
         case sendTransaction
         case transactionHistory
         case createAccount
+        case burnAccount
     }
 }
 
@@ -205,7 +224,8 @@ extension AccountViewController.Row {
         case .publicAddress:
             return "subtitle"
         case .balance,
-             .createAccount:
+             .createAccount,
+             .burnAccount:
             return "value1"
         case .sendTransaction,
              .transactionHistory:
@@ -225,6 +245,8 @@ extension AccountViewController.Row {
             return "Transaction History"
         case .createAccount:
             return "Create Account"
+        case .burnAccount:
+            return "Burn Account"
         }
     }
 }
@@ -324,7 +346,26 @@ extension AccountViewController {
                     cell?.detailTextLabel?.text = nil
                     tableView.deselectRow(at: indexPath, animated: true)
             }
-            
+
+        case .burnAccount:
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.detailTextLabel?.text = "Burning..."
+
+            burnAccount()
+                .then(on: .main, { transactionHash in
+                    if let _ = transactionHash {
+                        cell?.detailTextLabel?.text = "Burned"
+                    }
+                    else {
+                        cell?.detailTextLabel?.text = "Burned Already"
+                    }
+                })
+                .error { error in
+                    DispatchQueue.main.async {
+                        cell?.detailTextLabel?.text = "Failed"
+                    }
+            }
+
         default:
             break
         }

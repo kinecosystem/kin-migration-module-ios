@@ -69,18 +69,3 @@ class WrappedKinCoreClient: KinClientProtocol {
         client.deleteKeystore()
     }
 }
-
-extension Network {
-    fileprivate var mapToKinCore: KinCoreSDK.NetworkId {
-        switch self {
-        case .mainNet:
-            return .mainNet
-        case .testNet:
-            return .testNet
-        case .playground:
-            return .playground
-        case .custom(let string):
-            return .custom(issuer: "", stellarNetworkId: StellarKit.NetworkId(string))
-        }
-    }
-}

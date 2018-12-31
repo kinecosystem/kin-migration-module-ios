@@ -24,10 +24,10 @@
   ],
   "dependencies": {
     "KinUtil": [
-
+      "0.0.13"
     ],
     "Sodium": [
-
+      "0.7.0"
     ]
   },
   "platforms": {

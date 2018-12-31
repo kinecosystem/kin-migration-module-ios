@@ -7,6 +7,7 @@
 //
 
 import KinCoreSDK
+import StellarKit
 import StellarErrors
 
 class WrappedKinCoreAccount: KinAccountProtocol {
@@ -63,6 +64,20 @@ class WrappedKinCoreAccount: KinAccountProtocol {
         account.balance()
             .then { kin in
                 promise.signal(kin)
+            }
+            .error { error in
+                promise.signal(KinError(error: error))
+        }
+
+        return promise
+    }
+
+    func burn() -> Promise<String?> {
+        let promise = Promise<String?>()
+
+        account.burn()
+            .then { transactionHash in
+                promise.signal(transactionHash)
             }
             .error { error in
                 promise.signal(KinError(error: error))

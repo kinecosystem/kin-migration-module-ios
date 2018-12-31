@@ -1,32 +1,36 @@
 PODS:
   - KinCoreSDK (0.7.12):
-    - StellarKit (= 0.3.6)
+    - Sodium (= 0.7.0)
+    - StellarKit (= 0.3.10)
   - KinMigrationModule (0.0.1):
     - KinCoreSDK
     - KinSDK
-    - Sodium
+    - Sodium (= 0.7.0)
   - KinSDK (1.0.0):
-    - KinUtil
-    - Sodium
-  - KinUtil (0.0.6)
+    - KinUtil (= 0.0.13)
+    - Sodium (= 0.7.0)
+  - KinUtil (0.0.13)
   - Sodium (0.7.0)
   - StellarErrors (0.2.7)
-  - StellarKit (0.3.6):
-    - KinUtil (= 0.0.6)
+  - StellarKit (0.3.10):
+    - KinUtil (= 0.0.13)
     - StellarErrors (= 0.2.7)
 
 DEPENDENCIES:
   - KinCoreSDK (from `../kin-core-ios/`)
   - KinMigrationModule (from `./`)
   - KinSDK (from `../kin-sdk-ios/`)
-  - Sodium
-  - StellarErrors (from `../kin-core-ios/KinSDK/StellarKit/`)
-  - StellarKit (from `../kin-core-ios/KinSDK/StellarKit/`)
+  - KinUtil (= 0.0.13)
+  - Sodium (= 0.7.0)
+  - StellarErrors (= 0.2.7)
+  - StellarKit (= 0.3.10)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - KinUtil
     - Sodium
+    - StellarErrors
+    - StellarKit
 
 EXTERNAL SOURCES:
   KinCoreSDK:
@@ -35,20 +39,16 @@ EXTERNAL SOURCES:
     :path: "./"
   KinSDK:
     :path: "../kin-sdk-ios/"
-  StellarErrors:
-    :path: "../kin-core-ios/KinSDK/StellarKit/"
-  StellarKit:
-    :path: "../kin-core-ios/KinSDK/StellarKit/"
 
 SPEC CHECKSUMS:
-  KinCoreSDK: 83902f2a548dbe86990317c7af02db456a708fb9
-  KinMigrationModule: efd55392c85f8bebf1e985abdff1103964f67e0b
-  KinSDK: 510757c185af03947af060155635efa0d1517416
-  KinUtil: 1bc7b10d5dec37d268f9c3d18a54b87eba7db2e8
+  KinCoreSDK: 6ee880a7bbef4aa5b4832e48e545c75210782563
+  KinMigrationModule: 0f00233523b76444847927b8c0e2f3b17cc14037
+  KinSDK: c03a91974d7ae0dda0d232adbed92f1f020612c5
+  KinUtil: e609c48a6f3fff7c4ecb6e3d189c86f14687bf58
   Sodium: c5510cc6f5e1b27858e5f260b5cac80d4a3f9379
-  StellarErrors: 453f761875104c59060dc7f63204cbf17976384e
-  StellarKit: 12b8bc00ced841e32b0dfd28ca2cc5666411256b
+  StellarErrors: f9239fad02b05464fbc9845063195a87d28f57d1
+  StellarKit: 47362bbf11928673ca3897900e36b58046c97a05
 
-PODFILE CHECKSUM: 0b6981fa4acac1d220590d3d6b38916c70dc241f
+PODFILE CHECKSUM: 3d3af02e0d5f9cf1c5617a30e83b454003980594
 
 COCOAPODS: 1.5.3

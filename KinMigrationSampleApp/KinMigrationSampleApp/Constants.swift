@@ -18,14 +18,19 @@ enum Environment {
 extension Environment {
     var network: Network {
         switch self {
-        case .testKinCore:
-            return .playground
-        case .testKinSDK:
+        case .testKinCore, .testKinSDK:
             return .testNet
-        case .mainKinCore:
+        case .mainKinCore, .mainKinSDK:
             return .mainNet
-        case .mainKinSDK:
-            return .mainNet
+        }
+    }
+
+    var networkId: String {
+        switch self {
+        case .testKinCore, .mainKinCore:
+            return network.id(version: .kinCore)
+        case .testKinSDK, .mainKinSDK:
+            return network.id(version: .kinSDK)
         }
     }
 
@@ -47,10 +52,9 @@ extension Environment {
 extension AppId {
     init(network: Network) throws {
         switch network {
-        case .testNet:    try self.init("test")
-        case .mainNet:    try self.init("test") // TODO:
-        case .playground: try self.init("test")
-        default:          fatalError()
+        case .testNet: try self.init("test")
+        case .mainNet: try self.init("test") // TODO:
+        default:       fatalError()
         }
     }
 }

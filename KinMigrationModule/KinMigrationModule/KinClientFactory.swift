@@ -8,17 +8,22 @@
 
 import Foundation
 
-public class KinClientFactory {
+class KinClientFactory {
     let version: KinMigrationManager.Version
 
     init(version: KinMigrationManager.Version) {
         self.version = version
     }
 
-    private func blockchainURL(_ network: Network) -> URL {
+    private func nodeURL(_ network: Network, customURL: URL? = nil) throws -> URL {
         switch network {
-        case .custom(let urlString):
-            return URL(string: urlString)!
+        case .custom:
+            if let url = customURL {
+                return url
+            }
+            else {
+                throw KinMigrationManager.Error.missingCustomURL
+            }
         case .mainNet:
             switch version {
             case .kinCore:
@@ -36,8 +41,8 @@ public class KinClientFactory {
         }
     }
 
-    public func KinClient(network: Network, appId: AppId) -> KinClientProtocol {
-        let url = blockchainURL(network)
+    func KinClient(network: Network, appId: AppId, customURL: URL? = nil) throws -> KinClientProtocol {
+        let url = try nodeURL(network, customURL: customURL)
 
         switch version {
         case .kinCore:

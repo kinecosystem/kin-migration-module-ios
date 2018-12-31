@@ -74,6 +74,10 @@ extension MainNavigationController: MigrationControllerDelegate {
 
         pushViewController(viewController, animated: true)
     }
+
+    func migrationController(_ controller: MigrationController, error: Error) {
+        dismissLoaderView()
+    }
 }
 
 // MARK: - Account List View Controller

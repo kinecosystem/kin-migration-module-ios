@@ -10,6 +10,7 @@ import KinMigrationModule
 
 protocol MigrationControllerDelegate: NSObjectProtocol {
     func migrationController(_ controller: MigrationController, didCreateClient client: KinClientProtocol)
+    func migrationController(_ controller: MigrationController, error: Error)
 }
 
 class MigrationController: NSObject {
@@ -31,34 +32,40 @@ class MigrationController: NSObject {
 // MARK: - Kin Migration Manager
 
 extension MigrationController: KinMigrationManagerDelegate {
-    func kinMigrationManagerCanCreateClient(_ kinMigrationManager: KinMigrationManager, factory: KinClientFactory) {
+    func kinMigrationManagerPreparingClient(_ kinMigrationManager: KinMigrationManager) -> KinClientPreparation {
         guard let network = environment?.network else {
-            return
+            fatalError()
         }
 
         guard let appId = try? AppId(network: network) else {
-            return
+            fatalError()
         }
 
-        let client = factory.KinClient(network: network, appId: appId)
-        
+        return KinClientPreparation(network: network, appId: appId)
+    }
+
+    func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, didCreateClient client: KinClientProtocol) {
         delegate?.migrationController(self, didCreateClient: client)
     }
 
-    func kinMigrationManagerError(_ kinMigrationManager: KinMigrationManager, error: Error) {
-        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel))
-        UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true)
+    func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, error: Error) {
+        if let viewController = UIApplication.shared.keyWindow?.rootViewController, viewController.presentedViewController == nil {
+            let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: .cancel))
+            viewController.present(alertController, animated: true)
+        }
+
+        delegate?.migrationController(self, error: error)
     }
 }
 
 // MARK: - Whitelist
 
 extension MigrationController {
-    static func whitelist(url: URL, network: Network) -> WhitelistClosure {
+    static func whitelist(url: URL, networkId: String) -> WhitelistClosure {
         return { transactionEnvelope -> Promise<TransactionEnvelope> in
             let promise: Promise<TransactionEnvelope> = Promise()
-            let whitelistEnvelope = WhitelistEnvelope(transactionEnvelope: transactionEnvelope, networkId: network.id)
+            let whitelistEnvelope = WhitelistEnvelope(transactionEnvelope: transactionEnvelope, networkId: networkId)
 
             var request = URLRequest(url: url)
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")

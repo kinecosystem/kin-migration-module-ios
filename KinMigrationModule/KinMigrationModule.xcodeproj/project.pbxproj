@@ -31,6 +31,7 @@
 		68963E1F21D0BAA90092C68D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68963E1D21D0BAA90092C68D /* Main.storyboard */; };
 		68963E2121D0BAA90092C68D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68963E2021D0BAA90092C68D /* Assets.xcassets */; };
 		68963E2421D0BAA90092C68D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68963E2221D0BAA90092C68D /* LaunchScreen.storyboard */; };
+		68963EE321D8E1D30092C68D /* KinNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68963EE221D8E1D30092C68D /* KinNetwork.swift */; };
 		9E1002277EBFF6FD41C0EEEF /* Pods_KinMigrationModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B821922D53478D730309B2C1 /* Pods_KinMigrationModule.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		68963E2021D0BAA90092C68D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68963E2321D0BAA90092C68D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68963E2521D0BAA90092C68D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68963EE221D8E1D30092C68D /* KinNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinNetwork.swift; sourceTree = "<group>"; };
 		8D3A5D3864A2A1FE24506181 /* Pods-KinMigrationModuleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinMigrationModuleTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-KinMigrationModuleTests/Pods-KinMigrationModuleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		98810B14914AC4A2E455506F /* Pods-KinMigrationModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinMigrationModule.release.xcconfig"; path = "../Pods/Target Support Files/Pods-KinMigrationModule/Pods-KinMigrationModule.release.xcconfig"; sourceTree = "<group>"; };
 		9A16B5EBD178BA959364A0C5 /* Pods-KinMigrationModuleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinMigrationModuleTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-KinMigrationModuleTests/Pods-KinMigrationModuleTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				6824E87C21CA252400E094F5 /* KinError.swift */,
 				6815F47621BFBA6200B9439A /* KinMigrationManager.swift */,
 				6815F43921BFB83E00B9439A /* KinMigrationModule.h */,
+				68963EE221D8E1D30092C68D /* KinNetwork.swift */,
 				6815F47A21BFBA6B00B9439A /* KinTypes.swift */,
 				6815F47C21BFBA7100B9439A /* WrappedKinCore */,
 				6815F48221BFBA7100B9439A /* WrappedKinSDK */,
@@ -449,6 +452,7 @@
 				6824E87D21CA252400E094F5 /* KinError.swift in Sources */,
 				6815F48821BFBA7100B9439A /* WrappedKinCoreAccounts.swift in Sources */,
 				6815F49021BFBA7100B9439A /* WrappedKinSDKWatchers.swift in Sources */,
+				68963EE321D8E1D30092C68D /* KinNetwork.swift in Sources */,
 				6815F48F21BFBA7100B9439A /* WrappedKinSDKAccount.swift in Sources */,
 				6815F48E21BFBA7100B9439A /* WrappedKinSDKClient.swift in Sources */,
 				6815F48C21BFBA7100B9439A /* WrappedKinCoreClient.swift in Sources */,

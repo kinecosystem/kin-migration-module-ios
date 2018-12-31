@@ -6,11 +6,11 @@ Pod::Spec.new do |s|
   s.homepage     = 'https://github.com/kinfoundation/kin-migration-module-ios'
   s.license      = { :type => 'MIT', :file => 'LICENSE.md' }
   s.author       = { 'Kin Foundation' => 'kin@kik.com' }
-  s.source       = { :git => 'https://github.com/kinfoundation/kin-migration-module-ios.git', :tag => "#{s.version}", :submodules => true  }
+  s.source       = { :git => 'https://github.com/kinfoundation/kin-migration-module-ios.git', :tag => "#{s.version}", :submodules => true }
 
   s.source_files = 'KinMigrationModule/KinMigrationModule/**/*.swift'
 
-  s.dependency 'Sodium'
+  s.dependency 'Sodium', '0.7.0'
   s.dependency 'KinSDK'
   s.dependency 'KinCoreSDK'
 

@@ -29,6 +29,11 @@ public final class LinkBag {
     public init() {
 
     }
+
+    public func clear() {
+        links.forEach { $0.unlink() }
+        links.removeAll()
+    }
     
     deinit {
         links.forEach { $0.unlink() }
@@ -225,9 +230,7 @@ extension Observable {
         observable.parent = on(next: { (value) in
             buffer.append(value)
 
-            while buffer.count > limit {
-                buffer.remove(at: 0)
-            }
+            buffer.removeFirst(max(0, buffer.count - limit))
 
             wb.observable?.next(buffer)
         })
@@ -337,12 +340,12 @@ extension Observable {
     }
 
     /**
-     The `flatMap` operator transforms the received value into a value of a different type.  Observers
+     The `compactMap` operator transforms the received value into a value of a different type.  Observers
      will receive the transformed value.  Only values which are not `nil` are emitted.
 
      - parameter handler: The closure whose return value is emitted to observers.
      */
-    public func flatMap<NewValue>(_ handler: @escaping (Value) -> NewValue?) -> Observable<NewValue> {
+    public func compactMap<NewValue>(_ handler: @escaping (Value) -> NewValue?) -> Observable<NewValue> {
         let observable = Observable<NewValue>()
         let wb = WeakBox(observable: observable)
 
@@ -379,7 +382,7 @@ extension Observable {
     /**
      The `skip` operator swallows the first X observed values.
 
-     - parameter handler: The closure whose return value determines if the value will be emitted.
+     - parameter count: The number of events to swallow before emitting values.
      */
     public func skip(_ count: Int) -> Observable<Value> {
         let observable = Observable<Value>()

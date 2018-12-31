@@ -9,202 +9,183 @@
 import Foundation
 import Dispatch
 
-private enum Result<Value> {
-    case value(Value)
-    case error(Error)
+enum Result<Value> {
+    case success(Value)
+    case failure(Error)
+
+    func unwrap() throws -> Value {
+        switch self {
+        case .success(let v): return v
+        case .failure(let e): throw e
+        }
+    }
 }
 
-public class Promise<Value>: CustomDebugStringConvertible {
-    public var debugDescription: String {
-        return "Promise [\(Unmanaged<AnyObject>.passUnretained(self as AnyObject).toOpaque())]"
-    }
+public class Future<Value> {
+    typealias Observer = (Result<Value>) -> ()
 
-    private var callbacks = [((Result<Value>) -> Void)]()
-    private var errorHandler: ((Error) -> Void)?
-    private var errorTransform: ((Error) -> Error) = { return $0 }
-    private var finalHandler: (() -> ())?
-
-    private var result: Result<Value>? {
+    var result: Result<Value>? {
         didSet {
-            callbacks.forEach { c in result.map { c($0) } }
+            guard oldValue == nil else { return }
 
-            if let result = result {
-                switch result {
-                case .value:
-                    break
-                case .error(let error):
-                    errorHandler?(errorTransform(error))
-
-                    errorHandler = nil
-
-                    invokeFinally()
-                }
-            }
-
-            if callbacks.isEmpty {
-                invokeFinally()
-            }
+            result.map(report)
         }
     }
 
-    private func invokeFinally() {
-        finalHandler?()
-        finalHandler = nil
+    var callbacks = [Observer]()
+
+    func observe(with observer: @escaping Observer) {
+        callbacks.append(observer)
+
+        result.map(observer)
     }
 
-    public init() {
-
+    func report(_ result: Result<Value>) {
+        callbacks.forEach { $0(result) }
     }
+}
+
+public final class Promise<Value>: Future<Value> {
+    override public init() { }
 
     public convenience init(_ value: Value) {
         self.init()
-
-        result = .value(value)
+        signal(value)
     }
 
     public convenience init(_ error: Error) {
         self.init()
-
-        result = .error(error)
+        signal(error)
     }
 
     @discardableResult
     public func signal(_ value: Value) -> Promise {
-        return signal(value: value)
+        result = result ?? .success(value)
+
+        return self
     }
 
     @discardableResult
     public func signal(_ error: Error) -> Promise {
-        return signal(error: error)
-    }
-
-    @discardableResult
-    public func signal(value: Value) -> Promise {
-        result = .value(value)
+        result = result ?? .failure(error)
 
         return self
     }
+}
 
-    @discardableResult
-    public func signal(error: Error) -> Promise {
-        result = .error(error)
+extension Promise {
+    public func then<NewValue>(on queue: DispatchQueue? = nil,
+                               _ handler: @escaping (Value) throws -> Promise<NewValue>) -> Promise<NewValue> {
+        let np = Promise<NewValue>()
 
-        return self
+        observe { result in
+            let block = {
+                do {
+                    try handler(result.unwrap()).observe { np.result = $0 }
+                }
+                catch {
+                    np.signal(error)
+                }
+            }
+
+            self.run(block, on: queue)
+        }
+
+        return np
     }
 
-    private func observe(_ callback: @escaping (Result<Value>) -> Void) {
-        callbacks.append(callback)
+    public func then<NewValue>(on queue: DispatchQueue? = nil,
+                               _ handler: @escaping (Value) throws -> NewValue) -> Promise<NewValue> {
+        let np = Promise<NewValue>()
 
-        result.map { callback($0) }
+        observe { result in
+            let block = {
+                do {
+                    np.signal(try handler(try result.unwrap()))
+                }
+                catch {
+                    np.signal(error)
+                }
+            }
+
+            self.run(block, on: queue)
+        }
+
+        return np
     }
 
     @discardableResult
     public func then(on queue: DispatchQueue? = nil,
-                     _ handler: @escaping (Value) throws -> Void) -> Promise {
-        let p = Promise<Value>()
-        p.errorTransform = errorTransform
-
-        observe { result in
-            let block =  {
-                switch result {
-                case .value(let value):
-                    do {
-                        try handler(value)
-
-                        p.signal(value)
-                    }
-                    catch {
-                        p.signal(error)
-                    }
-                case .error(let error):
-                    p.signal(error)
-                }
-            }
-
-            if let queue = queue {
-                queue.async(execute: block)
-            } else {
-                block()
-            }
-        }
-
-        return p
-    }
-
-    @discardableResult
-    public func then<NewValue>(on queue: DispatchQueue? = nil,
-                               _ handler: @escaping (Value) throws -> Promise<NewValue>) -> Promise<NewValue>{
-        let p = Promise<NewValue>()
-        p.errorTransform = errorTransform
-
+                     _ handler: @escaping (Value) -> ()) -> Promise<Value> {
         observe { result in
             let block = {
-                switch result {
-                case .value(let value):
-                    do {
-                        let promise = try handler(value)
-
-                        promise.observe { result in
-                            switch result {
-                            case .value(let value):
-                                p.signal(value)
-                            case .error(let error):
-                                p.signal(error)
-                            }
-                        }
-                    }
-                    catch {
-                        p.signal(error)
-                    }
-
-                case .error(let error):
-                    p.signal(error)
+                if case let .success(value) = result {
+                    handler(value)
                 }
             }
 
-            if let queue = queue {
-                queue.async(execute: block)
-            } else {
-                block()
+            self.run(block, on: queue)
+        }
+
+        return self
+    }
+
+    public func finally(on queue: DispatchQueue? = nil,
+                        _ handler: @escaping () -> ()) {
+        observe { _ in self.run(handler, on: queue) }
+    }
+
+    @discardableResult
+    public func error(on queue: DispatchQueue? = nil,
+                      _ handler: @escaping (Error) -> ()) -> Promise<Value> {
+        observe { result in
+            let block = {
+                if case let .failure(error) = result {
+                    handler(error)
+                }
+            }
+
+            self.run(block, on: queue)
+        }
+
+        return self
+    }
+
+    @discardableResult
+    public func mapError(_ handler: @escaping (Error) -> (Error)) -> Promise<Value> {
+        let p = Promise<Value>()
+
+        observe { result in
+            switch result {
+            case .success(let value): p.signal(value)
+            case .failure(let error): p.signal(handler(error))
             }
         }
 
         return p
     }
 
-    public func transformError(_ handler: @escaping (Error) -> Error) -> Promise {
-        errorTransform = handler
-
-        return self
-    }
-
     @discardableResult
-    public func error(_ handler: @escaping (Error) -> Void) -> Promise {
-        if let result = result {
-            switch result {
-            case .value:
-                break
-            case .error(let error):
-                handler(errorTransform(error))
-
-                invokeFinally()
-            }
-
-            return self
-        }
-
-        errorHandler = handler
-
-        return self
+    @available(*, deprecated, renamed: "mapError(_:)")
+    public func transformError(_ handler: @escaping (Error) -> (Error)) -> Promise<Value> {
+        return mapError(handler)
     }
+}
 
-    public func finally(_ handler: @escaping () -> ()) {
-        if result != nil {
-            handler()
+extension Promise {
+    private func run(_ block: () -> (), on queue: DispatchQueue?) {
+        if let queue = queue {
+            queue.sync { block() }
         }
         else {
-            finalHandler = handler
+            block()
         }
+    }
+}
+
+extension Promise: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return "Promise [\(Unmanaged<AnyObject>.passUnretained(self as AnyObject).toOpaque())]"
     }
 }
 

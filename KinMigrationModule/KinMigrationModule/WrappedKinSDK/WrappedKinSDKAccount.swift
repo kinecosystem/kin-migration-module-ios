@@ -60,6 +60,10 @@ class WrappedKinSDKAccount: KinAccountProtocol {
         return promise
     }
 
+    func burn() -> Promise<String?> {
+        return Promise(nil)
+    }
+
     // MARK: Transaction
 
     func sendTransaction(to recipient: String, kin: Kin, memo: String?, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId> {
@@ -71,7 +75,7 @@ class WrappedKinSDKAccount: KinAccountProtocol {
             }
             .then { [weak self] transactionEnvelope -> Promise<TransactionId> in
                 guard let strongSelf = self else {
-                    return promise.signal(error: KinError.internalInconsistency)
+                    return promise.signal(KinError.internalInconsistency)
                 }
 
                 return strongSelf.account.sendTransaction(transactionEnvelope)

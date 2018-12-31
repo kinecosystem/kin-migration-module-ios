@@ -10,7 +10,6 @@
 #endif
 #endif
 
-#import "Sodium.h"
 
 FOUNDATION_EXPORT double KinCoreSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char KinCoreSDKVersionString[];

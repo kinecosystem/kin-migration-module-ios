@@ -11,9 +11,10 @@ target 'KinMigrationModule' do
 
   pod 'KinSDK', :path => '../kin-sdk-ios/'
   pod 'KinCoreSDK', :path => '../kin-core-ios/'
-  pod 'StellarKit', :path => '../kin-core-ios/KinSDK/StellarKit/'
-  pod 'StellarErrors', :path => '../kin-core-ios/KinSDK/StellarKit/'
-  pod 'Sodium'
+  pod 'StellarKit', '0.3.10'
+  pod 'StellarErrors', '0.2.7'
+  pod 'KinUtil', '0.0.13'
+  pod 'Sodium', '0.7.0'
 
   # Fixes the framework tests failing to build
   target 'KinMigrationModuleTests' do

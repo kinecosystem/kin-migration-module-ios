@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import KinUtil
 
 public protocol KinMigrationManagerDelegate: NSObjectProtocol {
-    func kinMigrationManagerCanCreateClient(_ kinMigrationManager: KinMigrationManager, factory: KinClientFactory)
-    func kinMigrationManagerError(_ kinMigrationManager: KinMigrationManager, error: Error)
+    func kinMigrationManagerPreparingClient(_ kinMigrationManager: KinMigrationManager) -> KinClientPreparation
+    func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, didCreateClient client: KinClientProtocol)
+    func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, error: Error)
 }
 
 public class KinMigrationManager {
@@ -20,22 +22,13 @@ public class KinMigrationManager {
 
     }
 
-    /**
-     The version should be set only once.
-     */
-    fileprivate(set) var version: Version? {
-        didSet {
-            if let version = version {
-                delegate?.kinMigrationManagerCanCreateClient(self, factory: KinClientFactory(version: version))
-            }
-        }
-    }
-
-    fileprivate(set) var state: State = .ready {
+    fileprivate var state: State = .ready {
         didSet {
             syncState()
         }
     }
+
+    fileprivate(set) var version: Version?
 
     fileprivate var versionURL: URL?
 
@@ -47,22 +40,25 @@ public class KinMigrationManager {
         self.versionURL = versionURL
 
         guard delegate != nil else {
-            throw Error.invailedDelegate
+            throw Error.missingDelegate
         }
 
-        if isMigrated {
-            version = .kinSDK
-        }
-        else {
+//        if isMigrated {
+//            version = .kinSDK
+//            delegateClientCreation()
+//        }
+//        else {
             syncState()
-        }
+//        }
     }
+
+    fileprivate var publicAddresses: [String]?
 }
 
 // MARK: - Version
 
 extension KinMigrationManager {
-    enum Version: String, Codable {
+    public enum Version: String, Codable {
         case kinCore
         case kinSDK
     }
@@ -71,7 +67,7 @@ extension KinMigrationManager {
 // MARK: - State
 
 extension KinMigrationManager {
-    enum State {
+    fileprivate enum State {
         case ready
         case burnable
         case migrateable
@@ -83,11 +79,12 @@ extension KinMigrationManager {
         case .ready:
             requestVersion()
         case .burnable:
-            requestBurnAccount()
+            burnAccounts()
         case .migrateable:
             requestMigrateAccount()
         case .completed:
             isMigrated = true
+            delegateClientCreation()
         }
     }
 
@@ -105,10 +102,11 @@ extension KinMigrationManager {
 
 extension KinMigrationManager {
     public enum Error: Swift.Error {
-        case invailedDelegate
+        case missingDelegate
+        case missingCustomURL
         case responseFailed (Swift.Error)
         case decodingFailed (Swift.Error)
-        case burnResponseFailed
+        case burnAccountFailed (KinAccountProtocol, Swift.Error)
         case migrateResponseFailed
         case internalInconsistency
     }
@@ -131,38 +129,18 @@ extension KinMigrationManager {
                 if version == .kinSDK {
                     self?.state = .burnable
                 }
-            })
-            .error { [weak self] error in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                strongSelf.delegate?.kinMigrationManagerError(strongSelf, error: error)
-        }
-    }
-
-    fileprivate func requestBurnAccount() {
-        guard version == .kinSDK else {
-            return
-        }
-
-        let urlRequest = URLRequest(url: URL(string: "http://kin.org")!)
-
-        perform(urlRequest, responseType: Bool.self)
-            .then(on: .main, { [weak self] isBurned in
-                if isBurned {
-                    self?.state = .migrateable
-                }
-                else if let strongSelf = self {
-                    strongSelf.delegate?.kinMigrationManagerError(strongSelf, error: Error.burnResponseFailed)
+                else {
+                    self?.delegateClientCreation()
                 }
             })
             .error { [weak self] error in
-                guard let strongSelf = self else {
-                    return
-                }
+                DispatchQueue.main.async {
+                    guard let strongSelf = self else {
+                        return
+                    }
 
-                strongSelf.delegate?.kinMigrationManagerError(strongSelf, error: error)
+                    strongSelf.delegate?.kinMigrationManager(strongSelf, error: error)
+                }
         }
     }
 
@@ -179,15 +157,17 @@ extension KinMigrationManager {
                     self?.state = .completed
                 }
                 else if let strongSelf = self {
-                    strongSelf.delegate?.kinMigrationManagerError(strongSelf, error: Error.migrateResponseFailed)
+                    strongSelf.delegate?.kinMigrationManager(strongSelf, error: Error.migrateResponseFailed)
                 }
             })
             .error { [weak self] error in
-                guard let strongSelf = self else {
-                    return
-                }
+                DispatchQueue.main.async {
+                    guard let strongSelf = self else {
+                        return
+                    }
 
-                strongSelf.delegate?.kinMigrationManagerError(strongSelf, error: error)
+                    strongSelf.delegate?.kinMigrationManager(strongSelf, error: error)
+                }
         }
     }
 
@@ -222,5 +202,91 @@ extension KinMigrationManager {
         }.resume()
 
         return promise
+    }
+}
+
+// MARK: - Client / Account
+
+extension KinMigrationManager {
+    fileprivate func createClient(version: Version) -> KinClientProtocol? {
+        guard let prep = delegate?.kinMigrationManagerPreparingClient(self) else {
+            delegate?.kinMigrationManager(self, error: Error.missingDelegate)
+            return nil
+        }
+
+        do {
+            let factory = KinClientFactory(version: version)
+            return try factory.KinClient(network: prep.network, appId: prep.appId, customURL: prep.nodeURL)
+        }
+        catch {
+            delegate?.kinMigrationManager(self, error: error)
+            return nil
+        }
+    }
+
+    fileprivate func delegateClientCreation() {
+        guard let version = version else {
+            return
+        }
+
+        guard let client = createClient(version: version) else {
+            return
+        }
+
+        delegate?.kinMigrationManager(self, didCreateClient: client)
+    }
+
+    fileprivate func burnAccounts() {
+        guard version == .kinSDK else {
+            return
+        }
+
+        guard let accounts = createClient(version: .kinCore)?.accounts else {
+            return
+        }
+
+        let promises = accounts.makeIterator().map { account -> Promise<String?> in
+            return account.burn()
+                .then({ _ in
+                    print("||| made it")
+                })
+                .error { [weak self] error in
+                    DispatchQueue.main.async {
+                        guard let strongSelf = self else {
+                            return
+                        }
+
+                        strongSelf.delegate?.kinMigrationManager(strongSelf, error: Error.burnAccountFailed(account, error))
+                    }
+            }
+        }
+
+        do {
+            let p = Promise(try await(promises))
+            p
+                .then(on: .main, { [weak self] _ in
+                    self?.state = .migrateable
+                })
+                .error { error in
+                    self.state = .migrateable
+            }
+        }
+        catch {
+            self.state = .completed
+            print("")
+        }
+
+
+
+//        let promise = Promise<[String?]>()
+//
+//        do {
+//            promise.signal(try await(promises))
+//        }
+//        catch {
+//
+//        }
+                
+
     }
 }

@@ -11,7 +11,6 @@ import KinUtil
 
 public typealias Kin = KinSDK.Kin
 public typealias AppId = KinSDK.AppId
-public typealias Network = KinSDK.Network
 public typealias Node = KinSDK.Stellar.Node
 public typealias TransactionId = KinSDK.TransactionId
 public typealias TransactionEnvelope = KinSDK.TransactionEnvelope
@@ -47,6 +46,7 @@ public protocol KinAccountProtocol {
     func activate() -> Promise<Void> // KinCore only
     func status() -> Promise<AccountStatus>
     func balance() -> Promise<Kin>
+    func burn() -> Promise<String?> // KinCore only
     func sendTransaction(to recipient: String, kin: Kin, memo: String?, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId>
     func export(passphrase: String) throws -> String
     func watchCreation() throws -> Promise<Void>
@@ -81,6 +81,18 @@ public protocol PaymentInfoProtocol {
     var destination: String { get }
     var memoText: String? { get }
     var memoData: Data? { get }
+}
+
+public struct KinClientPreparation {
+    public let network: Network
+    public let appId: AppId
+    public let nodeURL: URL?
+
+    public init(network: Network, appId: AppId, nodeURL: URL? = nil) {
+        self.network = network
+        self.appId = appId
+        self.nodeURL = nodeURL
+    }
 }
 
 internal struct KinResponse<T: Codable>: Codable {

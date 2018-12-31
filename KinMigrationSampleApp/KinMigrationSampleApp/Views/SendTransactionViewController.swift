@@ -114,7 +114,7 @@ extension SendTransactionViewController {
             whitelist = { Promise($0) }
         }
         else {
-            whitelist = MigrationController.whitelist(url: .whitelist(environment), network: environment.network)
+            whitelist = MigrationController.whitelist(url: .whitelist(environment), networkId: environment.networkId)
         }
 
         button.sendState = .sending

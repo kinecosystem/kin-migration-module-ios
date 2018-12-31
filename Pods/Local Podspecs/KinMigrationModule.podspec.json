@@ -19,7 +19,7 @@
   "source_files": "KinMigrationModule/KinMigrationModule/**/*.swift",
   "dependencies": {
     "Sodium": [
-
+      "0.7.0"
     ],
     "KinSDK": [
 

@@ -17,7 +17,7 @@ class WrappedKinSDKClient: KinClientProtocol {
     required init(with url: URL, network: Network, appId: AppId) {
         self.url = url
         self.network = network
-        self.client = KinSDK.KinClient(with: url, network: network, appId: appId)
+        self.client = KinSDK.KinClient(with: url, network: network.mapToKinSDK, appId: appId)
         self.wrappedAccounts = WrappedKinSDKAccounts(client.accounts)
     }
 
