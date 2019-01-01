@@ -7,6 +7,7 @@
 //
 
 import KinSDK
+import KinCoreSDK
 import KinUtil
 
 public typealias Kin = KinSDK.Kin
@@ -98,3 +99,6 @@ public struct KinClientPreparation {
 internal struct KinResponse<T: Codable>: Codable {
     let success: T
 }
+
+internal let kinCoreAssetUnitDivisor: UInt64 = 10_000_000
+internal let kinSDKAssetUnitDivisor: UInt64 = 100_000

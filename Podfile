@@ -11,7 +11,7 @@ target 'KinMigrationModule' do
 
   pod 'KinSDK', :path => '../kin-sdk-ios/'
   pod 'KinCoreSDK', :path => '../kin-core-ios/'
-  pod 'StellarKit', '0.3.10'
+  pod 'StellarKit', :path => '../StellarKit/'
   pod 'StellarErrors', '0.2.7'
   pod 'KinUtil', '0.0.13'
   pod 'Sodium', '0.7.0'

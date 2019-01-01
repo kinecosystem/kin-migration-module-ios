@@ -110,11 +110,11 @@ extension SendTransactionViewController {
 
         let whitelist: WhitelistClosure
 
-        if whitelistControl.selectedSegmentIndex == 1 {
-            whitelist = { Promise($0) }
+        if whitelistControl.selectedSegmentIndex == 0 && environment.blockchain == .kin {
+            whitelist = MigrationController.whitelist(url: .whitelist(environment), networkId: environment.networkId)
         }
         else {
-            whitelist = MigrationController.whitelist(url: .whitelist(environment), networkId: environment.networkId)
+            whitelist = { Promise($0) }
         }
 
         button.sendState = .sending

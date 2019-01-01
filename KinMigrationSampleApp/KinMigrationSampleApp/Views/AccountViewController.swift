@@ -45,7 +45,6 @@ class AccountViewController: UITableViewController {
 
         super.init(nibName: nil, bundle: nil)
 
-//        watchAccountActivation()
         watchAccountBalance()
         updateAccountBalance()
     }
@@ -81,8 +80,8 @@ extension AccountViewController {
                 return
             }
 
-            guard let data = data, let _ = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                promise.signal(Error.invalidResponse)
+            guard let data = data, let _ = try? JSONSerialization.jsonObject(with: data, options: []) else {
+                promise.signal(Error.invalidResponse(message: nil))
                 return
             }
 
@@ -90,16 +89,6 @@ extension AccountViewController {
         }).resume()
 
         return promise
-    }
-
-    private func watchAccountActivation() {
-        _ = try? account.watchCreation()
-            .then { [weak self]  in
-                self?.createAccountPromise.signal(Void())
-            }
-            .error { [weak self] error in
-                self?.createAccountPromise.signal(error)
-            }
     }
 
     @discardableResult
@@ -135,8 +124,13 @@ extension AccountViewController {
                 return
             }
 
-            guard let data = data, let _ = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                promise.signal(Error.invalidResponse)
+            guard let data = data, let d = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                promise.signal(Error.invalidResponse(message: nil))
+                return
+            }
+
+            guard let success = d?["success"] as? Bool, success == true else {
+                promise.signal(Error.invalidResponse(message: d?["error"] as? String))
                 return
             }
 
@@ -161,7 +155,13 @@ extension AccountViewController {
                 }
 
                 strongSelf.balance = balance
-                strongSelf.tableView.reloadData()
+
+                if let indexPath = strongSelf.tableViewIndexPath(for: .balance) {
+                    strongSelf.tableView.reloadRows(at: [indexPath], with: .automatic)
+                }
+                else {
+                    strongSelf.tableView.reloadData()
+                }
 
                 promise.signal(Void())
             })
@@ -171,13 +171,7 @@ extension AccountViewController {
                         return
                     }
 
-                    guard let balanceIndex = strongSelf.datasource.firstIndex(of: .balance) else {
-                        return
-                    }
-
-                    let indexPath = IndexPath(row: balanceIndex, section: 0)
-
-                    guard let cell = strongSelf.tableView.cellForRow(at: indexPath) else {
+                    guard let cell = strongSelf.tableViewCell(for: .balance) else {
                         return
                     }
 
@@ -300,6 +294,7 @@ extension AccountViewController {
         case .publicAddress:
             UIPasteboard.general.string = account.publicAddress
             tableView.deselectRow(at: indexPath, animated: true)
+            print(account.publicAddress)
 
         case .sendTransaction:
             let viewController = SendTransactionViewController(account: account, environment: environment)
@@ -334,17 +329,20 @@ extension AccountViewController {
                     cell?.detailTextLabel?.text = "Funding..."
                     return strongSelf.fundAccount()
                 }
-                .then(on: .main) { [weak self] _ -> Promise<Void> in
-                    guard let strongSelf = self else {
-                        return Promise(Error.internalInconsistency)
-                    }
-
-                    cell?.detailTextLabel?.text = "Updating..."
-                    return strongSelf.updateAccountBalance()
-                }
                 .then(on: .main) { _ in
                     cell?.detailTextLabel?.text = nil
-                    tableView.deselectRow(at: indexPath, animated: true)
+                }
+                .error { error in
+                    print(error)
+
+                    DispatchQueue.main.async {
+                        cell?.detailTextLabel?.text = "Error"
+                    }
+                }
+                .finally {
+                    DispatchQueue.main.async {
+                        tableView.deselectRow(at: indexPath, animated: true)
+                    }
             }
 
         case .burnAccount:
@@ -372,11 +370,31 @@ extension AccountViewController {
     }
 }
 
+// MARK: Table View
+
+extension AccountViewController {
+    fileprivate func tableViewIndexPath(for row: Row) -> IndexPath? {
+        guard let balanceIndex = datasource.firstIndex(of: row) else {
+            return nil
+        }
+
+        return IndexPath(row: balanceIndex, section: 0)
+    }
+
+    fileprivate func tableViewCell(for row: Row) -> UITableViewCell? {
+        guard let indexPath = tableViewIndexPath(for: row) else {
+            return nil
+        }
+
+        return tableView.cellForRow(at: indexPath)
+    }
+}
+
 // MARK: - Error
 
 extension AccountViewController {
     enum Error: Swift.Error {
-        case invalidResponse
+        case invalidResponse (message: String?)
         case internalInconsistency
     }
 }

@@ -43,6 +43,7 @@ public class KinMigrationManager {
             throw Error.missingDelegate
         }
 
+        // !!!: DEBUG
 //        if isMigrated {
 //            version = .kinSDK
 //            delegateClientCreation()

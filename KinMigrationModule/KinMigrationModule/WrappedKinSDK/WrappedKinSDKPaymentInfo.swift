@@ -36,7 +36,7 @@ public class WrappedKinSDKPaymentInfo: PaymentInfoProtocol {
     }
 
     public var amount: Kin {
-        return paymentInfo.amount
+        return paymentInfo.amount / Decimal(kinSDKAssetUnitDivisor)
     }
 
     public var destination: String {

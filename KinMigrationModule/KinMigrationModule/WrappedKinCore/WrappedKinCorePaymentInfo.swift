@@ -36,7 +36,7 @@ public class WrappedKinCorePaymentInfo: PaymentInfoProtocol {
     }
 
     public var amount: Kin {
-        return paymentInfo.amount
+        return paymentInfo.amount / Decimal(kinCoreAssetUnitDivisor)
     }
 
     public var destination: String {
