@@ -23,14 +23,13 @@ DEPENDENCIES:
   - KinUtil (= 0.0.13)
   - Sodium (= 0.7.0)
   - StellarErrors (= 0.2.7)
-  - StellarKit (= 0.3.10)
+  - StellarKit (from `../StellarKit/`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - KinUtil
     - Sodium
     - StellarErrors
-    - StellarKit
 
 EXTERNAL SOURCES:
   KinCoreSDK:
@@ -39,6 +38,8 @@ EXTERNAL SOURCES:
     :path: "./"
   KinSDK:
     :path: "../kin-sdk-ios/"
+  StellarKit:
+    :path: "../StellarKit/"
 
 SPEC CHECKSUMS:
   KinCoreSDK: 6ee880a7bbef4aa5b4832e48e545c75210782563
@@ -47,8 +48,8 @@ SPEC CHECKSUMS:
   KinUtil: e609c48a6f3fff7c4ecb6e3d189c86f14687bf58
   Sodium: c5510cc6f5e1b27858e5f260b5cac80d4a3f9379
   StellarErrors: f9239fad02b05464fbc9845063195a87d28f57d1
-  StellarKit: 47362bbf11928673ca3897900e36b58046c97a05
+  StellarKit: 6367bd843d4c021d81be6934dbdd56a3200ddc8b
 
-PODFILE CHECKSUM: 3d3af02e0d5f9cf1c5617a30e83b454003980594
+PODFILE CHECKSUM: 985071ba9185c7ad0d1b869827fcbb169a7993ce
 
 COCOAPODS: 1.5.3

@@ -116,7 +116,7 @@ extension AccountViewController {
     @discardableResult
     private func fundAccount() -> Promise<Void> {
         let promise = Promise<Void>()
-        let url: URL = .fund(environment, publicAddress: account.publicAddress, amount: 10000)
+        let url: URL = .fund(environment, publicAddress: account.publicAddress, amount: 1000)
 
         URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
             if let error = error {

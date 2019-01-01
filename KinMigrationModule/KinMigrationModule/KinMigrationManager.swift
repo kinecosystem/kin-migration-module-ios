@@ -10,7 +10,6 @@ import Foundation
 import KinUtil
 
 public protocol KinMigrationManagerDelegate: NSObjectProtocol {
-    func kinMigrationManagerPreparingClient(_ kinMigrationManager: KinMigrationManager) -> KinClientPreparation
     func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, didCreateClient client: KinClientProtocol)
     func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, error: Error)
 }
@@ -18,8 +17,19 @@ public protocol KinMigrationManagerDelegate: NSObjectProtocol {
 public class KinMigrationManager {
     public weak var delegate: KinMigrationManagerDelegate?
 
-    public init() {
+    public let network: Network
+    public let appId: AppId
 
+    /**
+     Custom node URL
+
+     When using a custom network, the node url needs to be provided.
+     */
+    public var nodeURL: URL?
+
+    public init(network: Network, appId: AppId) {
+        self.network = network
+        self.appId = appId
     }
 
     fileprivate var state: State = .ready {
@@ -28,7 +38,7 @@ public class KinMigrationManager {
         }
     }
 
-    fileprivate(set) var version: Version?
+    fileprivate var version: Version?
 
     fileprivate var versionURL: URL?
 
@@ -53,15 +63,36 @@ public class KinMigrationManager {
 //        }
     }
 
-    fileprivate var publicAddresses: [String]?
+    fileprivate lazy var kinCoreClient: KinClientProtocol? = {
+        return self.createClient(version: .kinCore)
+    }()
+
+    fileprivate lazy var kinSDKClient: KinClientProtocol? = {
+        return self.createClient(version: .kinSDK)
+    }()
+
+    fileprivate var burnedKinCoreAccounts: [KinAccountProtocol] = []
 }
 
 // MARK: - Version
 
 extension KinMigrationManager {
-    public enum Version: String, Codable {
+    enum Version: String, Codable {
         case kinCore
         case kinSDK
+    }
+}
+
+extension KinMigrationManager.Version {
+    init?(version: String) {
+        switch version {
+        case "2":
+            self = .kinCore
+        case "3":
+            self = .kinSDK
+        default:
+            return nil
+        }
     }
 }
 
@@ -108,7 +139,9 @@ extension KinMigrationManager {
         case responseFailed (Swift.Error)
         case decodingFailed (Swift.Error)
         case burnAccountFailed (KinAccountProtocol, Swift.Error)
-        case migrateResponseFailed
+        case burnFailed
+        case migrateAccountFailed (KinAccountProtocol, Swift.Error)
+        case migrateResponseFailed (code: Int, message: String)
         case internalInconsistency
     }
 }
@@ -123,8 +156,13 @@ extension KinMigrationManager {
             return
         }
 
-        perform(URLRequest(url: versionURL), responseType: Version.self)
-            .then(on: .main, { [weak self] version in
+        perform(URLRequest(url: versionURL))
+            .then(on: .main, { [weak self] response in
+                guard let version = Version(version: response.message) else {
+                    // TODO: error
+                    return
+                }
+
                 self?.version = version
 
                 if version == .kinSDK {
@@ -145,40 +183,62 @@ extension KinMigrationManager {
         }
     }
 
-    fileprivate func requestMigrateAccount() {
+    fileprivate func requestMigrateAccount(_ account: KinAccountProtocol) -> Promise<Void> {
+        let promise = Promise<Void>()
+
+        var urlRequest = URLRequest(url: URL(string: "http://10.4.59.1:8000/migrate?address=\(account.publicAddress)")!)
+        urlRequest.httpMethod = "POST"
+
+        perform(urlRequest)
+            .then { response in
+                if response.code == 200 {
+                    promise.signal(Void())
+                }
+                else {
+                    promise.signal(Error.migrateResponseFailed(code: response.code, message: response.message))
+                }
+            }
+            .error { error in
+                promise.signal(error)
+        }
+
+        return promise
+    }
+
+    fileprivate func requestMigrateAccounts() {
         guard version == .kinSDK else {
             return
         }
 
-        let urlRequest = URLRequest(url: URL(string: "http://kin.org")!)
+        let promises = burnedKinCoreAccounts.map { account -> Promise<Void> in
+            return requestMigrateAccount(account)
+                .error { [weak self] error in
+                    DispatchQueue.main.async {
+                        guard let strongSelf = self else {
+                            return
+                        }
 
-        perform(urlRequest, responseType: Bool.self)
-            .then(on: .main, { [weak self] isMigrated in
-                if isMigrated {
-                    self?.state = .completed
-                }
-                else if let strongSelf = self {
-                    strongSelf.delegate?.kinMigrationManager(strongSelf, error: Error.migrateResponseFailed)
-                }
-            })
-            .error { [weak self] error in
-                DispatchQueue.main.async {
-                    guard let strongSelf = self else {
-                        return
+                        strongSelf.delegate?.kinMigrationManager(strongSelf, error: Error.migrateAccountFailed(account, error))
                     }
+            }
+        }
 
-                    strongSelf.delegate?.kinMigrationManager(strongSelf, error: error)
-                }
+        do {
+            // TODO:
+            let a = try await(promises)
+        }
+        catch {
+
         }
     }
 
-    private func perform<T: Codable>(_ urlRequest: URLRequest, responseType: T.Type, retryChances: Int = failedRetryChances) -> Promise<T> {
-        let promise = Promise<T>()
+    private func perform(_ urlRequest: URLRequest, retryChances: Int = failedRetryChances) -> Promise<KinResponse> {
+        let promise = Promise<KinResponse>()
 
         URLSession.shared.dataTask(with: urlRequest) { [weak self] (data, _, error) in
             if let error = error {
                 if retryChances > 0, let strongSelf = self {
-                    strongSelf.perform(urlRequest, responseType: T.self, retryChances: retryChances - 1)
+                    strongSelf.perform(urlRequest, retryChances: retryChances - 1)
                         .then { promise.signal($0) }
                         .error { promise.signal($0) }
                 }
@@ -194,8 +254,7 @@ extension KinMigrationManager {
             }
 
             do {
-                let response = try JSONDecoder().decode(KinResponse<T>.self, from: data)
-                promise.signal(response.success)
+                promise.signal(try JSONDecoder().decode(KinResponse.self, from: data))
             }
             catch {
                 promise.signal(Error.decodingFailed(error))
@@ -210,14 +269,9 @@ extension KinMigrationManager {
 
 extension KinMigrationManager {
     fileprivate func createClient(version: Version) -> KinClientProtocol? {
-        guard let prep = delegate?.kinMigrationManagerPreparingClient(self) else {
-            delegate?.kinMigrationManager(self, error: Error.missingDelegate)
-            return nil
-        }
-
         do {
             let factory = KinClientFactory(version: version)
-            return try factory.KinClient(network: prep.network, appId: prep.appId, customURL: prep.nodeURL)
+            return try factory.KinClient(network: network, appId: appId, nodeURL: nodeURL)
         }
         catch {
             delegate?.kinMigrationManager(self, error: error)
@@ -237,20 +291,35 @@ extension KinMigrationManager {
         delegate?.kinMigrationManager(self, didCreateClient: client)
     }
 
+    /**
+     Burn the Kin Core accounts
+
+     This function supports burning multiple accounts.
+
+     If the client has multiple accounts and at least one account succeeded,
+     an error will be delegated for each failed account, but the migration
+     will continue.
+
+     If the client has one or multiple accounts which all fail, an error will
+     be delegated for each failed account along with an error that burning
+     failed.
+     */
     fileprivate func burnAccounts() {
         guard version == .kinSDK else {
             return
         }
 
-        guard let accounts = createClient(version: .kinCore)?.accounts else {
+        guard let client = kinCoreClient else {
             return
         }
 
-        let promises = accounts.makeIterator().map { account -> Promise<String?> in
+        var burnedKinCoreAccounts: [KinAccountProtocol] = []
+
+        let promises = client.accounts.makeIterator().map { account -> Promise<String?> in
             return account.burn()
-                .then({ _ in
-                    print("||| made it")
-                })
+                .then { transactionHash in
+                    burnedKinCoreAccounts.append(account)
+                }
                 .error { [weak self] error in
                     DispatchQueue.main.async {
                         guard let strongSelf = self else {
@@ -263,31 +332,36 @@ extension KinMigrationManager {
         }
 
         do {
-            let p = Promise(try await(promises))
-            p
-                .then(on: .main, { [weak self] _ in
-                    self?.state = .migrateable
-                })
-                .error { error in
-                    self.state = .migrateable
+            // TODO: await should properly handle `.then`
+            Promise(try await(promises))
+                .then { [weak self] _ in
+                    DispatchQueue.main.async {
+                        guard let strongSelf = self else {
+                            return
+                        }
+
+                        if burnedKinCoreAccounts.isEmpty {
+                            strongSelf.delegate?.kinMigrationManager(strongSelf, error: Error.burnFailed)
+                        }
+                        else {
+                            // ???: by removing the state, which isnt needed, you can pass the accounts to a func
+                            strongSelf.burnedKinCoreAccounts = burnedKinCoreAccounts
+                            strongSelf.state = .migrateable
+                        }
+                    }
+                }
+                .error { [weak self] error in
+                    DispatchQueue.main.async {
+                        guard let strongSelf = self else {
+                            return
+                        }
+
+                        strongSelf.delegate?.kinMigrationManager(strongSelf, error: error)
+                    }
             }
         }
         catch {
-            self.state = .completed
-            print("")
+            delegate?.kinMigrationManager(self, error: error)
         }
-
-
-
-//        let promise = Promise<[String?]>()
-//
-//        do {
-//            promise.signal(try await(promises))
-//        }
-//        catch {
-//
-//        }
-                
-
     }
 }

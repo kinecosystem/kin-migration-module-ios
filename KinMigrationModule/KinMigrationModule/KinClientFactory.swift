@@ -15,10 +15,10 @@ class KinClientFactory {
         self.version = version
     }
 
-    private func nodeURL(_ network: Network, customURL: URL? = nil) throws -> URL {
+    private func nodeURL(_ network: Network, customNodeURL: URL? = nil) throws -> URL {
         switch network {
         case .custom:
-            if let url = customURL {
+            if let url = customNodeURL {
                 return url
             }
             else {
@@ -41,8 +41,8 @@ class KinClientFactory {
         }
     }
 
-    func KinClient(network: Network, appId: AppId, customURL: URL? = nil) throws -> KinClientProtocol {
-        let url = try nodeURL(network, customURL: customURL)
+    func KinClient(network: Network, appId: AppId, nodeURL: URL? = nil) throws -> KinClientProtocol {
+        let url = try self.nodeURL(network, customNodeURL: nodeURL)
 
         switch version {
         case .kinCore:

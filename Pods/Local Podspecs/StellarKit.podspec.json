@@ -1,6 +1,6 @@
 {
   "name": "StellarKit",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "license": {
     "type": "MIT"
   },
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/kinfoundation/StellarKit.git",
-    "tag": "0.3.9",
+    "tag": "0.3.10",
     "submodules": true
   },
   "dependencies": {

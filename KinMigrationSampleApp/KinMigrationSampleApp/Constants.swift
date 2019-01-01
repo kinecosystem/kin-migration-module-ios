@@ -28,9 +28,9 @@ extension Environment {
     var networkId: String {
         switch self {
         case .testKinCore, .mainKinCore:
-            return network.id(version: .kinCore)
+            return network.kinCoreId
         case .testKinSDK, .mainKinSDK:
-            return network.id(version: .kinSDK)
+            return network.kinSDKId
         }
     }
 
@@ -62,8 +62,8 @@ extension AppId {
 extension URL {
     static func version(_ environment: Environment) -> URL {
         switch environment { // https://www.mocky.io/
-        case .testKinCore: return URL(string: "http://www.mocky.io/v2/5c18b4642f00005300af10e2")!
-        case .testKinSDK:  return URL(string: "http://www.mocky.io/v2/5c18b46b2f00006500af10e4")!
+        case .testKinCore: return URL(string: "http://www.mocky.io/v2/5c2b5e403000007400abaf90")!
+        case .testKinSDK:  return URL(string: "http://www.mocky.io/v2/5c2b5e5b3000007400abaf91")!
         case .mainKinCore: return URL(string: "http://kin.org")!
         case .mainKinSDK:  return URL(string: "http://kin.org")!
         }

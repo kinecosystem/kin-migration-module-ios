@@ -22,7 +22,11 @@ class MigrationController: NSObject {
     func startManager(with environment: Environment) {
         self.environment = environment
 
-        let migrationManager = KinMigrationManager()
+        guard let appId = try? AppId(network: environment.network) else {
+            fatalError()
+        }
+
+        let migrationManager = KinMigrationManager(network: environment.network, appId: appId)
         migrationManager.delegate = self
         try? migrationManager.start(withVersionURL: .version(environment))
         self.migrationManager = migrationManager
@@ -32,18 +36,6 @@ class MigrationController: NSObject {
 // MARK: - Kin Migration Manager
 
 extension MigrationController: KinMigrationManagerDelegate {
-    func kinMigrationManagerPreparingClient(_ kinMigrationManager: KinMigrationManager) -> KinClientPreparation {
-        guard let network = environment?.network else {
-            fatalError()
-        }
-
-        guard let appId = try? AppId(network: network) else {
-            fatalError()
-        }
-
-        return KinClientPreparation(network: network, appId: appId)
-    }
-
     func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, didCreateClient client: KinClientProtocol) {
         delegate?.migrationController(self, didCreateClient: client)
     }

@@ -44,22 +44,16 @@ extension Network {
         }
     }
 
-    public func id(version: KinMigrationManager.Version) -> String {
-        switch version {
-        case .kinCore:
-            return mapToKinCore.stellarNetworkId.description
-        case .kinSDK:
-            return mapToKinSDK.id
-        }
+    public var kinCoreId: String {
+        return mapToKinCore.stellarNetworkId.description
     }
 
-    public func issuer(version: KinMigrationManager.Version) -> String? {
-        switch version {
-        case .kinCore:
-            return mapToKinCore.issuer
-        case .kinSDK:
-            return nil
-        }
+    public var kinSDKId: String {
+        return mapToKinSDK.id
+    }
+
+    public var kinCoreIssuer: String {
+        return mapToKinCore.issuer
     }
 }
 

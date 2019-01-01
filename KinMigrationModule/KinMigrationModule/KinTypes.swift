@@ -96,8 +96,9 @@ public struct KinClientPreparation {
     }
 }
 
-internal struct KinResponse<T: Codable>: Codable {
-    let success: T
+internal struct KinResponse: Codable {
+    let code: Int
+    let message: String
 }
 
 internal let kinCoreAssetUnitDivisor: UInt64 = 10_000_000
