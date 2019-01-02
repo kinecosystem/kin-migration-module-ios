@@ -37,7 +37,7 @@ class MigrationController: NSObject {
 
 extension MigrationController: KinMigrationManagerDelegate {
     func kinMigrationManagerDidStart(_ kinMigrationManager: KinMigrationManager) {
-        
+
     }
 
     func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, didCreateClient client: KinClientProtocol) {

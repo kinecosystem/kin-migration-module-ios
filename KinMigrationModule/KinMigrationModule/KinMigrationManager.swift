@@ -173,7 +173,7 @@ extension KinMigrationManager {
             }
 
             guard let data = data else {
-                promise.signal(Error.internalInconsistency)
+                promise.signal(Error.responseEmpty)
                 return
             }
 
@@ -263,18 +263,24 @@ extension KinMigrationManager {
         }
     }
 
-    fileprivate func migrateAccount(_ account: KinAccountProtocol) -> Promise<Void> {
+    private func migrateAccount(_ account: KinAccountProtocol) -> Promise<Void> {
         let promise = Promise<Void>()
 
         var urlRequest = URLRequest(url: URL(string: "http://10.4.59.1:8000/migrate?address=\(account.publicAddress)")!)
         urlRequest.httpMethod = "POST"
 
         perform(urlRequest)
-            .then { response in
+            .then { [weak self] response in
+                guard let strongSelf = self else {
+                    return
+                }
+
                 switch response.code {
                 case KinMigrateCode.success.rawValue,
                      KinMigrateCode.accountAlreadyMigrated.rawValue:
-                    promise.signal(Void())
+                    if strongSelf.moveAccountToKinSDKIfNeeded(account) {
+                        promise.signal(Void())
+                    }
                 default:
                     promise.signal(Error.migrateFailed(code: response.code, message: response.message))
                 }
@@ -319,6 +325,37 @@ extension KinMigrationManager {
             }
         }
     }
+
+    /**
+     Move the Kin Core keychain account to the Kin SDK keychain.
+
+     - Returns: True if there were no errors.
+     */
+    private func moveAccountToKinSDKIfNeeded(_ account: KinAccountProtocol) -> Bool {
+        guard let kinSDKClient = kinSDKClient else {
+            return false
+        }
+
+        let hasAccount = kinSDKClient.accounts.makeIterator().contains { kinSDKAccount -> Bool in
+            return kinSDKAccount.publicAddress == account.publicAddress
+        }
+
+        guard hasAccount == false else {
+            return true
+        }
+
+        do {
+            let json = try account.export(passphrase: "")
+            let _ = try kinSDKClient.importAccount(json, passphrase: "")
+
+            return true
+        }
+        catch {
+            delegate?.kinMigrationManager(self, error: error)
+        }
+
+        return false
+    }
 }
 
 // MARK: - Error
@@ -327,17 +364,31 @@ extension KinMigrationManager {
     public enum Error: Swift.Error {
         case missingDelegate
         case missingNodeURL
-        case invalidVersion
+        case invalidVersion // TODO: can be removed after changes
+        case responseEmpty
         case responseFailed (Swift.Error)
         case decodingFailed (Swift.Error)
         case migrateFailed (code: Int, message: String)
-        case internalInconsistency
     }
 }
 
 extension KinMigrationManager.Error: LocalizedError {
-    /// :nodoc:
-//    public var localizedDescription: String {
-//
-//    }
+    public var errorDescription: String? {
+        switch self {
+        case .missingDelegate:
+            return "The `delegate` was not set."
+        case .missingNodeURL:
+            return "A custom network was used without setting the `nodeURL`."
+        case .invalidVersion:
+            return ""
+        case .responseEmpty:
+            return "Response was empty."
+        case .responseFailed:
+            return "Response failed."
+        case .decodingFailed:
+            return "Decoding response failed."
+        case .migrateFailed:
+            return "Migrating account failed."
+        }
+    }
 }
