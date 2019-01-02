@@ -22,7 +22,7 @@ class KinClientFactory {
                 return url
             }
             else {
-                throw KinMigrationManager.Error.missingCustomURL
+                throw KinMigrationManager.Error.missingNodeURL
             }
         case .mainNet:
             switch version {

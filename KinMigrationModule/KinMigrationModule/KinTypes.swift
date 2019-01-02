@@ -84,22 +84,13 @@ public protocol PaymentInfoProtocol {
     var memoData: Data? { get }
 }
 
-public struct KinClientPreparation {
-    public let network: Network
-    public let appId: AppId
-    public let nodeURL: URL?
-
-    public init(network: Network, appId: AppId, nodeURL: URL? = nil) {
-        self.network = network
-        self.appId = appId
-        self.nodeURL = nodeURL
-    }
-}
-
-internal struct KinResponse: Codable {
-    let code: Int
-    let message: String
-}
-
 internal let kinCoreAssetUnitDivisor: UInt64 = 10_000_000
 internal let kinSDKAssetUnitDivisor: UInt64 = 100_000
+
+internal enum KinMigrateCode: Int {
+    case success                = 200
+    case accountNotBurned       = 4001
+    case accountAlreadyMigrated = 4002
+    case invalidPublicAddress   = 4003
+    case accountNotFound        = 4041
+}

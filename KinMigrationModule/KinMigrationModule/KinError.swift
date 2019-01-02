@@ -46,7 +46,7 @@ public enum KinError: Error {
 
 extension KinError: LocalizedError {
     /// :nodoc:
-    public var errorDescription: String? {
+    public var localizedDescription: String {
         switch self {
         case .accountCreationFailed:
             return "Account creation failed"

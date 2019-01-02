@@ -36,6 +36,10 @@ class MigrationController: NSObject {
 // MARK: - Kin Migration Manager
 
 extension MigrationController: KinMigrationManagerDelegate {
+    func kinMigrationManagerDidStart(_ kinMigrationManager: KinMigrationManager) {
+        
+    }
+
     func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, didCreateClient client: KinClientProtocol) {
         delegate?.migrationController(self, didCreateClient: client)
     }
