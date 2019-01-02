@@ -21,6 +21,22 @@ public typealias LinkBag = KinUtil.LinkBag
 public typealias Promise = KinUtil.Promise
 public typealias Observable<T> = KinUtil.Observable<T>
 
+public enum KinVersion: Int, Codable {
+    /**
+     Kin Core version
+
+     Also known as Kin 2.
+     */
+    case kinCore = 2
+
+    /**
+     Kin SDK version
+
+     Also known as Kin 3.
+     */
+    case kinSDK = 3
+}
+
 public protocol KinClientProtocol {
     var url: URL { get }
     var network: Network { get }
@@ -86,11 +102,3 @@ public protocol PaymentInfoProtocol {
 
 internal let kinCoreAssetUnitDivisor: UInt64 = 10_000_000
 internal let kinSDKAssetUnitDivisor: UInt64 = 100_000
-
-internal enum KinMigrateCode: Int {
-    case success                = 200
-    case accountNotBurned       = 4001
-    case accountAlreadyMigrated = 4002
-    case invalidPublicAddress   = 4003
-    case accountNotFound        = 4041
-}

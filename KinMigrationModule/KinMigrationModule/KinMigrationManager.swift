@@ -10,6 +10,7 @@ import Foundation
 import KinUtil
 
 public protocol KinMigrationManagerDelegate: NSObjectProtocol {
+    func kinMigrationManagerNeedsVersion(_ kinMigrationManager: KinMigrationManager) -> Promise<KinVersion>
     func kinMigrationManagerDidStart(_ kinMigrationManager: KinMigrationManager)
     // migration was successful without error
     func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, didCreateClient client: KinClientProtocol)
@@ -35,17 +36,9 @@ public class KinMigrationManager {
         self.appId = appId
     }
 
-    fileprivate var version: Version?
+    fileprivate(set) var version: KinVersion?
 
-    fileprivate var versionURL: URL?
-
-    public func start(withVersionURL versionURL: URL) throws {
-        guard self.versionURL != versionURL else {
-            return
-        }
-
-        self.versionURL = versionURL
-
+    public func start() throws {
         guard delegate != nil else {
             throw Error.missingDelegate
         }
@@ -67,29 +60,6 @@ public class KinMigrationManager {
     fileprivate lazy var kinSDKClient: KinClientProtocol? = {
         return self.createClient(version: .kinSDK)
     }()
-}
-
-// MARK: - Version
-
-extension KinMigrationManager {
-    // TODO: make public. the user should return in a delegate the version
-    enum Version: String, Codable {
-        case kinCore
-        case kinSDK
-    }
-}
-
-extension KinMigrationManager.Version {
-    init(version: String) throws {
-        switch version {
-        case "2":
-            self = .kinCore
-        case "3":
-            self = .kinSDK
-        default:
-            throw KinMigrationManager.Error.invalidVersion
-        }
-    }
 }
 
 // MARK: - State
@@ -118,40 +88,30 @@ extension KinMigrationManager {
         let message: String
     }
 
+    enum MigrateCode: Int {
+        case success                = 200
+        case accountNotBurned       = 4001
+        case accountAlreadyMigrated = 4002
+        case invalidPublicAddress   = 4003
+        case accountNotFound        = 4041
+    }
+
     private static let failedRetryChances = 3
 
     fileprivate func requestVersion() {
-        guard let versionURL = versionURL else {
-            return
-        }
-
-        perform(URLRequest(url: versionURL))
-            .then(on: .main, { [weak self] response in
+        delegate?.kinMigrationManagerNeedsVersion(self)
+            .then { [weak self] version in
                 guard let strongSelf = self else {
                     return
                 }
 
-                do {
-                    strongSelf.version = try Version(version: response.message)
+                strongSelf.version = version
 
-                    if strongSelf.version == .kinSDK {
-                        strongSelf.prepareBurning()
-                    }
-                    else {
-                        strongSelf.delegateClientCreation()
-                    }
-                }
-                catch {
-                    strongSelf.delegate?.kinMigrationManager(strongSelf, error: error)
-                }
-            })
-            .error { [weak self] error in
-                DispatchQueue.main.async {
-                    guard let strongSelf = self else {
-                        return
-                    }
-
-                    strongSelf.delegate?.kinMigrationManager(strongSelf, error: error)
+                switch version {
+                case .kinCore:
+                    strongSelf.delegateClientCreation()
+                case .kinSDK:
+                    strongSelf.prepareBurning()
                 }
         }
     }
@@ -192,7 +152,7 @@ extension KinMigrationManager {
 // MARK: - Client
 
 extension KinMigrationManager {
-    fileprivate func createClient(version: Version) -> KinClientProtocol? {
+    fileprivate func createClient(version: KinVersion) -> KinClientProtocol? {
         do {
             let factory = KinClientFactory(version: version)
             return try factory.KinClient(network: network, appId: appId, nodeURL: nodeURL)
@@ -276,8 +236,8 @@ extension KinMigrationManager {
                 }
 
                 switch response.code {
-                case KinMigrateCode.success.rawValue,
-                     KinMigrateCode.accountAlreadyMigrated.rawValue:
+                case MigrateCode.success.rawValue,
+                     MigrateCode.accountAlreadyMigrated.rawValue:
                     if strongSelf.moveAccountToKinSDKIfNeeded(account) {
                         promise.signal(Void())
                     }
@@ -364,7 +324,6 @@ extension KinMigrationManager {
     public enum Error: Swift.Error {
         case missingDelegate
         case missingNodeURL
-        case invalidVersion // TODO: can be removed after changes
         case responseEmpty
         case responseFailed (Swift.Error)
         case decodingFailed (Swift.Error)
@@ -379,8 +338,6 @@ extension KinMigrationManager.Error: LocalizedError {
             return "The `delegate` was not set."
         case .missingNodeURL:
             return "A custom network was used without setting the `nodeURL`."
-        case .invalidVersion:
-            return ""
         case .responseEmpty:
             return "Response was empty."
         case .responseFailed:

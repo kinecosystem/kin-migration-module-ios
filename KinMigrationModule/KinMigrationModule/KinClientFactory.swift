@@ -9,9 +9,9 @@
 import Foundation
 
 class KinClientFactory {
-    let version: KinMigrationManager.Version
+    let version: KinVersion
 
-    init(version: KinMigrationManager.Version) {
+    init(version: KinVersion) {
         self.version = version
     }
 

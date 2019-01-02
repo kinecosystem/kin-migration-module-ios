@@ -28,7 +28,7 @@ class MigrationController: NSObject {
 
         let migrationManager = KinMigrationManager(network: environment.network, appId: appId)
         migrationManager.delegate = self
-        try? migrationManager.start(withVersionURL: .version(environment))
+        try? migrationManager.start()
         self.migrationManager = migrationManager
     }
 }
@@ -36,6 +36,34 @@ class MigrationController: NSObject {
 // MARK: - Kin Migration Manager
 
 extension MigrationController: KinMigrationManagerDelegate {
+    func kinMigrationManagerNeedsVersion(_ kinMigrationManager: KinMigrationManager) -> Promise<KinVersion> {
+        guard let environment = environment else {
+            fatalError()
+        }
+
+        let promise: Promise<KinVersion> = Promise()
+
+        URLSession.shared.dataTask(with: .version(environment)) { (data, _, error) in
+            if let _ = error {
+                fatalError()
+            }
+
+            guard let data = data else {
+                fatalError()
+            }
+
+            do {
+                // TODO: create a response type that can be decoded
+                promise.signal(try JSONDecoder().decode(KinVersion.self, from: data))
+            }
+            catch {
+                fatalError()
+            }
+        }.resume()
+
+        return promise
+    }
+
     func kinMigrationManagerDidStart(_ kinMigrationManager: KinMigrationManager) {
 
     }
