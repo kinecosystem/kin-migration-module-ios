@@ -6,7 +6,6 @@
 //  Copyright © 2018 Corey Werner. All rights reserved.
 //
 
-import Foundation
 import KinUtil
 
 public protocol KinMigrationManagerDelegate: NSObjectProtocol {
@@ -40,17 +39,16 @@ public class KinMigrationManager {
 
     public func start() throws {
         guard delegate != nil else {
-            throw Error.missingDelegate
+            throw KinMigrationError.missingDelegate
         }
 
-        // !!!: DEBUG
-//        if isMigrated {
-//            version = .kinSDK
-//            delegateClientCreation()
-//        }
-//        else {
+        if isMigrated {
+            version = .kinSDK
+            delegateClientCreation()
+        }
+        else {
             requestVersion()
-//        }
+        }
     }
 
     fileprivate lazy var kinCoreClient: KinClientProtocol? = {
@@ -74,30 +72,6 @@ extension KinMigrationManager {
         }
     }
 
-    fileprivate func completed() {
-        isMigrated = true
-        delegateClientCreation()
-    }
-}
-
-// MARK: - Requests
-
-extension KinMigrationManager {
-    struct Response: Codable {
-        let code: Int
-        let message: String
-    }
-
-    enum MigrateCode: Int {
-        case success                = 200
-        case accountNotBurned       = 4001
-        case accountAlreadyMigrated = 4002
-        case invalidPublicAddress   = 4003
-        case accountNotFound        = 4041
-    }
-
-    private static let failedRetryChances = 3
-
     fileprivate func requestVersion() {
         delegate?.kinMigrationManagerNeedsVersion(self)
             .then { [weak self] version in
@@ -116,36 +90,9 @@ extension KinMigrationManager {
         }
     }
 
-    fileprivate func perform(_ urlRequest: URLRequest, retryChances: Int = failedRetryChances) -> Promise<Response> {
-        let promise = Promise<Response>()
-
-        URLSession.shared.dataTask(with: urlRequest) { [weak self] (data, _, error) in
-            if let error = error {
-                if retryChances > 0, let strongSelf = self {
-                    strongSelf.perform(urlRequest, retryChances: retryChances - 1)
-                        .then { promise.signal($0) }
-                        .error { promise.signal($0) }
-                }
-                else {
-                    promise.signal(Error.responseFailed(error))
-                }
-                return
-            }
-
-            guard let data = data else {
-                promise.signal(Error.responseEmpty)
-                return
-            }
-
-            do {
-                promise.signal(try JSONDecoder().decode(Response.self, from: data))
-            }
-            catch {
-                promise.signal(Error.decodingFailed(error))
-            }
-        }.resume()
-
-        return promise
+    fileprivate func completed() {
+        isMigrated = true
+        delegateClientCreation()
     }
 }
 
@@ -229,20 +176,20 @@ extension KinMigrationManager {
         var urlRequest = URLRequest(url: URL(string: "http://10.4.59.1:8000/migrate?address=\(account.publicAddress)")!)
         urlRequest.httpMethod = "POST"
 
-        perform(urlRequest)
+        KinRequest(urlRequest).resume()
             .then { [weak self] response in
                 guard let strongSelf = self else {
                     return
                 }
 
                 switch response.code {
-                case MigrateCode.success.rawValue,
-                     MigrateCode.accountAlreadyMigrated.rawValue:
+                case KinRequest.MigrateCode.success.rawValue,
+                     KinRequest.MigrateCode.accountAlreadyMigrated.rawValue:
                     if strongSelf.moveAccountToKinSDKIfNeeded(account) {
                         promise.signal(Void())
                     }
                 default:
-                    promise.signal(Error.migrateFailed(code: response.code, message: response.message))
+                    promise.signal(KinMigrationError.migrateFailed(code: response.code, message: response.message))
                 }
             }
             .error { error in
@@ -315,37 +262,5 @@ extension KinMigrationManager {
         }
 
         return false
-    }
-}
-
-// MARK: - Error
-
-extension KinMigrationManager {
-    public enum Error: Swift.Error {
-        case missingDelegate
-        case missingNodeURL
-        case responseEmpty
-        case responseFailed (Swift.Error)
-        case decodingFailed (Swift.Error)
-        case migrateFailed (code: Int, message: String)
-    }
-}
-
-extension KinMigrationManager.Error: LocalizedError {
-    public var errorDescription: String? {
-        switch self {
-        case .missingDelegate:
-            return "The `delegate` was not set."
-        case .missingNodeURL:
-            return "A custom network was used without setting the `nodeURL`."
-        case .responseEmpty:
-            return "Response was empty."
-        case .responseFailed:
-            return "Response failed."
-        case .decodingFailed:
-            return "Decoding response failed."
-        case .migrateFailed:
-            return "Migrating account failed."
-        }
     }
 }
