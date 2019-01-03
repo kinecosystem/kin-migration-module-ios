@@ -9,7 +9,7 @@
 import KinMigrationModule
 
 protocol MigrationControllerDelegate: NSObjectProtocol {
-    func migrationController(_ controller: MigrationController, didCreateClient client: KinClientProtocol)
+    func migrationController(_ controller: MigrationController, readyWith client: KinClientProtocol)
     func migrationController(_ controller: MigrationController, error: Error)
 }
 
@@ -68,8 +68,8 @@ extension MigrationController: KinMigrationManagerDelegate {
 
     }
 
-    func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, didCreateClient client: KinClientProtocol) {
-        delegate?.migrationController(self, didCreateClient: client)
+    func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, readyWith client: KinClientProtocol) {
+        delegate?.migrationController(self, readyWith: client)
     }
 
     func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, error: Error) {

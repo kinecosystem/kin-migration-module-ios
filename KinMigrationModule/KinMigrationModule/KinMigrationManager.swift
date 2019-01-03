@@ -9,11 +9,46 @@
 import KinUtil
 
 public protocol KinMigrationManagerDelegate: NSObjectProtocol {
+    /**
+     Asks the delegate for the Kin version to be used.
+
+     The returned value is passed in a `Promise` allowing for the answer to be determined from a
+     URL request. The migration process will only begin if `.kinSDK` is returned.
+
+     - Parameter kinMigrationManager: The migration-manager object requesting this information.
+
+     - Returns: A `Promise` of the `KinVersion` to be used.
+     */
     func kinMigrationManagerNeedsVersion(_ kinMigrationManager: KinMigrationManager) -> Promise<KinVersion>
+
+    /**
+     Tells the delegate that the migration process has begun.
+
+     The migration process will only start if the version is `.kinSDK`.
+
+     - Parameter kinMigrationManager: The migration-manager object providing this information.
+     */
     func kinMigrationManagerDidStart(_ kinMigrationManager: KinMigrationManager)
-    // migration was successful without error
-    func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, didCreateClient client: KinClientProtocol)
-    // migration halts with an error
+
+    /**
+     Tells the delegate that the client is ready to be used.
+
+     When the migration manager uses Kin Core, or when the accounts have successfully migrated
+     to the Kin SDK, the client will be returned.
+
+     - Parameter kinMigrationManager: The migration-manager object providing this information.
+     - Parameter client: The client used to interact with Kin.
+     */
+    func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, readyWith client: KinClientProtocol)
+
+    /**
+     Tells the delegate that the migration encountered an error.
+
+     When an error is encountered, the migration process will be stopped.
+
+     - Parameter kinMigrationManager: The migration-manager object providing this information.
+     - Parameter error: The error which stopped the migration process.
+     */
     func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, error: Error)
 }
 
@@ -24,12 +59,18 @@ public class KinMigrationManager {
     public let appId: AppId
 
     /**
-     Custom node URL
-
-     When using a custom network, the node url needs to be provided.
+     The node URL used for a `.custom` network.
      */
     public var nodeURL: URL?
 
+    /**
+     Initializes and returns a migration-manager object having the given network and appId.
+
+     When a `.custom` network is used, the `nodeURL` must be set.
+
+     - Parameter network: The `Network` which the client is connected to.
+     - Parameter appId: The `AppId` attached to all transactions.
+     */
     public init(network: Network, appId: AppId) {
         self.network = network
         self.appId = appId
@@ -37,6 +78,11 @@ public class KinMigrationManager {
 
     fileprivate(set) var version: KinVersion?
 
+    /**
+     Tell the migration manager to start the process.
+
+     - Throws: An error if the `delegate` was not set.
+     */
     public func start() throws {
         guard delegate != nil else {
             throw KinMigrationError.missingDelegate
@@ -63,7 +109,7 @@ public class KinMigrationManager {
 // MARK: - State
 
 extension KinMigrationManager {
-    public private(set) var isMigrated: Bool {
+    public fileprivate(set) var isMigrated: Bool {
         get {
             return UserDefaults.standard.bool(forKey: "KinMigrationDidMigrateToKin3")
         }
@@ -125,7 +171,7 @@ extension KinMigrationManager {
         }
 
         if let client = client {
-            delegate?.kinMigrationManager(self, didCreateClient: client)
+            delegate?.kinMigrationManager(self, readyWith: client)
         }
     }
 }

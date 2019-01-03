@@ -62,7 +62,7 @@ extension MainNavigationController {
 // MARK: - Migration Controller
 
 extension MainNavigationController: MigrationControllerDelegate {
-    func migrationController(_ controller: MigrationController, didCreateClient client: KinClientProtocol) {
+    func migrationController(_ controller: MigrationController, readyWith client: KinClientProtocol) {
         dismissLoaderView()
 
         let viewController = AccountListViewController(with: client)
