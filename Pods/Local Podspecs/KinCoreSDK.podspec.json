@@ -1,6 +1,6 @@
 {
   "name": "KinCoreSDK",
-  "version": "0.7.12",
+  "version": "0.7.13",
   "summary": "Pod for the KIN Core SDK.",
   "description": "Initial pod for the KIN SDK.",
   "homepage": "https://github.com/kinfoundation/kin-core-ios",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/kinfoundation/kin-core-ios.git",
-    "tag": "0.7.12",
+    "tag": "0.7.13",
     "submodules": true
   },
   "source_files": [
@@ -22,7 +22,7 @@
   ],
   "dependencies": {
     "StellarKit": [
-      "0.3.10"
+      "0.3.11"
     ],
     "Sodium": [
       "0.7.0"
