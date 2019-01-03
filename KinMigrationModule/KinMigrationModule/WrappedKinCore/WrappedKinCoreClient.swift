@@ -16,11 +16,11 @@ class WrappedKinCoreClient: KinClientProtocol {
     private(set) var url: URL
     private(set) var network: Network
 
-    required init(with url: URL, network: Network) {
+    required init(with url: URL, network: Network, appId: AppId) {
         self.url = url
         self.network = network
         self.client = KinCoreSDK.KinClient(with: url, networkId: network.mapToKinCore)
-        self.wrappedAccounts = WrappedKinCoreAccounts(client.accounts)
+        self.wrappedAccounts = WrappedKinCoreAccounts(client.accounts, appId: appId)
     }
 
     // MARK: Account

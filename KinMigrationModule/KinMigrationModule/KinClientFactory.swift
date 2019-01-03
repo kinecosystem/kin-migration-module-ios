@@ -46,7 +46,7 @@ class KinClientFactory {
 
         switch version {
         case .kinCore:
-            return WrappedKinCoreClient(with: url, network: network)
+            return WrappedKinCoreClient(with: url, network: network, appId: appId)
         case .kinSDK:
             return WrappedKinSDKClient(with: url, network: network, appId: appId)
         }

@@ -12,6 +12,7 @@ import StellarErrors
 
 class WrappedKinCoreAccount: KinAccountProtocol {
     let account: KinCoreSDK.KinAccount
+    let appId: AppId
 
     var publicAddress: String {
         return account.publicAddress
@@ -26,8 +27,9 @@ class WrappedKinCoreAccount: KinAccountProtocol {
         }
     }
 
-    init(_ kinAccount: KinCoreSDK.KinAccount) {
+    init(_ kinAccount: KinCoreSDK.KinAccount, appId: AppId) {
         self.account = kinAccount
+        self.appId = appId
     }
 
     func activate() -> Promise<Void> {
@@ -89,6 +91,12 @@ class WrappedKinCoreAccount: KinAccountProtocol {
     // MARK: Transaction
 
     func sendTransaction(to recipient: String, kin: Kin, memo: String?, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId> {
+        let prefixedMemo = KinSDKMemo.prependAppIdIfNeeded(appId, to: memo ?? "")
+
+        guard prefixedMemo.utf8.count <= Transaction.MaxMemoLength else {
+            return Promise(KinError(error: StellarError.memoTooLong(prefixedMemo)))
+        }
+
         let promise = Promise<TransactionId>()
 
         account.sendTransaction(to: recipient, kin: kin, memo: memo)

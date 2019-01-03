@@ -10,6 +10,7 @@ import KinCoreSDK
 
 class WrappedKinCoreAccounts: KinAccountsProtocol {
     let accounts: KinCoreSDK.KinAccounts
+    let appId: AppId
 
     var count: Int {
         return accounts.count
@@ -23,8 +24,9 @@ class WrappedKinCoreAccounts: KinAccountsProtocol {
         return wrappedAccount(accounts.last)
     }
 
-    init(_ kinAccounts: KinCoreSDK.KinAccounts) {
+    init(_ kinAccounts: KinCoreSDK.KinAccounts, appId: AppId) {
         self.accounts = kinAccounts
+        self.appId = appId
         restoreWrappedAccount()
     }
 
@@ -52,7 +54,7 @@ class WrappedKinCoreAccounts: KinAccountsProtocol {
 
     @discardableResult
     func addWrappedAccount(_ account: KinCoreSDK.KinAccount) -> WrappedKinCoreAccount {
-        let wrappedAccount = WrappedKinCoreAccount(account)
+        let wrappedAccount = WrappedKinCoreAccount(account, appId: appId)
         wrappedAccounts.append(wrappedAccount)
         return wrappedAccount
     }

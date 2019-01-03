@@ -16,6 +16,7 @@ public typealias Node = KinSDK.Stellar.Node
 public typealias TransactionId = KinSDK.TransactionId
 public typealias TransactionEnvelope = KinSDK.TransactionEnvelope
 public typealias WhitelistEnvelope = KinSDK.WhitelistEnvelope
+internal typealias KinSDKMemo = KinSDK.Memo
 
 public typealias LinkBag = KinUtil.LinkBag
 public typealias Promise = KinUtil.Promise
