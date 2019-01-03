@@ -60,12 +60,20 @@ extension AppId {
 }
 
 extension URL {
+    /**
+     The Kin version to be used.
+
+     The JSON response should look like `{"version": 2}` for Kin Core and `{"version": 3}`
+     for Kin SDK.
+
+     - SeeAlso: https://www.mocky.io/
+     */
     static func version(_ environment: Environment) -> URL {
-        switch environment { // https://www.mocky.io/
-        case .testKinCore: return URL(string: "http://www.mocky.io/v2/5c2b5e403000007400abaf90")!
-        case .testKinSDK:  return URL(string: "http://www.mocky.io/v2/5c2b5e5b3000007400abaf91")!
-        case .mainKinCore: return URL(string: "http://kin.org")!
-        case .mainKinSDK:  return URL(string: "http://kin.org")!
+        switch environment {
+        case .testKinCore: return URL(string: "http://www.mocky.io/v2/5c2db8b82f00008e2f1751df")!
+        case .testKinSDK:  return URL(string: "http://www.mocky.io/v2/5c2db8cd2f0000a3301751e3")!
+        case .mainKinCore: fatalError("Not yet implemented.")
+        case .mainKinSDK:  fatalError("Not yet implemented.")
         }
     }
 
@@ -80,16 +88,16 @@ extension URL {
     static func fund(_ environment: Environment, publicAddress: String, amount: Kin) -> URL {
         switch environment {
         case .testKinCore: return URL(string: "http://faucet-playground.kininfrastructure.com/fund?account=\(publicAddress)&amount=\(amount)")!
-        case .testKinSDK:  return URL(string: "http://kin.org?addr=\(publicAddress)&amount=\(amount)")! // TODO:
+        case .testKinSDK:  fatalError("Not yet implemented.")
         default:           fatalError("Funding is only supported on test net.")
         }
     }
 
     static func whitelist(_ environment: Environment) -> URL {
-        switch environment { // TODO:
-        case .testKinSDK:  return URL(string: "http://10.4.59.1:3003/whitelist")!
-        case .mainKinSDK:  return URL(string: "http://kin.org")!
-        default:           fatalError("Whitelisting is only for Kin 3")
+        switch environment {
+        case .testKinSDK: return URL(string: "http://10.4.59.1:3003/whitelist")!
+        case .mainKinSDK: fatalError("Not yet implemented.")
+        default:          fatalError("Whitelisting is only for Kin 3")
         }
     }
 }

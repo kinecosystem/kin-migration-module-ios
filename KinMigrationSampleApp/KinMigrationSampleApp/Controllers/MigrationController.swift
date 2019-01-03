@@ -36,6 +36,10 @@ class MigrationController: NSObject {
 // MARK: - Kin Migration Manager
 
 extension MigrationController: KinMigrationManagerDelegate {
+    private struct VersionResponse: Codable {
+        let version: KinVersion
+    }
+
     func kinMigrationManagerNeedsVersion(_ kinMigrationManager: KinMigrationManager) -> Promise<KinVersion> {
         guard let environment = environment else {
             fatalError()
@@ -53,8 +57,8 @@ extension MigrationController: KinMigrationManagerDelegate {
             }
 
             do {
-                // TODO: create a response type that can be decoded
-                promise.signal(try JSONDecoder().decode(KinVersion.self, from: data))
+                let response = try JSONDecoder().decode(VersionResponse.self, from: data)
+                promise.signal(response.version)
             }
             catch {
                 fatalError()

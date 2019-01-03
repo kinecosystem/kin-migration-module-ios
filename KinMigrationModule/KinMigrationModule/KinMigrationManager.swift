@@ -88,13 +88,13 @@ public class KinMigrationManager {
             throw KinMigrationError.missingDelegate
         }
 
-        if isMigrated {
-            version = .kinSDK
-            delegateClientCreation()
-        }
-        else {
+//        if isMigrated {
+//            version = .kinSDK
+//            delegateClientCreation()
+//        }
+//        else {
             requestVersion()
-        }
+//        }
     }
 
     fileprivate lazy var kinCoreClient: KinClientProtocol? = {
@@ -120,7 +120,7 @@ extension KinMigrationManager {
 
     fileprivate func requestVersion() {
         delegate?.kinMigrationManagerNeedsVersion(self)
-            .then { [weak self] version in
+            .then(on: .main, { [weak self] version in
                 guard let strongSelf = self else {
                     return
                 }
@@ -133,7 +133,7 @@ extension KinMigrationManager {
                 case .kinSDK:
                     strongSelf.prepareBurning()
                 }
-        }
+            })
     }
 
     fileprivate func completed() {
