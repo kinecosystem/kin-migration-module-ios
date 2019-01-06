@@ -143,7 +143,15 @@ extension KinMigrationManager {
 
 extension KinMigrationManager {
     fileprivate func createClient(version: KinVersion) -> KinClientProtocol {
-        let serviceProvider = version == .kinCore ? kinCoreServiceProvider : kinSDKServiceProvider
+        let serviceProvider: ServiceProviderProtocol
+
+        switch version {
+        case .kinCore:
+            serviceProvider = kinCoreServiceProvider
+        case .kinSDK:
+            serviceProvider = kinSDKServiceProvider
+        }
+
         let factory = KinClientFactory(version: version)
         return factory.KinClient(serviceProvider: serviceProvider, appId: appId)
     }
@@ -153,7 +161,7 @@ extension KinMigrationManager {
             return
         }
 
-        var client: KinClientProtocol?
+        let client: KinClientProtocol
 
         switch version {
         case .kinCore:
@@ -162,9 +170,7 @@ extension KinMigrationManager {
             client = kinSDKClient
         }
 
-        if let client = client {
-            delegate?.kinMigrationManager(self, readyWith: client)
-        }
+        delegate?.kinMigrationManager(self, readyWith: client)
     }
 }
 
