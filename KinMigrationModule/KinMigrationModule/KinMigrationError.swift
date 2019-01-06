@@ -9,8 +9,8 @@
 import Foundation
 
 public enum KinMigrationError: Error {
+    case invalidNetwork
     case missingDelegate
-    case missingNodeURL
     case responseEmpty
     case responseFailed (Error)
     case decodingFailed (Error)
@@ -20,10 +20,10 @@ public enum KinMigrationError: Error {
 extension KinMigrationError: LocalizedError {
     public var errorDescription: String? {
         switch self {
+        case .invalidNetwork:
+            return "The provided `network` is invalid."
         case .missingDelegate:
             return "The `delegate` was not set."
-        case .missingNodeURL:
-            return "A custom network was used without setting the `nodeURL`."
         case .responseEmpty:
             return "Response was empty."
         case .responseFailed:

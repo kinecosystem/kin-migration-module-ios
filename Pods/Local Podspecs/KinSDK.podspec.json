@@ -1,9 +1,9 @@
 {
   "name": "KinSDK",
-  "version": "0.1.0",
+  "version": "0.8.0",
   "summary": "Pod for the KIN SDK.",
   "description": "Initial pod for the KIN SDK.",
-  "homepage": "https://github.com/kinfoundation/kin-sdk-ios",
+  "homepage": "https://github.com/kinecosystem/kin-sdk-ios",
   "license": {
     "type": "MIT",
     "file": "LICENSE.md"
@@ -12,8 +12,8 @@
     "Kin Foundation": "kin@kik.com"
   },
   "source": {
-    "git": "https://github.com/kinfoundation/kin-sdk-ios.git",
-    "tag": "0.1.0",
+    "git": "https://github.com/kinecosystem/kin-sdk-ios.git",
+    "tag": "0.8.0",
     "submodules": true
   },
   "source_files": [

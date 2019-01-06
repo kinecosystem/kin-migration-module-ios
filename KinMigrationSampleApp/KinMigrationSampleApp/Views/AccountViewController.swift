@@ -36,9 +36,6 @@ class AccountViewController: UITableViewController {
             if environment.network != .mainNet {
                 datasource.append(.createAccount)
             }
-            if environment.blockchain == .stellar {
-                datasource.append(.burnAccount)
-            }
 
             return datasource
         }()
@@ -140,10 +137,6 @@ extension AccountViewController {
         return promise
     }
 
-    private func burnAccount() -> Promise<String?> {
-        return account.burn()
-    }
-
     @discardableResult
     private func updateAccountBalance() -> Promise<Void> {
         let promise = Promise<Void>()
@@ -208,7 +201,6 @@ extension AccountViewController {
         case sendTransaction
         case transactionHistory
         case createAccount
-        case burnAccount
     }
 }
 
@@ -218,8 +210,7 @@ extension AccountViewController.Row {
         case .publicAddress:
             return "subtitle"
         case .balance,
-             .createAccount,
-             .burnAccount:
+             .createAccount:
             return "value1"
         case .sendTransaction,
              .transactionHistory:
@@ -239,8 +230,6 @@ extension AccountViewController.Row {
             return "Transaction History"
         case .createAccount:
             return "Create Account"
-        case .burnAccount:
-            return "Burn Account"
         }
     }
 }
@@ -342,25 +331,6 @@ extension AccountViewController {
                 .finally {
                     DispatchQueue.main.async {
                         tableView.deselectRow(at: indexPath, animated: true)
-                    }
-            }
-
-        case .burnAccount:
-            let cell = tableView.cellForRow(at: indexPath)
-            cell?.detailTextLabel?.text = "Burning..."
-
-            burnAccount()
-                .then(on: .main, { transactionHash in
-                    if let _ = transactionHash {
-                        cell?.detailTextLabel?.text = "Burned"
-                    }
-                    else {
-                        cell?.detailTextLabel?.text = "Burned Already"
-                    }
-                })
-                .error { error in
-                    DispatchQueue.main.async {
-                        cell?.detailTextLabel?.text = "Failed"
                     }
             }
 

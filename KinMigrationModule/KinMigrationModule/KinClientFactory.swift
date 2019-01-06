@@ -15,40 +15,38 @@ class KinClientFactory {
         self.version = version
     }
 
-    private func nodeURL(_ network: Network, customNodeURL: URL? = nil) throws -> URL {
-        switch network {
-        case .custom:
-            if let url = customNodeURL {
-                return url
-            }
-            else {
-                throw KinMigrationError.missingNodeURL
-            }
-        case .mainNet:
-            switch version {
-            case .kinCore:
-                return URL(string: "https://horizon-ecosystem.kininfrastructure.com")!
-            case .kinSDK:
-                return URL(string: "http://kin.org")!
-            }
-        default:
-            switch version {
-            case .kinCore:
-                return URL(string: "http://horizon-playground.kininfrastructure.com")!
-            case .kinSDK:
-                return URL(string: "http://horizon-testnet.kininfrastructure.com")!
+    private func nodeURL(_ serviceProvider: ServiceProviderProtocol) -> URL {
+        if let serviceProvider = serviceProvider as? CustomServiceProvider {
+            return serviceProvider.nodeURL
+        }
+        else {
+            switch serviceProvider.network {
+            case .mainNet:
+                switch version {
+                case .kinCore:
+                    return URL(string: "https://horizon-ecosystem.kininfrastructure.com")!
+                case .kinSDK:
+                    fatalError("Not yet implemented.")
+                }
+            default:
+                switch version {
+                case .kinCore:
+                    return URL(string: "http://horizon-playground.kininfrastructure.com")!
+                case .kinSDK:
+                    return URL(string: "http://horizon-testnet.kininfrastructure.com")!
+                }
             }
         }
     }
 
-    func KinClient(network: Network, appId: AppId, nodeURL: URL? = nil) throws -> KinClientProtocol {
-        let url = try self.nodeURL(network, customNodeURL: nodeURL)
+    func KinClient(serviceProvider: ServiceProviderProtocol, appId: AppId) -> KinClientProtocol {
+        let url = nodeURL(serviceProvider)
 
         switch version {
         case .kinCore:
-            return WrappedKinCoreClient(with: url, network: network, appId: appId)
+            return WrappedKinCoreClient(with: url, network: serviceProvider.network, appId: appId)
         case .kinSDK:
-            return WrappedKinSDKClient(with: url, network: network, appId: appId)
+            return WrappedKinSDKClient(with: url, network: serviceProvider.network, appId: appId)
         }
     }
 }

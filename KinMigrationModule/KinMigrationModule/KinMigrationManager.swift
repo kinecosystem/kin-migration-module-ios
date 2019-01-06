@@ -55,24 +55,21 @@ public protocol KinMigrationManagerDelegate: NSObjectProtocol {
 public class KinMigrationManager {
     public weak var delegate: KinMigrationManagerDelegate?
 
-    public let network: Network
+    public let kinCoreServiceProvider: ServiceProviderProtocol
+    public let kinSDKServiceProvider: ServiceProviderProtocol
     public let appId: AppId
 
     /**
-     The node URL used for a `.custom` network.
-     */
-    public var nodeURL: URL?
+     Initializes and returns a migration-manager object having the given service providers and
+     appId.
 
-    /**
-     Initializes and returns a migration-manager object having the given network and appId.
-
-     When a `.custom` network is used, the `nodeURL` must be set.
-
-     - Parameter network: The `Network` which the client is connected to.
+     - Parameter kinCoreServiceProvider: The service provider for connecting to Kin Core.
+     - Parameter kinSDKServiceProvider: The service provider for connecting to Kin SDK.
      - Parameter appId: The `AppId` attached to all transactions.
      */
-    public init(network: Network, appId: AppId) {
-        self.network = network
+    public init(kinCoreServiceProvider: ServiceProviderProtocol, kinSDKServiceProvider: ServiceProviderProtocol, appId: AppId) {
+        self.kinCoreServiceProvider = kinCoreServiceProvider
+        self.kinSDKServiceProvider = kinSDKServiceProvider
         self.appId = appId
     }
 
@@ -97,11 +94,11 @@ public class KinMigrationManager {
         }
     }
 
-    fileprivate lazy var kinCoreClient: KinClientProtocol? = {
+    fileprivate lazy var kinCoreClient: KinClientProtocol = {
         return self.createClient(version: .kinCore)
     }()
 
-    fileprivate lazy var kinSDKClient: KinClientProtocol? = {
+    fileprivate lazy var kinSDKClient: KinClientProtocol = {
         return self.createClient(version: .kinSDK)
     }()
 }
@@ -145,15 +142,10 @@ extension KinMigrationManager {
 // MARK: - Client
 
 extension KinMigrationManager {
-    fileprivate func createClient(version: KinVersion) -> KinClientProtocol? {
-        do {
-            let factory = KinClientFactory(version: version)
-            return try factory.KinClient(network: network, appId: appId, nodeURL: nodeURL)
-        }
-        catch {
-            delegate?.kinMigrationManager(self, error: error)
-            return nil
-        }
+    fileprivate func createClient(version: KinVersion) -> KinClientProtocol {
+        let serviceProvider = version == .kinCore ? kinCoreServiceProvider : kinSDKServiceProvider
+        let factory = KinClientFactory(version: version)
+        return factory.KinClient(serviceProvider: serviceProvider, appId: appId)
     }
 
     fileprivate func delegateClientCreation() {
@@ -189,12 +181,10 @@ extension KinMigrationManager {
             return
         }
 
-        guard let client = kinCoreClient else {
-            return
-        }
+        let promises = kinCoreClient.accounts.makeIterator().map { $0.burn() }
 
         DispatchQueue.global(qos: .background).async {
-            await(client.accounts.makeIterator().map { $0.burn() })
+            await(promises)
                 .then { _ in
                     DispatchQueue.main.async { [weak self] in
                         guard let strongSelf = self else {
@@ -250,11 +240,7 @@ extension KinMigrationManager {
             return
         }
 
-        guard let client = kinCoreClient else {
-            return
-        }
-
-        let promises = client.accounts.makeIterator().map({ migrateAccount($0) })
+        let promises = kinCoreClient.accounts.makeIterator().map({ migrateAccount($0) })
 
         DispatchQueue.global(qos: .background).async {
             await(promises)
@@ -285,10 +271,6 @@ extension KinMigrationManager {
      - Returns: True if there were no errors.
      */
     private func moveAccountToKinSDKIfNeeded(_ account: KinAccountProtocol) -> Bool {
-        guard let kinSDKClient = kinSDKClient else {
-            return false
-        }
-
         let hasAccount = kinSDKClient.accounts.makeIterator().contains { kinSDKAccount -> Bool in
             return kinSDKAccount.publicAddress == account.publicAddress
         }
