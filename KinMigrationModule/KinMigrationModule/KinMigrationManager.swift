@@ -63,6 +63,13 @@ public class KinMigrationManager {
      Initializes and returns a migration-manager object having the given service providers and
      appId.
 
+     When the `version` is set to `.kinCore`, the `kinSDKServiceProvider` will not be called.
+     However, when the `version` is set to `.kinSDK`, the `kinCoreServiceProvider` will be
+     called for preparing the migration.
+
+     - Important: The URL for migrating an account must be set on the `migrateBaseURL` property
+     of the `kinCoreServiceProvider`.
+
      - Parameter kinCoreServiceProvider: The service provider for connecting to Kin Core.
      - Parameter kinSDKServiceProvider: The service provider for connecting to Kin SDK.
      - Parameter appId: The `AppId` attached to all transactions.
@@ -213,9 +220,20 @@ extension KinMigrationManager {
     }
 
     private func migrateAccount(_ account: KinAccountProtocol) -> Promise<Void> {
+        // TODO: check balance, if 0 then continue. or if account doesnt exist, continue
+
+        let url: URL
+
+        do {
+            url = try kinCoreServiceProvider.migrateURL(publicAddress: account.publicAddress)
+        }
+        catch {
+            return Promise(error)
+        }
+
         let promise = Promise<Void>()
 
-        var urlRequest = URLRequest(url: URL(string: "http://10.4.59.1:8000/migrate?address=\(account.publicAddress)")!)
+        var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
 
         KinRequest(urlRequest).resume()

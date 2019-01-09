@@ -77,6 +77,14 @@ extension URL {
         }
     }
 
+    static func migrate(_ environment: Environment) -> URL {
+        switch environment {
+        case .testKinCore: return URL(string: "https://migration-devplatform-playground.developers.kinecosystem.com")!
+        case .mainKinCore: fatalError("Not yet implemented.")
+        default:           fatalError("Migration is only needed for Kin Core.")
+        }
+    }
+
     static func friendBot(_ environment: Environment, publicAddress: String) -> URL {
         switch environment {
         case .testKinCore: return URL(string: "http://friendbot-playground.kininfrastructure.com?addr=\(publicAddress)")!
@@ -97,7 +105,7 @@ extension URL {
         switch environment {
         case .testKinSDK: return URL(string: "http://10.4.59.1:3003/whitelist")!
         case .mainKinSDK: fatalError("Not yet implemented.")
-        default:          fatalError("Whitelisting is only for Kin 3")
+        default:          fatalError("Whitelisting is only for Kin SDK.")
         }
     }
 }

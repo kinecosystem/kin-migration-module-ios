@@ -22,7 +22,7 @@ class MigrationController: NSObject {
     func startManager(with environment: Environment) {
         self.environment = environment
 
-        guard let kinCoreSP = try? ServiceProvider(network: environment.network) else {
+        guard let kinCoreSP = try? ServiceProvider(network: environment.network, migrateBaseURL: .migrate(environment)) else {
             fatalError()
         }
 
