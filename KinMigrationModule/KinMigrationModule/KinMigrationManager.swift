@@ -92,13 +92,13 @@ public class KinMigrationManager {
             throw KinMigrationError.missingDelegate
         }
 
-//        if isMigrated {
-//            version = .kinSDK
-//            delegateClientCreation()
-//        }
-//        else {
+        if isMigrated {
+            version = .kinSDK
+            delegateClientCreation()
+        }
+        else {
             requestVersion()
-//        }
+        }
     }
 
     fileprivate lazy var kinCoreClient: KinClientProtocol = {
