@@ -80,7 +80,7 @@ public class KinMigrationManager {
         self.appId = appId
     }
 
-    fileprivate(set) public var version: KinVersion?
+    public fileprivate(set) var version: KinVersion?
 
     /**
      Tell the migration manager to start the process.
