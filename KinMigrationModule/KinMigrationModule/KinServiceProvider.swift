@@ -20,7 +20,7 @@ extension ServiceProviderProtocol {
         }
 
         var urlComponents = URLComponents(url: migrateBaseURL, resolvingAgainstBaseURL: false)
-        urlComponents?.path = "migrate"
+        urlComponents?.path = "/migrate"
         urlComponents?.queryItems = [URLQueryItem(name: "address", value: publicAddress)]
 
         if let url = urlComponents?.url {

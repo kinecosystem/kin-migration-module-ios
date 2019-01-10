@@ -22,11 +22,13 @@ class MigrationController: NSObject {
     func startManager(with environment: Environment) {
         self.environment = environment
 
-        guard let kinCoreSP = try? ServiceProvider(network: environment.network, migrateBaseURL: .migrate(environment)) else {
+        guard let kinCoreSP = try? ServiceProvider(network: environment.network) else {
             fatalError()
         }
 
-        guard let kinSDKSP = try? ServiceProvider(network: environment.network) else {
+        let migrateURL: URL? = environment.blockchain == .kin ? .migrate(environment) : nil
+
+        guard let kinSDKSP = try? ServiceProvider(network: environment.network, migrateBaseURL: migrateURL) else {
             fatalError()
         }
 
@@ -38,6 +40,10 @@ class MigrationController: NSObject {
         migrationManager.delegate = self
         try? migrationManager.start()
         self.migrationManager = migrationManager
+    }
+
+    var version: KinVersion? {
+        return migrationManager?.version
     }
 }
 

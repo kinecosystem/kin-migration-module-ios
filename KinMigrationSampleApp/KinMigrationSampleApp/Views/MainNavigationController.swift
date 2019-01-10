@@ -65,12 +65,15 @@ extension MainNavigationController: MigrationControllerDelegate {
     func migrationController(_ controller: MigrationController, readyWith client: KinClientProtocol) {
         dismissLoaderView()
 
+        var title = "\(client.network.description.capitalized) Accounts"
+
+        if let version = controller.version?.rawValue {
+            title = "Kin \(version) \(title)"
+        }
+
         let viewController = AccountListViewController(with: client)
         viewController.delegate = self
-
-        if let network = controller.environment?.network {
-            viewController.title = "\(network.description.capitalized) Accounts"
-        }
+        viewController.title = title
 
         pushViewController(viewController, animated: true)
     }

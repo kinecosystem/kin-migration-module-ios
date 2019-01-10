@@ -16,6 +16,7 @@ public enum KinMigrationError: Error {
     case responseFailed (Error)
     case decodingFailed (Error)
     case migrateFailed (code: Int, message: String)
+    case unexpectedCondition
 }
 
 extension KinMigrationError: LocalizedError {
@@ -35,6 +36,8 @@ extension KinMigrationError: LocalizedError {
             return "Decoding response failed."
         case .migrateFailed:
             return "Migrating account failed."
+        case .unexpectedCondition:
+            return "An unexpected condition was met."
         }
     }
 }

@@ -15,33 +15,29 @@ class KinRequest {
     private var urlSessionDataTask: URLSessionDataTask?
 
     init(_ urlRequest: URLRequest, retryChances: Int = failedRetryChances) {
-        urlSessionDataTask = URLSession.shared.dataTask(with: urlRequest) { [weak self] (data, _, error) in
-            guard let strongSelf = self else {
-                return
-            }
-
+        urlSessionDataTask = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
             if let error = error {
                 if retryChances > 0 {
                     KinRequest(urlRequest, retryChances: retryChances - 1).resume()
-                        .then { strongSelf.promise.signal($0) }
-                        .error { strongSelf.promise.signal($0) }
+                        .then { self.promise.signal($0) }
+                        .error { self.promise.signal($0) }
                 }
                 else {
-                    strongSelf.promise.signal(KinMigrationError.responseFailed(error))
+                    self.promise.signal(KinMigrationError.responseFailed(error))
                 }
                 return
             }
 
             guard let data = data else {
-                strongSelf.promise.signal(KinMigrationError.responseEmpty)
+                self.promise.signal(KinMigrationError.responseEmpty)
                 return
             }
 
             do {
-                strongSelf.promise.signal(try JSONDecoder().decode(Response.self, from: data))
+                self.promise.signal(try JSONDecoder().decode(Response.self, from: data))
             }
             catch {
-                strongSelf.promise.signal(KinMigrationError.decodingFailed(error))
+                self.promise.signal(KinMigrationError.decodingFailed(error))
             }
         }
     }

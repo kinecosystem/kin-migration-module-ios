@@ -79,9 +79,9 @@ extension URL {
 
     static func migrate(_ environment: Environment) -> URL {
         switch environment {
-        case .testKinCore: return URL(string: "https://migration-devplatform-playground.developers.kinecosystem.com")!
-        case .mainKinCore: fatalError("Not yet implemented.")
-        default:           fatalError("Migration is only needed for Kin Core.")
+        case .testKinSDK: return URL(string: "https://migration-devplatform-playground.developers.kinecosystem.com")!
+        case .mainKinSDK: fatalError("Not yet implemented.")
+        default:          fatalError("Migration is only needed for Kin SDK.")
         }
     }
 
