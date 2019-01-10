@@ -200,10 +200,11 @@ extension KinMigrationManager {
                     promise.signal(transactionHash)
                 }
                 .error { error in
-                    if case KinError.missingAccount = error {
+                    switch error {
+                    case KinError.missingAccount,
+                         KinError.missingBalance:
                         promise.signal(nil)
-                    }
-                    else {
+                    default:
                         promise.signal(error)
                     }
                 }
