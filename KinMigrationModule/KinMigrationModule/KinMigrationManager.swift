@@ -269,7 +269,13 @@ extension KinMigrationManager {
                 return self.migrateAccount(account)
             }
             else {
-                return Promise(Void())
+                do {
+                    try self.moveAccountToKinSDKIfNeeded(account)
+                    return Promise(Void())
+                }
+                catch {
+                    return Promise(error)
+                }
             }
         }
     }
