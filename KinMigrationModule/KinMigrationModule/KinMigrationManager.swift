@@ -187,35 +187,22 @@ extension KinMigrationManager {
     }
 
     fileprivate func prepareBurning() {
+        guard kinCoreClient.accounts.count > 0 else {
+            completed()
+            return
+        }
+
         delegate?.kinMigrationManagerDidStart(self)
         burnAccounts()
     }
 
-    fileprivate func burnAccounts() {
+    private func burnAccounts() {
         guard version == .kinSDK else {
             delegate?.kinMigrationManager(self, error: KinMigrationError.unexpectedCondition)
             return
         }
 
-        let promises = kinCoreClient.accounts.makeIterator().map { kinAccount -> Promise<MigrateableAccount> in
-            let promise = Promise<MigrateableAccount>()
-
-            kinAccount.burn()
-                .then { _ in
-                    promise.signal(MigrateableAccount(account: kinAccount, migrateable: true))
-                }
-                .error { error in
-                    switch error {
-                    case KinError.missingAccount,
-                         KinError.missingBalance:
-                        promise.signal(MigrateableAccount(account: kinAccount, migrateable: false))
-                    default:
-                        promise.signal(error)
-                    }
-                }
-
-            return promise
-        }
+        let promises = kinCoreClient.accounts.makeIterator().map { burnAccount($0) }
 
         DispatchQueue.global(qos: .background).async {
             await(promises)
@@ -229,6 +216,63 @@ extension KinMigrationManager {
                         self.delegate?.kinMigrationManager(self, error: error)
                     }
             }
+        }
+    }
+
+    private func burnAccount(_ account: KinAccountProtocol) -> Promise<MigrateableAccount> {
+        let promise = Promise<MigrateableAccount>()
+
+        account.burn()
+            .then { _ in
+                promise.signal(MigrateableAccount(account: account, migrateable: true))
+            }
+            .error { error in
+                switch error {
+                case KinError.missingAccount,
+                     KinError.missingBalance:
+                    promise.signal(MigrateableAccount(account: account, migrateable: false))
+                default:
+                    promise.signal(error)
+                }
+        }
+
+        return promise
+    }
+
+    private func migrateAccounts(_ migrateableAccounts: [MigrateableAccount]) {
+        guard version == .kinSDK else {
+            delegate?.kinMigrationManager(self, error: KinMigrationError.unexpectedCondition)
+            return
+        }
+
+        let promises = migrateableAccounts.map { migrateAccountIfNeeded($0) }
+
+        DispatchQueue.global(qos: .background).async {
+            await(promises)
+                .then { _ in
+                    DispatchQueue.main.async {
+                        self.completed()
+                    }
+                }
+                .error { error in
+                    DispatchQueue.main.async {
+                        self.delegate?.kinMigrationManager(self, error: error)
+                    }
+            }
+        }
+    }
+
+    private func migrateAccountIfNeeded(_ migrateableAccount: MigrateableAccount) -> Promise<Void> {
+        if migrateableAccount.migrateable {
+            return migrateAccount(migrateableAccount.account)
+        }
+
+        do {
+            try moveAccountToKinSDKIfNeeded(migrateableAccount.account)
+            return Promise(Void())
+        }
+        catch {
+            return Promise(error)
         }
     }
 
@@ -258,43 +302,6 @@ extension KinMigrationManager {
                 }
             default:
                 return Promise(KinMigrationError.migrateFailed(code: response.code, message: response.message))
-            }
-        }
-    }
-
-    private func migrateAccountIfNeeded(_ migrateableAccount: MigrateableAccount) -> Promise<Void> {
-        if migrateableAccount.migrateable {
-            return migrateAccount(migrateableAccount.account)
-        }
-
-        do {
-            try moveAccountToKinSDKIfNeeded(migrateableAccount.account)
-            return Promise(Void())
-        }
-        catch {
-            return Promise(error)
-        }
-    }
-
-    private func migrateAccounts(_ migrateableAccounts: [MigrateableAccount]) {
-        guard version == .kinSDK else {
-            delegate?.kinMigrationManager(self, error: KinMigrationError.unexpectedCondition)
-            return
-        }
-
-        let promises = migrateableAccounts.map { migrateAccountIfNeeded($0) }
-
-        DispatchQueue.global(qos: .background).async {
-            await(promises)
-                .then { _ in
-                    DispatchQueue.main.async {
-                        self.completed()
-                    }
-                }
-                .error { error in
-                    DispatchQueue.main.async {
-                        self.delegate?.kinMigrationManager(self, error: error)
-                    }
             }
         }
     }
