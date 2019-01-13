@@ -82,15 +82,23 @@ public class KinMigrationManager {
 
     public fileprivate(set) var version: KinVersion?
 
+    private var didStart = false
+
     /**
      Tell the migration manager to start the process.
 
      - Throws: An error if the `delegate` was not set.
      */
     public func start() throws {
+        guard !didStart else {
+            return
+        }
+
         guard delegate != nil else {
             throw KinMigrationError.missingDelegate
         }
+
+        didStart = true
 
         if isMigrated {
             version = .kinSDK
@@ -139,13 +147,23 @@ extension KinMigrationManager {
                 }
             })
             .error { error in
-                print("BI Event migration_version_check_failed")
+                DispatchQueue.main.async {
+                    print("BI Event migration_version_check_failed")
+
+                    self.failed(error: error)
+                }
             }
     }
 
     fileprivate func completed() {
+        didStart = false
         isMigrated = true
         delegateClientCreation()
+    }
+
+    fileprivate func failed(error: Error) {
+        didStart = false
+        delegate?.kinMigrationManager(self, error: error)
     }
 }
 
@@ -168,7 +186,7 @@ extension KinMigrationManager {
 
     fileprivate func delegateClientCreation() {
         guard let version = version else {
-            delegate?.kinMigrationManager(self, error: KinMigrationError.unexpectedCondition)
+            failed(error: KinMigrationError.unexpectedCondition)
             return
         }
 
@@ -207,7 +225,7 @@ extension KinMigrationManager {
 
     private func burnAccounts() {
         guard version == .kinSDK else {
-            delegate?.kinMigrationManager(self, error: KinMigrationError.unexpectedCondition)
+            failed(error: KinMigrationError.unexpectedCondition)
             return
         }
 
@@ -228,7 +246,7 @@ extension KinMigrationManager {
                     DispatchQueue.main.async {
                         print("BI Event migration_burn_failed")
 
-                        self.delegate?.kinMigrationManager(self, error: error)
+                        self.failed(error: error)
                     }
             }
         }
@@ -256,7 +274,7 @@ extension KinMigrationManager {
 
     private func migrateAccounts(_ migrateableAccounts: [MigrateableAccount]) {
         guard version == .kinSDK else {
-            delegate?.kinMigrationManager(self, error: KinMigrationError.unexpectedCondition)
+            failed(error: KinMigrationError.unexpectedCondition)
             return
         }
 
@@ -277,7 +295,7 @@ extension KinMigrationManager {
                     DispatchQueue.main.async {
                         print("BI Event migration_migration_failed")
 
-                        self.delegate?.kinMigrationManager(self, error: error)
+                        self.failed(error: error)
                     }
             }
         }
@@ -322,15 +340,13 @@ extension KinMigrationManager {
                     return Promise(error)
                 }
             default:
-                return Promise(KinMigrationError.migrateFailed(code: response.code, message: response.message))
+                return Promise(KinMigrationError.migrationFailed(code: response.code, message: response.message))
             }
         }
     }
 
     /**
      Move the Kin Core keychain account to the Kin SDK keychain.
-
-     - Returns: True if there were no errors.
      */
     private func moveAccountToKinSDKIfNeeded(_ account: KinAccountProtocol) throws {
         let hasAccount = kinSDKClient.accounts.makeIterator().contains { kinSDKAccount -> Bool in
