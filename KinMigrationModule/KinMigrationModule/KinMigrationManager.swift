@@ -123,8 +123,12 @@ extension KinMigrationManager {
     }
 
     fileprivate func requestVersion() {
+        print("BI Event migration_version_check_start")
+
         delegate?.kinMigrationManagerNeedsVersion(self)
             .then(on: .main, { version in
+                print("BI Event migration_version_check_received")
+
                 self.version = version
 
                 switch version {
@@ -134,6 +138,9 @@ extension KinMigrationManager {
                     self.prepareBurning()
                 }
             })
+            .error { error in
+                print("BI Event migration_version_check_failed")
+            }
     }
 
     fileprivate func completed() {
@@ -164,6 +171,8 @@ extension KinMigrationManager {
             delegate?.kinMigrationManager(self, error: KinMigrationError.unexpectedCondition)
             return
         }
+
+        print("BI Event migration_selected_sdk")
 
         let client: KinClientProtocol
 
@@ -202,17 +211,23 @@ extension KinMigrationManager {
             return
         }
 
+        print("BI Event migration_burn_start")
+
         let promises = kinCoreClient.accounts.makeIterator().map { burnAccount($0) }
 
         DispatchQueue.global(qos: .background).async {
             await(promises)
                 .then { migrateableAccounts in
                     DispatchQueue.main.async {
+                        print("BI Event migration_burn_success")
+
                         self.migrateAccounts(migrateableAccounts)
                     }
                 }
                 .error { error in
                     DispatchQueue.main.async {
+                        print("BI Event migration_burn_failed")
+
                         self.delegate?.kinMigrationManager(self, error: error)
                     }
             }
@@ -223,8 +238,8 @@ extension KinMigrationManager {
         let promise = Promise<MigrateableAccount>()
 
         account.burn()
-            .then { _ in
-                promise.signal(MigrateableAccount(account: account, migrateable: true))
+            .then { transactionHash in
+                promise.signal(MigrateableAccount(account: account, migrateable: transactionHash != nil))
             }
             .error { error in
                 switch error {
@@ -245,17 +260,23 @@ extension KinMigrationManager {
             return
         }
 
+        print("BI Event migration_migration_start")
+
         let promises = migrateableAccounts.map { migrateAccountIfNeeded($0) }
 
         DispatchQueue.global(qos: .background).async {
             await(promises)
                 .then { _ in
                     DispatchQueue.main.async {
+                        print("BI Event migration_migration_success")
+
                         self.completed()
                     }
                 }
                 .error { error in
                     DispatchQueue.main.async {
+                        print("BI Event migration_migration_failed")
+
                         self.delegate?.kinMigrationManager(self, error: error)
                     }
             }
