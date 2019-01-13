@@ -3,7 +3,7 @@
 //  multi
 //
 //  Created by Corey Werner on 04/12/2018.
-//  Copyright © 2018 Corey Werner. All rights reserved.
+//  Copyright © 2018 Kin Foundation. All rights reserved.
 //
 
 import KinCoreSDK
