@@ -29,19 +29,21 @@ public enum KinMigrationBIReadyReason {
 }
 
 public protocol KinMigrationBIDelegate: NSObjectProtocol {
-    func kinMigrationStart()
-    func kinMigrationReady(reason: KinMigrationBIReadyReason, version: KinVersion)
-    func kinMigrationFailed(error: Error)
+    func kinMigrationMethodStarted()
 
-    func kinMigrationRequestVersionStart()
-    func kinMigrationRequestVersionSuccess(version: KinVersion)
-    func kinMigrationRequestVersionFailed(error: Error)
+    func kinMigrationCallbackStart()
+    func kinMigrationCallbackReady(reason: KinMigrationBIReadyReason, version: KinVersion)
+    func kinMigrationCallbackFailed(error: Error)
 
-    func kinMigrationBurnStart(publicAddress: String)
-    func kinMigrationBurnSuccess(reason: KinMigrationBIBurnReason, publicAddress: String)
+    func kinMigrationVersionCheckStarted()
+    func kinMigrationVersionCheckSucceeded(version: KinVersion)
+    func kinMigrationVersionCheckFailed(error: Error)
+
+    func kinMigrationBurnStarted(publicAddress: String)
+    func kinMigrationBurnSucceeded(reason: KinMigrationBIBurnReason, publicAddress: String)
     func kinMigrationBurnFailed(error: Error, publicAddress: String)
 
-    func kinMigrationRequestAccountMigrationStart(publicAddress: String)
-    func kinMigrationRequestAccountMigrationSuccess(reason: KinMigrationBIMigrateReason, publicAddress: String)
+    func kinMigrationRequestAccountMigrationStarted(publicAddress: String)
+    func kinMigrationRequestAccountMigrationSucceeded(reason: KinMigrationBIMigrateReason, publicAddress: String)
     func kinMigrationRequestAccountMigrationFailed(error: Error, publicAddress: String)
 }

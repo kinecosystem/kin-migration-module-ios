@@ -89,33 +89,6 @@ public class KinMigrationManager {
 
     private var didStart = false
 
-    /**
-     Tell the migration manager to start the process.
-
-     - Throws: An error if the `delegate` was not set.
-     */
-    public func start() throws {
-        guard !didStart else {
-            return
-        }
-
-        guard delegate != nil else {
-            throw KinMigrationError.missingDelegate
-        }
-
-        didStart = true
-
-        biDelegate?.kinMigrationStart()
-
-        if isMigrated {
-            version = .kinSDK
-            completed(biReadyReason: .alreadyMigrated)
-        }
-        else {
-            requestVersion()
-        }
-    }
-
     fileprivate lazy var kinCoreClient: KinClientProtocol = {
         return self.createClient(version: .kinCore)
     }()
@@ -137,28 +110,43 @@ extension KinMigrationManager {
         }
     }
 
-    fileprivate func requestVersion() {
-        biDelegate?.kinMigrationRequestVersionStart()
+    /**
+     Tell the migration manager to start the process.
 
-        delegate?.kinMigrationManagerNeedsVersion(self)
-            .then(on: .main, { version in
-                self.biDelegate?.kinMigrationRequestVersionSuccess(version: version)
+     - Throws: An error if the `delegate` was not set.
+     */
+    public func start() throws {
+        guard !didStart else {
+            return
+        }
 
-                self.version = version
+        guard delegate != nil else {
+            throw KinMigrationError.missingDelegate
+        }
 
-                switch version {
-                case .kinCore:
-                    self.completed(biReadyReason: .apiCheck)
-                case .kinSDK:
-                    self.prepareBurning()
-                }
-            })
-            .error { error in
-                DispatchQueue.main.async {
-                    self.biDelegate?.kinMigrationRequestVersionFailed(error: error)
-                    self.failed(error: error)
-                }
-            }
+        didStart = true
+
+        biDelegate?.kinMigrationMethodStarted()
+
+        if isMigrated {
+            version = .kinSDK
+            completed(biReadyReason: .alreadyMigrated)
+        }
+        else {
+            requestVersion()
+        }
+    }
+
+    fileprivate func startMigration() {
+        guard kinCoreClient.accounts.count > 0 else {
+            completed(biReadyReason: .noAccountToMigrate)
+            return
+        }
+
+        biDelegate?.kinMigrationCallbackStart()
+        delegate?.kinMigrationManagerDidStart(self)
+
+        burnAccounts()
     }
 
     fileprivate func completed(biReadyReason: KinMigrationBIReadyReason) {
@@ -173,7 +161,7 @@ extension KinMigrationManager {
             isMigrated = true
         }
 
-        biDelegate?.kinMigrationReady(reason: biReadyReason, version: version)
+        biDelegate?.kinMigrationCallbackReady(reason: biReadyReason, version: version)
 
         let client: KinClientProtocol
 
@@ -190,8 +178,36 @@ extension KinMigrationManager {
     fileprivate func failed(error: Error) {
         didStart = false
 
-        biDelegate?.kinMigrationFailed(error: error)
+        biDelegate?.kinMigrationCallbackFailed(error: error)
         delegate?.kinMigrationManager(self, error: error)
+    }
+}
+
+// MARK: - Version
+
+extension KinMigrationManager {
+    fileprivate func requestVersion() {
+        biDelegate?.kinMigrationVersionCheckStarted()
+
+        delegate?.kinMigrationManagerNeedsVersion(self)
+            .then(on: .main, { version in
+                self.biDelegate?.kinMigrationVersionCheckSucceeded(version: version)
+
+                self.version = version
+
+                switch version {
+                case .kinCore:
+                    self.completed(biReadyReason: .apiCheck)
+                case .kinSDK:
+                    self.startMigration()
+                }
+            })
+            .error { error in
+                DispatchQueue.main.async {
+                    self.biDelegate?.kinMigrationVersionCheckFailed(error: error)
+                    self.failed(error: error)
+                }
+        }
     }
 }
 
@@ -221,17 +237,7 @@ extension KinMigrationManager {
         let migrateable: Bool
     }
 
-    fileprivate func prepareBurning() {
-        guard kinCoreClient.accounts.count > 0 else {
-            completed(biReadyReason: .noAccountToMigrate)
-            return
-        }
-
-        delegate?.kinMigrationManagerDidStart(self)
-        burnAccounts()
-    }
-
-    private func burnAccounts() {
+    fileprivate func burnAccounts() {
         guard version == .kinSDK else {
             failed(error: KinMigrationError.unexpectedCondition)
             return
@@ -260,7 +266,7 @@ extension KinMigrationManager {
     }
 
     private func burnAccount(_ account: KinAccountProtocol) -> Promise<MigrateableAccount> {
-        biDelegate?.kinMigrationBurnStart(publicAddress: account.publicAddress)
+        biDelegate?.kinMigrationBurnStarted(publicAddress: account.publicAddress)
 
         let promise = Promise<MigrateableAccount>()
 
@@ -269,13 +275,13 @@ extension KinMigrationManager {
                 let didMigrate = transactionHash != nil
 
                 let reason: KinMigrationBIBurnReason = didMigrate ? .burned : .alreadyBurned
-                self.biDelegate?.kinMigrationBurnSuccess(reason: reason, publicAddress: account.publicAddress)
+                self.biDelegate?.kinMigrationBurnSucceeded(reason: reason, publicAddress: account.publicAddress)
 
                 promise.signal(MigrateableAccount(account: account, migrateable: didMigrate))
             }
             .error { error in
                 func success(reason: KinMigrationBIBurnReason) {
-                    self.biDelegate?.kinMigrationBurnSuccess(reason: reason, publicAddress: account.publicAddress)
+                    self.biDelegate?.kinMigrationBurnSucceeded(reason: reason, publicAddress: account.publicAddress)
 
                     promise.signal(MigrateableAccount(account: account, migrateable: false))
                 }
@@ -342,7 +348,7 @@ extension KinMigrationManager {
             return Promise(error)
         }
 
-        biDelegate?.kinMigrationRequestAccountMigrationStart(publicAddress: account.publicAddress)
+        biDelegate?.kinMigrationRequestAccountMigrationStarted(publicAddress: account.publicAddress)
 
         let promise = Promise<Void>()
 
@@ -352,7 +358,7 @@ extension KinMigrationManager {
         KinRequest(urlRequest).resume()
             .then { response in
                 func success(reason: KinMigrationBIMigrateReason) {
-                    self.biDelegate?.kinMigrationRequestAccountMigrationSuccess(reason: reason, publicAddress: account.publicAddress)
+                    self.biDelegate?.kinMigrationRequestAccountMigrationSucceeded(reason: reason, publicAddress: account.publicAddress)
 
                     do {
                         try self.moveAccountToKinSDKIfNeeded(account)
