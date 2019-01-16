@@ -119,7 +119,9 @@ extension SendTransactionViewController {
 
         button.sendState = .sending
 
-        account.sendTransaction(to: address, kin: kin, memo: memoTextField.text, whitelist: whitelist)
+        // TODO: test client.minFee()
+
+        account.sendTransaction(to: address, kin: kin, memo: memoTextField.text, fee: 0, whitelist: whitelist)
             .then(on: .main, { transactionId in
                 button.sendState = .sent
             })

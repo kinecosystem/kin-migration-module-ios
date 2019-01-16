@@ -90,7 +90,7 @@ class WrappedKinCoreAccount: KinAccountProtocol {
 
     // MARK: Transaction
 
-    func sendTransaction(to recipient: String, kin: Kin, memo: String?, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId> {
+    func sendTransaction(to recipient: String, kin: Kin, memo: String?, fee: Stroop, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId> {
         let prefixedMemo = KinSDKMemo.prependAppIdIfNeeded(appId, to: memo ?? "")
 
         guard prefixedMemo.utf8.count <= Transaction.MaxMemoLength else {

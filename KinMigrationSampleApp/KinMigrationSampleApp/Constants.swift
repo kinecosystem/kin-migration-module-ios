@@ -96,14 +96,14 @@ extension URL {
     static func fund(_ environment: Environment, publicAddress: String, amount: Kin) -> URL {
         switch environment {
         case .testKinCore: return URL(string: "http://faucet-playground.kininfrastructure.com/fund?account=\(publicAddress)&amount=\(amount)")!
-        case .testKinSDK:  fatalError("Not yet implemented.")
+        case .testKinSDK:  return URL(string: "http://friendbot-testnet.kininfrastructure.com/fund?addr=\(publicAddress)&amount=\(amount)")!
         default:           fatalError("Funding is only supported on test net.")
         }
     }
 
     static func whitelist(_ environment: Environment) -> URL {
         switch environment {
-        case .testKinSDK: return URL(string: "http://10.4.59.1:3003/whitelist")!
+        case .testKinSDK: return URL(string: "http://34.239.111.38:3000/whitelist")!
         case .mainKinSDK: fatalError("Not yet implemented.")
         default:          fatalError("Whitelisting is only for Kin SDK.")
         }

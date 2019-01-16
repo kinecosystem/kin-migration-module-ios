@@ -68,4 +68,10 @@ class WrappedKinCoreClient: KinClientProtocol {
     func deleteKeystore() {
         client.deleteKeystore()
     }
+
+    // MARK: Fee
+
+    func minFee() -> Promise<Stroop> {
+        return Promise(0)
+    }
 }

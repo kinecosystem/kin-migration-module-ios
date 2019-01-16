@@ -66,4 +66,20 @@ class WrappedKinSDKClient: KinClientProtocol {
     func deleteKeystore() {
         client.deleteKeystore()
     }
+
+    // MARK: Fee
+    
+    func minFee() -> Promise<Stroop> {
+        let promise = Promise<Stroop>()
+
+        client.minFee()
+            .then { stroop in
+                promise.signal(stroop)
+            }
+            .error { error in
+                promise.signal(KinError(error: error))
+        }
+
+        return promise
+    }
 }

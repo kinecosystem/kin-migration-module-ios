@@ -19,7 +19,7 @@ PODS:
 DEPENDENCIES:
   - KinCoreSDK
   - KinMigrationModule (from `./`)
-  - KinSDK
+  - KinSDK (from `../kin-sdk-ios`)
   - KinUtil (= 0.0.14)
   - Sodium (= 0.7.0)
   - StellarErrors (= 0.2.7)
@@ -28,7 +28,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - KinCoreSDK
-    - KinSDK
     - KinUtil
     - Sodium
     - StellarErrors
@@ -37,16 +36,18 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   KinMigrationModule:
     :path: "./"
+  KinSDK:
+    :path: "../kin-sdk-ios"
 
 SPEC CHECKSUMS:
   KinCoreSDK: b9b6f36fcca663cdca97ff25466f7b70b133bb56
   KinMigrationModule: 60fb2a5c26d98661248496fcd1b1f5c56a51186d
-  KinSDK: 73b54ddf0c5e38869b68f14a4971a3e65bc58aee
+  KinSDK: e8f450cfb6f1778181ecc2d5ecb5b79de91bee45
   KinUtil: ad22d0694a9c8a526740e1d2441c32e24a98928b
   Sodium: c5510cc6f5e1b27858e5f260b5cac80d4a3f9379
   StellarErrors: f9239fad02b05464fbc9845063195a87d28f57d1
   StellarKit: 2844acd019f7b59f2fd29e430e14111b3eb4f9d9
 
-PODFILE CHECKSUM: 4b11057d468fa9e9f09a411aee99e63bb5966812
+PODFILE CHECKSUM: 7441feb4f6bb7e5ee44884e124dbbcdbbcf70244
 
 COCOAPODS: 1.5.3

@@ -31,9 +31,9 @@ class KinClientFactory {
             default:
                 switch version {
                 case .kinCore:
-                    return URL(string: "http://horizon-playground.kininfrastructure.com")!
+                    return URL(string: "https://horizon-playground.kininfrastructure.com")!
                 case .kinSDK:
-                    return URL(string: "http://horizon-testnet.kininfrastructure.com")!
+                    return URL(string: "https://horizon-testnet.kininfrastructure.com")!
                 }
             }
         }

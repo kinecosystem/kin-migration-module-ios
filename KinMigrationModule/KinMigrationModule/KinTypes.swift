@@ -11,6 +11,7 @@ import KinCoreSDK
 import KinUtil
 
 public typealias Kin = KinSDK.Kin
+public typealias Stroop = KinSDK.Stroop
 public typealias AppId = KinSDK.AppId
 public typealias Node = KinSDK.Stellar.Node
 public typealias TransactionId = KinSDK.TransactionId
@@ -46,6 +47,7 @@ public protocol KinClientProtocol {
     func deleteAccount(at index: Int) throws
     func importAccount(_ jsonString: String, passphrase: String) throws -> KinAccountProtocol
     func deleteKeystore()
+    func minFee() -> Promise<Stroop>
 }
 
 public protocol KinAccountsProtocol {
@@ -65,7 +67,7 @@ public protocol KinAccountProtocol {
     func status() -> Promise<AccountStatus>
     func balance() -> Promise<Kin>
     func burn() -> Promise<String?> // KinCore only
-    func sendTransaction(to recipient: String, kin: Kin, memo: String?, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId>
+    func sendTransaction(to recipient: String, kin: Kin, memo: String?, fee: Stroop, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId>
     func export(passphrase: String) throws -> String
     func watchCreation() throws -> Promise<Void>
     func watchBalance(_ balance: Kin?) throws -> BalanceWatchProtocol
