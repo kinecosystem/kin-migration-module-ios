@@ -69,7 +69,7 @@ class WrappedKinSDKAccount: KinAccountProtocol {
     func sendTransaction(to recipient: String, kin: Kin, memo: String?, fee: Stroop, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId> {
         let promise = Promise<TransactionId>()
 
-        account.generateTransaction(to: recipient, kin: kin, fee: fee, memo: memo)
+        account.generateTransaction(to: recipient, kin: kin, memo: memo, fee: fee)
             .then { transactionEnvelope -> Promise<TransactionEnvelope> in
                 return whitelist(transactionEnvelope)
             }
