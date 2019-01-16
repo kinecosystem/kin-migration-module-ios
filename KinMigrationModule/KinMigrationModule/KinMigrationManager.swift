@@ -60,6 +60,8 @@ public class KinMigrationManager {
      */
     public weak var biDelegate: KinMigrationBIDelegate?
 
+    public fileprivate(set) var version: KinVersion?
+    
     public let kinCoreServiceProvider: ServiceProviderProtocol
     public let kinSDKServiceProvider: ServiceProviderProtocol
     public let appId: AppId
@@ -84,8 +86,6 @@ public class KinMigrationManager {
         self.kinSDKServiceProvider = kinSDKServiceProvider
         self.appId = appId
     }
-
-    public fileprivate(set) var version: KinVersion?
 
     private var didStart = false
 
