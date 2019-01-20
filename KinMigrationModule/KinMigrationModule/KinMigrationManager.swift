@@ -190,18 +190,20 @@ extension KinMigrationManager {
         biDelegate?.kinMigrationVersionCheckStarted()
 
         delegate?.kinMigrationManagerNeedsVersion(self)
-            .then(on: .main, { version in
-                self.biDelegate?.kinMigrationVersionCheckSucceeded(version: version)
+            .then { version in
+                DispatchQueue.main.async {
+                    self.biDelegate?.kinMigrationVersionCheckSucceeded(version: version)
 
-                self.version = version
+                    self.version = version
 
-                switch version {
-                case .kinCore:
-                    self.completed(biReadyReason: .apiCheck)
-                case .kinSDK:
-                    self.startMigration()
+                    switch version {
+                    case .kinCore:
+                        self.completed(biReadyReason: .apiCheck)
+                    case .kinSDK:
+                        self.startMigration()
+                    }
                 }
-            })
+            }
             .error { error in
                 DispatchQueue.main.async {
                     self.biDelegate?.kinMigrationVersionCheckFailed(error: error)
