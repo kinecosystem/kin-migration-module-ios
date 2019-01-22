@@ -411,3 +411,12 @@ extension KinMigrationManager {
         let _ = try kinSDKClient.importAccount(json, passphrase: "")
     }
 }
+
+// MARK: Debugging
+
+extension KinMigrationManager {
+    public func deleteKeystore() {
+        kinCoreClient.deleteKeystore()
+        kinSDKClient.deleteKeystore()
+    }
+}
