@@ -16,6 +16,7 @@ public enum KinMigrationError: Error {
     case responseFailed (Error)
     case decodingFailed (Error)
     case migrationFailed (code: Int, message: String)
+    case migrationNeeded
     case unexpectedCondition
 }
 
@@ -36,6 +37,8 @@ extension KinMigrationError: LocalizedError {
             return "Decoding response failed."
         case .migrationFailed:
             return "Migrating account failed."
+        case .migrationNeeded:
+            return "The user wallet has been migrated to the Kin blockchain. No Kin transactions will succeed until the client is migrated too."
         case .unexpectedCondition:
             return "An unexpected condition was met."
         }
