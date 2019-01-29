@@ -15,7 +15,7 @@ public protocol KinMigrationManagerDelegate: NSObjectProtocol {
      The returned value is passed in a `Promise` allowing for the answer to be determined from a
      URL request. The migration process will only begin if `.kinSDK` is returned.
 
-     - Parameter kinMigrationManager: The migration-manager object requesting this information.
+     - Parameter kinMigrationManager: The migration manager object requesting this information.
 
      - Returns: A `Promise` of the `KinVersion` to be used.
      */
@@ -26,7 +26,7 @@ public protocol KinMigrationManagerDelegate: NSObjectProtocol {
 
      The migration process will only start if the version is `.kinSDK`.
 
-     - Parameter kinMigrationManager: The migration-manager object providing this information.
+     - Parameter kinMigrationManager: The migration manager object providing this information.
      */
     func kinMigrationManagerDidStart(_ kinMigrationManager: KinMigrationManager)
 
@@ -36,7 +36,7 @@ public protocol KinMigrationManagerDelegate: NSObjectProtocol {
      When the migration manager uses Kin Core, or when the accounts have successfully migrated
      to the Kin SDK, the client will be returned.
 
-     - Parameter kinMigrationManager: The migration-manager object providing this information.
+     - Parameter kinMigrationManager: The migration manager object providing this information.
      - Parameter client: The client used to interact with Kin.
      */
     func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, readyWith client: KinClientProtocol)
@@ -46,7 +46,7 @@ public protocol KinMigrationManagerDelegate: NSObjectProtocol {
 
      When an error is encountered, the migration process will be stopped.
 
-     - Parameter kinMigrationManager: The migration-manager object providing this information.
+     - Parameter kinMigrationManager: The migration manager object providing this information.
      - Parameter error: The error which stopped the migration process.
      */
     func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, error: Error)
@@ -62,28 +62,18 @@ public class KinMigrationManager {
 
     public fileprivate(set) var version: KinVersion?
     
-    public let kinCoreServiceProvider: ServiceProviderProtocol
-    public let kinSDKServiceProvider: ServiceProviderProtocol
+    public let serviceProvider: ServiceProviderProtocol
     public let appId: AppId
 
     /**
-     Initializes and returns a migration-manager object having the given service providers and
+     Initializes and returns a migration manager object having the given service provider and
      appId.
 
-     When the `version` is set to `.kinCore`, the `kinSDKServiceProvider` will not be called.
-     However, when the `version` is set to `.kinSDK`, the `kinCoreServiceProvider` will be
-     called for preparing the migration.
-
-     - Important: The URL for migrating an account must be set on the `migrateBaseURL` property
-     of the `kinSDKServiceProvider`.
-
-     - Parameter kinCoreServiceProvider: The service provider for connecting to Kin Core.
-     - Parameter kinSDKServiceProvider: The service provider for connecting to Kin SDK.
+     - Parameter serviceProvider: The service provider for the migration manager.
      - Parameter appId: The `AppId` attached to all transactions.
      */
-    public init(kinCoreServiceProvider: ServiceProviderProtocol, kinSDKServiceProvider: ServiceProviderProtocol, appId: AppId) {
-        self.kinCoreServiceProvider = kinCoreServiceProvider
-        self.kinSDKServiceProvider = kinSDKServiceProvider
+    public init(serviceProvider: ServiceProviderProtocol, appId: AppId) {
+        self.serviceProvider = serviceProvider
         self.appId = appId
     }
 
@@ -217,15 +207,6 @@ extension KinMigrationManager {
 
 extension KinMigrationManager {
     fileprivate func createClient(version: KinVersion) -> KinClientProtocol {
-        let serviceProvider: ServiceProviderProtocol
-
-        switch version {
-        case .kinCore:
-            serviceProvider = kinCoreServiceProvider
-        case .kinSDK:
-            serviceProvider = kinSDKServiceProvider
-        }
-
         let factory = KinClientFactory(version: version)
         return factory.KinClient(serviceProvider: serviceProvider, appId: appId)
     }
@@ -320,7 +301,7 @@ extension KinMigrationManager {
         let url: URL
 
         do {
-            url = try kinSDKServiceProvider.migrateURL(publicAddress: account.publicAddress)
+            url = try serviceProvider.migrateURL(publicAddress: account.publicAddress)
         }
         catch {
             return Promise(error)

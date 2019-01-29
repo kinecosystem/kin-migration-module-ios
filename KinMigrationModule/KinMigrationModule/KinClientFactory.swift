@@ -26,7 +26,7 @@ class KinClientFactory {
                 case .kinCore:
                     return URL(string: "https://horizon-ecosystem.kininfrastructure.com")!
                 case .kinSDK:
-                    fatalError("Not yet implemented.")
+                    return URL(string: "https://horizon.kinfederation.com")!
                 }
             default:
                 switch version {
