@@ -3,10 +3,10 @@ Pod::Spec.new do |s|
   s.version      = '0.0.1'
   s.summary      = 'Pod for the Kin migration.'
   s.description  = 'Pod for the KinCore to KinSDK migration.'
-  s.homepage     = 'https://github.com/kinfoundation/kin-migration-module-ios'
+  s.homepage     = 'https://github.com/kinecosystem/kin-migration-module-ios'
   s.license      = { :type => 'MIT', :file => 'LICENSE.md' }
   s.author       = { 'Kin Foundation' => 'kin@kik.com' }
-  s.source       = { :git => 'https://github.com/kinfoundation/kin-migration-module-ios.git', :tag => "#{s.version}", :submodules => true }
+  s.source       = { :git => 'https://github.com/kinecosystem/kin-migration-module-ios.git', :tag => "#{s.version}", :submodules => true }
 
   s.source_files = 'KinMigrationModule/KinMigrationModule/**/*.swift'
 
