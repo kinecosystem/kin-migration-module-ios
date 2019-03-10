@@ -11,9 +11,9 @@ target 'KinMigrationModule' do
 
   pod 'KinSDK'
   pod 'KinCoreSDK'
-  pod 'StellarKit', '0.3.11'
-  pod 'StellarErrors', '0.2.7'
-  pod 'KinUtil', '0.0.14'
+  pod 'StellarKit'
+  pod 'StellarErrors'
+  pod 'KinUtil'
   pod 'Sodium', '0.7.0'
 
   # Fixes the framework tests failing to build

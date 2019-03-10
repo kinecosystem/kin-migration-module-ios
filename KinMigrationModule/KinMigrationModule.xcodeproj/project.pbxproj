@@ -276,7 +276,6 @@
 				6815F43B21BFB83E00B9439A /* Sources */,
 				6815F43C21BFB83E00B9439A /* Frameworks */,
 				6815F43D21BFB83E00B9439A /* Resources */,
-				37EB61A513FAAD03491F339F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -377,38 +376,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		37EB61A513FAAD03491F339F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/../Pods/Target Support Files/Pods-KinMigrationModuleTests/Pods-KinMigrationModuleTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/KinCoreSDK/KinCoreSDK.framework",
-				"${BUILT_PRODUCTS_DIR}/KinSDK/KinSDK.framework",
-				"${BUILT_PRODUCTS_DIR}/KinUtil/KinUtil.framework",
-				"${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework",
-				"${BUILT_PRODUCTS_DIR}/StellarErrors/StellarErrors.framework",
-				"${BUILT_PRODUCTS_DIR}/StellarKit/StellarKit.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinCoreSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinUtil.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StellarErrors.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StellarKit.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-KinMigrationModuleTests/Pods-KinMigrationModuleTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C20135ED91D77CEA0365BCB3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

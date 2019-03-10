@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'KinMigrationModule'
-  s.version      = '0.0.1'
+  s.version      = '0.0.2'
   s.summary      = 'Pod for the Kin migration.'
   s.description  = 'Pod for the KinCore to KinSDK migration.'
   s.homepage     = 'https://github.com/kinecosystem/kin-migration-module-ios'
@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
   s.source_files = 'KinMigrationModule/KinMigrationModule/**/*.swift'
 
   s.dependency 'Sodium', '0.7.0'
-  s.dependency 'KinSDK'
-  s.dependency 'KinCoreSDK'
+  s.dependency 'KinSDK', '0.8.4'
+  s.dependency 'KinCoreSDK', '0.7.18'
 
   s.ios.deployment_target = '8.0'
   s.swift_version = "4.2"

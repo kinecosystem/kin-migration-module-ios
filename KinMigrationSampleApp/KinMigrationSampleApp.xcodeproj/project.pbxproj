@@ -240,7 +240,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/../Pods/Target Support Files/Pods-KinMigrationSampleApp/Pods-KinMigrationSampleApp-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-KinMigrationSampleApp/Pods-KinMigrationSampleApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/KinCoreSDK/KinCoreSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/KinSDK/KinSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/KinUtil/KinUtil.framework",
@@ -263,7 +263,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-KinMigrationSampleApp/Pods-KinMigrationSampleApp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KinMigrationSampleApp/Pods-KinMigrationSampleApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
