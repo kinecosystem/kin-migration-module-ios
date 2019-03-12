@@ -2,11 +2,11 @@ PODS:
   - KinCoreSDK (0.7.18):
     - Sodium (= 0.7.0)
     - StellarKit (= 0.3.14)
-  - KinMigrationModule (0.0.2):
+  - KinMigrationModule (0.0.4):
     - KinCoreSDK (= 0.7.18)
-    - KinSDK (= 0.8.4)
+    - KinSDK (= 0.8.5)
     - Sodium (= 0.7.0)
-  - KinSDK (0.8.4):
+  - KinSDK (0.8.5):
     - KinUtil (= 0.0.16)
     - Sodium (= 0.7.0)
   - KinUtil (0.0.16)
@@ -40,8 +40,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   KinCoreSDK: 98808062921d425703e8b8b042bae097b7271948
-  KinMigrationModule: 5ae5c56007ccd6e47c36a28bf6255788ef99b89f
-  KinSDK: 70abdf99ae85996ec77d591a5e1c43ea067f4301
+  KinMigrationModule: be22b912959aab352882c9a05d32bac50b557607
+  KinSDK: 6d021909c1011c2c3c9518d1fbe86334a8e9fafb
   KinUtil: 00442723f29cfa38f2410f9d4dba5a28937ed4ad
   Sodium: c5510cc6f5e1b27858e5f260b5cac80d4a3f9379
   StellarErrors: f9239fad02b05464fbc9845063195a87d28f57d1

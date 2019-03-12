@@ -1,6 +1,6 @@
 {
   "name": "KinMigrationModule",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "summary": "Pod for the Kin migration.",
   "description": "Pod for the KinCore to KinSDK migration.",
   "homepage": "https://github.com/kinecosystem/kin-migration-module-ios",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/kinecosystem/kin-migration-module-ios.git",
-    "tag": "0.0.2",
+    "tag": "0.0.4",
     "submodules": true
   },
   "source_files": "KinMigrationModule/KinMigrationModule/**/*.swift",
@@ -22,7 +22,7 @@
       "0.7.0"
     ],
     "KinSDK": [
-      "0.8.4"
+      "0.8.5"
     ],
     "KinCoreSDK": [
       "0.7.18"
