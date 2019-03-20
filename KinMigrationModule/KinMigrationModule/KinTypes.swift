@@ -21,6 +21,7 @@ public typealias XDREncoder = KinSDK.XDREncoder
 public typealias XDRDecoder = KinSDK.XDRDecoder
 internal typealias KinSDKMemo = KinSDK.Memo
 
+public typealias KeyUtils = KinSDK.KeyUtils
 public typealias LinkBag = KinUtil.LinkBag
 public typealias Promise = KinUtil.Promise
 public typealias Observable<T> = KinUtil.Observable<T>
