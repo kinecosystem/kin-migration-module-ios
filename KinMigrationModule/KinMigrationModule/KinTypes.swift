@@ -19,11 +19,13 @@ public typealias TransactionEnvelope = KinSDK.TransactionEnvelope
 public typealias WhitelistEnvelope = KinSDK.WhitelistEnvelope
 public typealias XDREncoder = KinSDK.XDREncoder
 public typealias XDRDecoder = KinSDK.XDRDecoder
-internal typealias KinSDKMemo = KinSDK.Memo
+public typealias KeyUtils = KinSDK.KeyUtils
+public typealias KeyUtilsError = KinSDK.KeyUtilsError
+public typealias LinkBag = KinSDK.LinkBag
+public typealias Promise = KinSDK.Promise
+public typealias Observable<T> = KinSDK.Observable<T>
 
-public typealias LinkBag = KinUtil.LinkBag
-public typealias Promise = KinUtil.Promise
-public typealias Observable<T> = KinUtil.Observable<T>
+typealias KinSDKMemo = KinSDK.Memo
 
 public enum KinVersion: Int, Codable {
     /**
