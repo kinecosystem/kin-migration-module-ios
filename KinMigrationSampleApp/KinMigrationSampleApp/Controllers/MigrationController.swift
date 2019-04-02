@@ -111,8 +111,18 @@ extension MigrationController {
             request.httpBody = try? JSONEncoder().encode(whitelistEnvelope)
 
             URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    promise.signal(error)
+                    return
+                }
+
+                guard let data = data else {
+                    promise.signal(KinMigrationError.unexpectedCondition)
+                    return
+                }
+
                 do {
-                    promise.signal(try TransactionEnvelope.decodeResponse(data: data, error: error))
+                    promise.signal(try XDRDecoder.decode(TransactionEnvelope.self, data: data))
                 }
                 catch {
                     promise.signal(error)

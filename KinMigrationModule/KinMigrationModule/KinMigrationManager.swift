@@ -86,6 +86,8 @@ public class KinMigrationManager {
     fileprivate lazy var kinSDKClient: KinClientProtocol = {
         return self.createClient(version: .kinSDK)
     }()
+
+    fileprivate var migratePublicAddress: String?
 }
 
 // MARK: - State
@@ -103,9 +105,11 @@ extension KinMigrationManager {
     /**
      Tell the migration manager to start the process.
 
+     - Parameter publicAddress: The `kinAccount` public address to be migrated.
+
      - Throws: An error if the `delegate` was not set.
      */
-    public func start() throws {
+    public func start(with publicAddress: String) throws {
         guard !didStart else {
             return
         }
@@ -114,6 +118,7 @@ extension KinMigrationManager {
             throw KinMigrationError.missingDelegate
         }
 
+        migratePublicAddress = publicAddress
         didStart = true
 
         biDelegate?.kinMigrationMethodStarted()
@@ -133,14 +138,20 @@ extension KinMigrationManager {
             return
         }
 
+        guard let account = kinCoreClient.accounts.makeIterator().first(where: { $0.publicAddress == migratePublicAddress }) else {
+            failed(error: KinMigrationError.invalidPublicAddress)
+            return
+        }
+
         biDelegate?.kinMigrationCallbackStart()
         delegate?.kinMigrationManagerDidStart(self)
 
-        burnAccounts()
+        startBurningAccount(account)
     }
 
     fileprivate func completed(biReadyReason: KinMigrationBIReadyReason) {
         didStart = false
+        migratePublicAddress = nil
 
         guard let version = version else {
             failed(error: KinMigrationError.unexpectedCondition)
@@ -167,6 +178,7 @@ extension KinMigrationManager {
 
     fileprivate func failed(error: Error) {
         didStart = false
+        migratePublicAddress = nil
 
         biDelegate?.kinMigrationCallbackFailed(error: error)
         delegate?.kinMigrationManager(self, error: error)
@@ -215,19 +227,17 @@ extension KinMigrationManager {
 // MARK: - Account
 
 extension KinMigrationManager {
-    fileprivate func burnAccounts() {
+    fileprivate func startBurningAccount(_ account: KinAccountProtocol) {
         guard version == .kinSDK else {
             failed(error: KinMigrationError.unexpectedCondition)
             return
         }
 
-        let promises = kinCoreClient.accounts.makeIterator().map { burnAccount($0) }
-
         DispatchQueue.global(qos: .background).async {
-            await(promises)
-                .then { accounts in
+            self.burnAccount(account)
+                .then { account in
                     DispatchQueue.main.async {
-                        self.migrateAccounts(accounts)
+                        self.startMigratingAccount(account)
                     }
                 }
                 .error { error in
@@ -274,16 +284,14 @@ extension KinMigrationManager {
         return promise
     }
 
-    private func migrateAccounts(_ accounts: [KinAccountProtocol]) {
+    private func startMigratingAccount(_ account: KinAccountProtocol) {
         guard version == .kinSDK else {
             failed(error: KinMigrationError.unexpectedCondition)
             return
         }
 
-        let promises = accounts.map { migrateAccount($0) }
-
         DispatchQueue.global(qos: .background).async {
-            await(promises)
+            self.migrateAccount(account)
                 .then { _ in
                     DispatchQueue.main.async {
                         self.completed(biReadyReason: .migrated)
