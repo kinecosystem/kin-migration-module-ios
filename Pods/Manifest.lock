@@ -1,27 +1,27 @@
 PODS:
-  - KinCoreSDK (0.7.18):
+  - KinCoreSDK (0.7.19):
     - Sodium (= 0.7.0)
-    - StellarKit (= 0.3.14)
-  - KinMigrationModule (0.0.4):
-    - KinCoreSDK (= 0.7.18)
-    - KinSDK (= 0.8.5)
+    - StellarKit (= 0.3.17)
+  - KinMigrationModule (0.0.6):
+    - KinCoreSDK (= 0.7.19)
+    - KinSDK (= 0.8.6)
     - Sodium (= 0.7.0)
-  - KinSDK (0.8.5):
-    - KinUtil (= 0.0.16)
+  - KinSDK (0.8.6):
+    - KinUtil (= 0.0.18)
     - Sodium (= 0.7.0)
-  - KinUtil (0.0.16)
+  - KinUtil (0.0.18)
   - Sodium (0.7.0)
-  - StellarErrors (0.2.7)
-  - StellarKit (0.3.14):
-    - KinUtil (= 0.0.16)
-    - StellarErrors (= 0.2.7)
+  - StellarErrors (0.3.17)
+  - StellarKit (0.3.17):
+    - KinUtil (= 0.0.18)
+    - StellarErrors (= 0.3.17)
 
 DEPENDENCIES:
   - KinCoreSDK
   - KinMigrationModule (from `./`)
   - KinSDK
   - KinUtil
-  - Sodium (= 0.7.0)
+  - Sodium
   - StellarErrors
   - StellarKit
 
@@ -39,14 +39,14 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  KinCoreSDK: 98808062921d425703e8b8b042bae097b7271948
-  KinMigrationModule: be22b912959aab352882c9a05d32bac50b557607
-  KinSDK: 6d021909c1011c2c3c9518d1fbe86334a8e9fafb
-  KinUtil: 00442723f29cfa38f2410f9d4dba5a28937ed4ad
+  KinCoreSDK: cf254c8041e56137bfbdec7431ecc3187c5007cf
+  KinMigrationModule: 18e4df6503dbaeab02c9a2d80006a59b34e33da1
+  KinSDK: 162a6b27e299015aaff845a74b0b73ba7a569b80
+  KinUtil: ffcdec211f59a5fbb7fd68a13fcfc403f62596e0
   Sodium: c5510cc6f5e1b27858e5f260b5cac80d4a3f9379
-  StellarErrors: f9239fad02b05464fbc9845063195a87d28f57d1
-  StellarKit: e9325dee370a10bda1a82ac7488900ddc697ef98
+  StellarErrors: 5987d5cd224c4ca51582b1e9e9efd15b86c41f5a
+  StellarKit: bea116076a87bf1e6bcb59366e34164ba75a1c2c
 
-PODFILE CHECKSUM: 10c9146bcfafb6624b1414762413ca483b8114a3
+PODFILE CHECKSUM: 4cd46224abea73e1ef7522d46972cd77923bf8e6
 
 COCOAPODS: 1.6.0
