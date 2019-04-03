@@ -14,6 +14,7 @@ class MainNavigationController: UINavigationController {
     let networkViewController = NetworkViewController()
 
     private let loaderView = UIActivityIndicatorView(style: .whiteLarge)
+    private var migrateAccountPromise: Promise<Void>?
 
     convenience init() {
         self.init(nibName: nil, bundle: nil)
@@ -36,13 +37,38 @@ class MainNavigationController: UINavigationController {
     }
 }
 
+// MARK: - Flow
+
+extension MainNavigationController {
+    func pushAccountListViewController(client: KinClientProtocol) {
+        var title = "\(client.network.description.capitalized) Accounts"
+
+        if let version = migrationController.version?.rawValue {
+            title = "Kin \(version) \(title)"
+        }
+
+        let viewController = AccountListViewController(with: client)
+        viewController.delegate = self
+        viewController.title = title
+        pushViewController(viewController, animated: true)
+    }
+
+    private func pushAccountViewController(account: KinAccountProtocol) {
+        guard let environment = migrationController.environment else {
+            return
+        }
+
+        let viewController = AccountViewController(account, environment: environment)
+        viewController.delegate = self
+        pushViewController(viewController, animated: true)
+    }
+}
+
 // MARK: - Network View Controller
 
 extension MainNavigationController {
     @objc
     private func buttonAction(_ button: UIButton) {
-        presentLoaderView()
-
         let environment: Environment
 
         if button == networkViewController.testV2Button {
@@ -55,7 +81,40 @@ extension MainNavigationController {
             environment = .mainKinCore
         }
 
-        migrationController.startManager(with: environment)
+        pushAccountListViewController(client: migrationController.client(for: environment))
+    }
+}
+
+// MARK: - Account List View Controller
+
+extension MainNavigationController: AccountListViewControllerDelegate {
+    func accountListViewController(_ viewController: AccountListViewController, didSelect account: KinAccountProtocol) {
+        pushAccountViewController(account: account)
+    }
+}
+
+// MARK: - Account View Controller
+
+extension MainNavigationController: AccountViewControllerDelegate {
+    func accountViewController(_ viewController: AccountViewController, isMigrated account: KinAccountProtocol) -> Bool {
+        return migrationController.isAccountMigrated(publicAddress: account.publicAddress)
+    }
+
+    func accountViewController(_ viewController: AccountViewController, migrate account: KinAccountProtocol) -> Promise<Void> {
+        let promise = Promise<Void>()
+
+        do {
+            migrateAccountPromise = promise
+            try migrationController.migrateAccount(with: account.publicAddress)
+        }
+        catch {
+            dismissLoaderView()
+
+            promise.signal(error)
+            migrateAccountPromise = nil
+        }
+
+        return promise
     }
 }
 
@@ -65,34 +124,15 @@ extension MainNavigationController: MigrationControllerDelegate {
     func migrationController(_ controller: MigrationController, readyWith client: KinClientProtocol) {
         dismissLoaderView()
 
-        var title = "\(client.network.description.capitalized) Accounts"
-
-        if let version = controller.version?.rawValue {
-            title = "Kin \(version) \(title)"
-        }
-
-        let viewController = AccountListViewController(with: client)
-        viewController.delegate = self
-        viewController.title = title
-
-        pushViewController(viewController, animated: true)
+        migrateAccountPromise?.signal(Void())
+        migrateAccountPromise = nil
     }
 
     func migrationController(_ controller: MigrationController, error: Error) {
         dismissLoaderView()
-    }
-}
 
-// MARK: - Account List View Controller
-
-extension MainNavigationController: AccountListViewControllerDelegate {
-    func accountListViewController(_ viewController: AccountListViewController, didSelect account: KinAccountProtocol) {
-        guard let environment = migrationController.environment else {
-            return
-        }
-
-        let viewController = AccountViewController(account, environment: environment)
-        pushViewController(viewController, animated: true)
+        migrateAccountPromise?.signal(error)
+        migrateAccountPromise = nil
     }
 }
 

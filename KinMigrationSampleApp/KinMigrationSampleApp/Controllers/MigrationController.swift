@@ -19,10 +19,10 @@ class MigrationController: NSObject {
     private(set) var environment: Environment?
     private var migrationManager: KinMigrationManager?
 
-    func startManager(with environment: Environment) {
+    func client(for environment: Environment) -> KinClientProtocol {
         self.environment = environment
 
-        let migrateURL: URL? = environment.blockchain == .kin ? .migrate(environment) : nil
+        let migrateURL: URL? = environment.blockchain == .stellar ? .migrate(environment) : nil
 
         guard let serviceProvider = try? ServiceProvider(network: environment.network, migrateBaseURL: migrateURL) else {
             fatalError()
@@ -34,8 +34,22 @@ class MigrationController: NSObject {
 
         let migrationManager = KinMigrationManager(serviceProvider: serviceProvider, appId: appId)
         migrationManager.delegate = self
-        try? migrationManager.start()
         self.migrationManager = migrationManager
+
+        switch environment {
+        case .testKinCore, .mainKinCore:
+            return migrationManager.kinClient(version: .kinCore)
+        case .testKinSDK, .mainKinSDK:
+            return migrationManager.kinClient(version: .kinSDK)
+        }
+    }
+
+    func isAccountMigrated(publicAddress: String) -> Bool {
+        return migrationManager?.isAccountMigrated(publicAddress: publicAddress) ?? false
+    }
+
+    func migrateAccount(with publicAddress: String) throws {
+        try migrationManager?.start(with: publicAddress)
     }
 
     var version: KinVersion? {
@@ -58,8 +72,8 @@ extension MigrationController: KinMigrationManagerDelegate {
         let promise: Promise<KinVersion> = Promise()
 
         URLSession.shared.dataTask(with: .version(environment)) { (data, _, error) in
-            if let _ = error {
-                fatalError()
+            if let error = error {
+                promise.signal(error)
             }
 
             guard let data = data else {
@@ -71,7 +85,7 @@ extension MigrationController: KinMigrationManagerDelegate {
                 promise.signal(response.version)
             }
             catch {
-                fatalError()
+                promise.signal(error)
             }
         }.resume()
 
