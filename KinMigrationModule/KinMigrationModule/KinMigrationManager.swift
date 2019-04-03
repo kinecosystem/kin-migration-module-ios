@@ -60,6 +60,11 @@ public class KinMigrationManager {
      */
     public weak var biDelegate: KinMigrationBIDelegate?
 
+    /**
+     The `KinVersion` being used by the migration manager.
+
+     The version received from the `kinMigrationManagerNeedsVersion(_:)` delegate.
+     */
     public fileprivate(set) var version: KinVersion?
     
     public let serviceProvider: ServiceProviderProtocol
@@ -78,34 +83,53 @@ public class KinMigrationManager {
     }
 
     private var didStart = false
+    private var migratePublicAddress: String?
 
-    fileprivate lazy var kinCoreClient: KinClientProtocol = {
+    private lazy var kinCoreClient: KinClientProtocol = {
         return self.createClient(version: .kinCore)
     }()
 
-    fileprivate lazy var kinSDKClient: KinClientProtocol = {
+    private lazy var kinSDKClient: KinClientProtocol = {
         return self.createClient(version: .kinSDK)
     }()
 
-    fileprivate var migratePublicAddress: String?
+    /**
+     Get a `KinClientProtocol` for a specific version.
+
+     The version should be the same as your servers.
+
+     - Parameter version: The `KinVersion` for which `KinClientProtocol` to receive.
+
+     - Returns: A `KinClientProtocol` for the given `KinVersion`.
+     */
+    public func kinClient(version: KinVersion) -> KinClientProtocol {
+        switch version {
+        case .kinCore:
+            return kinCoreClient
+        case .kinSDK:
+            return kinSDKClient
+        }
+    }
+
+    /**
+     Check if a `kinAccount` has been migrated.
+
+     - Parameter publicAddress: The `kinAccount.publicAddress` to be checked.
+
+     - Returns: True if the `kinAccount` with the given `publicAddress` has been migrated.
+     */
+    public func isAccountMigrated(publicAddress: String) -> Bool {
+        return kinSDKClient.accounts.makeIterator().first { $0.publicAddress == publicAddress } != nil
+    }
 }
 
 // MARK: - State
 
 extension KinMigrationManager {
-    public fileprivate(set) var isMigrated: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: "KinMigrationDidMigrateToKin3")
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: "KinMigrationDidMigrateToKin3")
-        }
-    }
-
     /**
      Tell the migration manager to start the process.
 
-     - Parameter publicAddress: The `kinAccount` public address to be migrated.
+     - Parameter publicAddress: The `kinAccount.publicAddress` to be migrated.
 
      - Throws: An error if the `delegate` was not set.
      */
@@ -123,7 +147,7 @@ extension KinMigrationManager {
 
         biDelegate?.kinMigrationMethodStarted()
 
-        if isMigrated {
+        if isAccountMigrated(publicAddress: publicAddress) {
             version = .kinSDK
             completed(biReadyReason: .alreadyMigrated)
         }
@@ -156,10 +180,6 @@ extension KinMigrationManager {
         guard let version = version else {
             failed(error: KinMigrationError.unexpectedCondition)
             return
-        }
-
-        if version == .kinSDK {
-            isMigrated = true
         }
 
         biDelegate?.kinMigrationCallbackReady(reason: biReadyReason, version: version)
