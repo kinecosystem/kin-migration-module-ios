@@ -10,9 +10,16 @@ import UIKit
 import KinMigrationModule
 import StellarErrors
 
+protocol AccountViewControllerDelegate: NSObjectProtocol {
+    func accountViewController(_ viewController: AccountViewController, isMigrated account: KinAccountProtocol) -> Bool
+    func accountViewController(_ viewController: AccountViewController, migrate account: KinAccountProtocol) -> Promise<Void>
+}
+
 class AccountViewController: UITableViewController {
     let account: KinAccountProtocol
     let environment: Environment
+
+    weak var delegate: AccountViewControllerDelegate?
 
     private let createAccountPromise = Promise<Void>()
     private var watch: BalanceWatchProtocol?
@@ -35,6 +42,10 @@ class AccountViewController: UITableViewController {
             
             if environment.network != .mainNet {
                 datasource.append(.createAccount)
+            }
+
+            if environment.blockchain == .stellar && environment.network == .testNet {
+                datasource.append(.migrateAccount)
             }
 
             return datasource
@@ -182,6 +193,15 @@ extension AccountViewController {
         return promise
     }
 
+    @discardableResult
+    private func migrateAccount() -> Promise<Void> {
+        guard let delegate = delegate else {
+            return Promise(KinMigrationError.missingDelegate)
+        }
+
+        return delegate.accountViewController(self, migrate: account)
+    }
+
     private func watchAccountBalance() {
         self.watch = try? account.watchBalance(nil)
         self.watch?.emitter
@@ -201,6 +221,7 @@ extension AccountViewController {
         case sendTransaction
         case transactionHistory
         case createAccount
+        case migrateAccount
     }
 }
 
@@ -210,7 +231,8 @@ extension AccountViewController.Row {
         case .publicAddress:
             return "subtitle"
         case .balance,
-             .createAccount:
+             .createAccount,
+             .migrateAccount:
             return "value1"
         case .sendTransaction,
              .transactionHistory:
@@ -230,6 +252,8 @@ extension AccountViewController.Row {
             return "Transaction History"
         case .createAccount:
             return "Create Account"
+        case .migrateAccount:
+            return "Migrate Account"
         }
     }
 }
@@ -256,6 +280,10 @@ extension AccountViewController {
             else {
                 cell.detailTextLabel?.text = "Loading..."
             }
+        }
+        else if row == .migrateAccount {
+            let isMigrated = delegate?.accountViewController(self, isMigrated: account) ?? false
+            cell.detailTextLabel?.text = isMigrated ? "Migrated" : nil
         }
 
         return cell
@@ -320,6 +348,27 @@ extension AccountViewController {
                 }
                 .then(on: .main) { _ in
                     cell?.detailTextLabel?.text = nil
+                }
+                .error { error in
+                    print(error)
+
+                    DispatchQueue.main.async {
+                        cell?.detailTextLabel?.text = "Error"
+                    }
+                }
+                .finally {
+                    DispatchQueue.main.async {
+                        tableView.deselectRow(at: indexPath, animated: true)
+                    }
+            }
+
+        case .migrateAccount:
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.detailTextLabel?.text = "Migrating..."
+
+            migrateAccount()
+                .then(on: .main) {
+                    cell?.detailTextLabel?.text = "Migrated"
                 }
                 .error { error in
                     print(error)

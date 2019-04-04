@@ -70,18 +70,17 @@ extension URL {
      */
     static func version(_ environment: Environment) -> URL {
         switch environment {
-        case .testKinCore: return URL(string: "http://www.mocky.io/v2/5c2db8b82f00008e2f1751df")!
-        case .testKinSDK:  return URL(string: "http://www.mocky.io/v2/5c2db8cd2f0000a3301751e3")!
+        case .testKinCore: return URL(string: "http://www.mocky.io/v2/5c2db8cd2f0000a3301751e3")!
         case .mainKinCore: fatalError("Not yet implemented.")
-        case .mainKinSDK:  fatalError("Not yet implemented.")
+        default:           fatalError("Migration version is only needed for the Kin Core.")
         }
     }
 
     static func migrate(_ environment: Environment) -> URL {
         switch environment {
-        case .testKinSDK: return URL(string: "https://migration-devplatform-playground.developers.kinecosystem.com")!
-        case .mainKinSDK: fatalError("Not yet implemented.")
-        default:          fatalError("Migration is only needed for Kin SDK.")
+        case .testKinCore: return URL(string: "https://migration-devplatform-playground.developers.kinecosystem.com")!
+        case .mainKinCore: fatalError("Not yet implemented.")
+        default:           fatalError("Migration is only needed for Kin Core.")
         }
     }
 

@@ -126,6 +126,8 @@ extension SendTransactionViewController {
                 button.sendState = .sent
             })
             .error { error in
+                print(error)
+                
                 DispatchQueue.main.async {
                     button.sendState = .failed
                 }
