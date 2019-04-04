@@ -127,13 +127,16 @@ public class KinMigrationManager {
 
 extension KinMigrationManager {
     /**
-     Tell the migration manager to start the process.
+     Tell the migration manager to start the migration process.
+
+     If the `publicAddress` is omitted the migration manager will still request a version and
+     call the `readyWithClient` delegate function, returning the correct client.
 
      - Parameter publicAddress: The `kinAccount.publicAddress` to be migrated.
 
      - Throws: An error if the `delegate` was not set.
      */
-    public func start(with publicAddress: String) throws {
+    public func start(with publicAddress: String? = nil) throws {
         guard !didStart else {
             return
         }
@@ -147,7 +150,7 @@ extension KinMigrationManager {
 
         biDelegate?.kinMigrationMethodStarted()
 
-        if isAccountMigrated(publicAddress: publicAddress) {
+        if let publicAddress = publicAddress, isAccountMigrated(publicAddress: publicAddress) {
             version = .kinSDK
             completed(biReadyReason: .alreadyMigrated)
         }
