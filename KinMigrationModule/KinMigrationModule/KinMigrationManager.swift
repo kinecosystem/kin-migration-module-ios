@@ -396,7 +396,8 @@ extension KinMigrationManager {
         }
 
         let json = try account.export(passphrase: "")
-        let _ = try kinSDKClient.importAccount(json, passphrase: "")
+        var migrated = try kinSDKClient.importAccount(json, passphrase: "")
+        migrated.extra = account.extra
     }
 }
 
