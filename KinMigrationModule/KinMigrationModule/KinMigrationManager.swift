@@ -400,11 +400,19 @@ extension KinMigrationManager {
     }
 }
 
-// MARK: Debugging
+// MARK: Keystore
 
 extension KinMigrationManager {
     public func deleteKeystore() {
         kinCoreClient.deleteKeystore()
         kinSDKClient.deleteKeystore()
+    }
+
+    public static func deleteKeystore(serviceProvider: ServiceProviderProtocol, appId: AppId) {
+        for version in [KinVersion.kinCore, KinVersion.kinSDK] {
+            let factory = KinClientFactory(version: version)
+            let kinClient = factory.KinClient(serviceProvider: serviceProvider, appId: appId)
+            kinClient.deleteKeystore()
+        }
     }
 }
