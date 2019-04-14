@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'KinMigrationModule'
-  s.version      = '0.0.8'
+  s.version      = '0.0.9'
   s.summary      = 'Pod for the Kin migration.'
   s.description  = 'Pod for the KinCore to KinSDK migration.'
   s.homepage     = 'https://github.com/kinecosystem/kin-migration-module-ios'
