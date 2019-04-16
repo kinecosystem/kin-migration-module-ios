@@ -11,6 +11,7 @@ import Foundation
 public protocol ServiceProviderProtocol {
     var network: Network { get }
     var migrateBaseURL: URL? { get }
+    var queryItems: [URLQueryItem]? { get }
 }
 
 extension ServiceProviderProtocol {
@@ -20,9 +21,19 @@ extension ServiceProviderProtocol {
         }
 
         var urlComponents = URLComponents(url: migrateBaseURL, resolvingAgainstBaseURL: false)
-        urlComponents?.path = "/migrate"
-        urlComponents?.queryItems = [URLQueryItem(name: "address", value: publicAddress)]
+        let migratePath = "migrate"
+        let pathToUse: String
+        if !migrateBaseURL.path.isEmpty {
+            pathToUse = (migrateBaseURL.path as NSString).appendingPathComponent(migratePath)
+        } else {
+            pathToUse = migratePath
+        }
 
+        urlComponents?.path = pathToUse
+        var queryItemsToSet = queryItems ?? []
+        queryItemsToSet.append(.init(name: "public_address", value: publicAddress))
+        urlComponents?.queryItems = queryItemsToSet
+        
         if let url = urlComponents?.url {
             return url
         }
@@ -35,6 +46,7 @@ extension ServiceProviderProtocol {
 public struct ServiceProvider: ServiceProviderProtocol {
     private(set) public var network: Network
     private(set) public var migrateBaseURL: URL?
+    private(set) public var queryItems: [URLQueryItem]?
 
     /**
      Initializes and returns a service provider object having the given network.
@@ -46,19 +58,21 @@ public struct ServiceProvider: ServiceProviderProtocol {
 
      - Throws: An error if the `network` is `.custom`.
      */
-    public init(network: Network, migrateBaseURL: URL? = nil) throws {
+    public init(network: Network, migrateBaseURL: URL? = nil, queryItems: [URLQueryItem]? = nil) throws {
         if case .custom = network {
             throw KinMigrationError.invalidNetwork
         }
 
         self.network = network
         self.migrateBaseURL = migrateBaseURL
+        self.queryItems = queryItems
     }
 }
 
 public struct CustomServiceProvider: ServiceProviderProtocol {
     private(set) public var network: Network
     private(set) public var migrateBaseURL: URL?
+    private(set) public var queryItems: [URLQueryItem]?
     public let nodeURL: URL
 
     /**
@@ -72,7 +86,7 @@ public struct CustomServiceProvider: ServiceProviderProtocol {
 
      - Throws: An error if the `network` is not `.custom`.
      */
-    public init(network: Network, migrateBaseURL: URL? = nil, nodeURL: URL) throws {
+    public init(network: Network, migrateBaseURL: URL? = nil, nodeURL: URL, queryItems: [URLQueryItem]? = nil) throws {
         guard case .custom = network else {
             throw KinMigrationError.invalidNetwork
         }
@@ -80,5 +94,6 @@ public struct CustomServiceProvider: ServiceProviderProtocol {
         self.network = network
         self.migrateBaseURL = migrateBaseURL
         self.nodeURL = nodeURL
+        self.queryItems = queryItems
     }
 }
