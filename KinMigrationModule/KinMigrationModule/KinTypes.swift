@@ -78,7 +78,7 @@ public protocol KinAccountProtocol {
     func watchPayments(cursor: String?) throws -> PaymentWatchProtocol
 }
 
-public typealias WhitelistClosure = (TransactionEnvelope)->(Promise<(TransactionEnvelope, Bool)>)
+public typealias WhitelistClosure = (TransactionEnvelope) -> Promise<TransactionEnvelope?>
 
 public enum AccountStatus: Int {
     case notCreated
