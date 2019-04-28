@@ -115,8 +115,8 @@ extension MigrationController: KinMigrationManagerDelegate {
 
 extension MigrationController {
     static func whitelist(url: URL, networkId: String) -> WhitelistClosure {
-        return { transactionEnvelope -> Promise<TransactionEnvelope> in
-            let promise: Promise<TransactionEnvelope> = Promise()
+        return { transactionEnvelope -> Promise<TransactionEnvelope?> in
+            let promise: Promise<TransactionEnvelope?> = Promise()
             let whitelistEnvelope = WhitelistEnvelope(transactionEnvelope: transactionEnvelope, networkId: networkId)
 
             var request = URLRequest(url: url)
