@@ -137,8 +137,8 @@ extension AccountViewController {
                 return
             }
 
-            guard let success = d?["success"] as? Bool, success == true else {
-                promise.signal(Error.invalidResponse(message: d?["error"] as? String))
+            guard let success = d["success"] as? Bool, success == true else {
+                promise.signal(Error.invalidResponse(message: d["error"] as? String))
                 return
             }
 

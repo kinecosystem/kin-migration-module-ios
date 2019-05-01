@@ -14,7 +14,7 @@ target 'KinMigrationModule' do
   pod 'StellarKit'
   pod 'StellarErrors'
   pod 'KinUtil'
-  pod 'Sodium', '0.7.0'
+  pod 'Sodium'
 
   # Fixes the framework tests failing to build
   target 'KinMigrationModuleTests' do
