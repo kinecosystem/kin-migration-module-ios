@@ -108,4 +108,4 @@ public protocol PaymentInfoProtocol {
 }
 
 internal let kinCoreAssetUnitDivisor: UInt64 = 10_000_000
-internal let kinSDKAssetUnitDivisor: UInt64 = 100_000
+internal let kinSDKAssetUnitDivisor: UInt64 = 1
