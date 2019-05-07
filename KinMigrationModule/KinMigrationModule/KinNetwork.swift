@@ -31,7 +31,7 @@ extension Network {
         }
     }
 
-    var mapToKinSDK: KinSDK.Network {
+    public var mapToKinSDK: KinSDK.Network {
         switch self {
         case .mainNet:
             return .mainNet
