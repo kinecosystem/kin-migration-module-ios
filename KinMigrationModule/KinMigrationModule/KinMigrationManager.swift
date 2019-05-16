@@ -160,7 +160,7 @@ extension KinMigrationManager {
     }
 
     fileprivate func startMigration() {
-        guard kinCoreClient.accounts.count > 0 else {
+        guard kinCoreClient.accounts.count > 0 && migratePublicAddress != nil else {
             completed(biReadyReason: .noAccountToMigrate)
             return
         }
