@@ -1,19 +1,18 @@
 {
   "name": "KinCoreSDK",
-  "version": "0.7.13",
+  "version": "0.8.1",
   "summary": "Pod for the KIN Core SDK.",
   "description": "Initial pod for the KIN SDK.",
-  "homepage": "https://github.com/kinfoundation/kin-core-ios",
+  "homepage": "https://github.com/kinecosystem/kin-core-ios",
   "license": {
-    "type": "MIT",
-    "file": "LICENSE.md"
+    "type": "Kin Ecosystem SDK License"
   },
   "authors": {
-    "Kin Foundation": "kin@kik.com"
+    "Kin Foundation": "info@kin.org"
   },
   "source": {
-    "git": "https://github.com/kinfoundation/kin-core-ios.git",
-    "tag": "0.7.13",
+    "git": "https://github.com/kinecosystem/kin-core-ios.git",
+    "tag": "0.8.1",
     "submodules": true
   },
   "source_files": [
@@ -22,14 +21,14 @@
   ],
   "dependencies": {
     "StellarKit": [
-      "0.3.11"
+      "0.4.1"
     ],
     "Sodium": [
-      "0.7.0"
+      "0.8.0"
     ]
   },
   "platforms": {
     "ios": "8.0"
   },
-  "swift_version": "3.2"
+  "swift_version": "5.0"
 }
