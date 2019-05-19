@@ -27,7 +27,6 @@
 		15DA0C5C0C0EB3BFBC08CB556EEDE418 /* StellarEventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94DA7DADADCE52E84606D04422D25EF /* StellarEventSource.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1869570DD86BE7C08D8F8367B82BB79A /* crypto_auth_hmacsha256.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DD2474B952B5F458D172439C909BC1E /* crypto_auth_hmacsha256.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		193E37A6E84199E0F083F1F7A7AD2263 /* StellarUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545FF5A132415DCD089FC2F6C6441053 /* StellarUtils.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		197C8C89385B163609DA0471DEDBFCA9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48894836333386FC69B3DB6C6608A81A /* Foundation.framework */; };
 		1A0601603977D89B2BB96EFE05474BFC /* crypto_verify_16.h in Headers */ = {isa = PBXBuildFile; fileRef = EAC39C42875F6C3A173775C0ACEB44D1 /* crypto_verify_16.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1A12CC2065EE995B0AA7FBBDA9A4B8D7 /* KinAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3FC381B39FCF9B3E60DBD61FD2EE3 /* KinAccounts.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1FB81C2B7D984E82A55360A23D668BDE /* export.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B81EA9BFBC737E63C94F33A93FBE36D /* export.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -39,7 +38,6 @@
 		253DBA94E25203FD539EDFEE5E44F78D /* crypto_sign_edwards25519sha512batch.h in Headers */ = {isa = PBXBuildFile; fileRef = BE265FC9154A55566B18E164BA879E20 /* crypto_sign_edwards25519sha512batch.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2725958EB1F33295694609F62411F7F6 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03411D2B385D69C99AAACC6DEE2EEFF /* Asset.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		28E412BEB5320D3040F5268C3E4CD31A /* KinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B83C158D30F2DEB6CF6C2E11257419E5 /* KinUtil.framework */; };
-		29A3C5E1AF0B9A9EFDBCD7F072AD7597 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48894836333386FC69B3DB6C6608A81A /* Foundation.framework */; };
 		2A92D50DA281D5180B115BAA3C432A1B /* Data+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F140E45409416998FDEAE1F5DFD8DDEA /* Data+extensions.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		2B9CC89D7D612249A4C887BB767C4D2B /* Sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A80E9E754A76A47E41735CE090DAF53 /* Sign.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		2E27E7AD0E4207FFF8FF76DADEF9C87E /* crypto_core_hchacha20.h in Headers */ = {isa = PBXBuildFile; fileRef = 63BAF995A52325DB9AB5AC3808E566E4 /* crypto_core_hchacha20.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -49,10 +47,10 @@
 		308F6A496316B458B99C780B84D81722 /* TxBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA343256911D2CEA7EF3FD339BF45F8 /* TxBuilder.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		311C0E92637AFD4817DDAA1B3F29F194 /* crypto_pwhash_argon2i.h in Headers */ = {isa = PBXBuildFile; fileRef = E1DD577E0A1E9DDBA2293ED5F6588355 /* crypto_pwhash_argon2i.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3141D59446DA3F6F8169967BD32B528B /* Pods-KinMigrationModule-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 082A87EAC4F4AE5881227830BBBE0BCD /* Pods-KinMigrationModule-dummy.m */; };
+		314EDB7FEC8B49C46C4A7FE5F6441EF5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBA30CDE051BE4B5AD7A3230E9C7E2A /* Foundation.framework */; };
 		316228043456A15052B058B33A3B4C90 /* StellarErrors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1D5273EDF7F79573B3772464C0D68A /* StellarErrors.framework */; };
 		322FCFDFD9D188BF385A2847A7166075 /* PublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDF4BD3FE42E1A39FD508AB4A5A6BAE /* PublicKey.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		365EA3E548C41DD4F873C757B92E6811 /* GenericHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE90A4FD64505ACEF5EDC1737BD0DCB7 /* GenericHash.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		36D5F4EEC824B07A2321A4AC9024B80B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48894836333386FC69B3DB6C6608A81A /* Foundation.framework */; };
 		3A06BEAFE610DD26B5C87A80D1FD5725 /* crypto_secretbox.h in Headers */ = {isa = PBXBuildFile; fileRef = E4678A55ED0258B6C85C38BAC31890D7 /* crypto_secretbox.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3A2E21994D306F03561088FFBE25ABDD /* KinMigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5EEABD236A656224B96DE16C647684 /* KinMigrationManager.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		3A385FA103D315DCDFF72D8832AC8DB4 /* KinMigrationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2558F76737F1E10CBF0581C38171ADB /* KinMigrationError.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -64,7 +62,6 @@
 		3F11FA1E97EF0D242027556F134ABDFD /* WhitelistEnvelope.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4818D8AD256153EA120768A535D201 /* WhitelistEnvelope.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		420860671EEDD4102D2F11C2BBF9E6CA /* KinSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A676E59FE8862882455FB954E7D415E2 /* KinSDK.framework */; };
 		43AC3A5E395876F19BA82F968D727F44 /* WrappedKinSDKAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AA0F8CD98713EA8F2F7B908D7448FC /* WrappedKinSDKAccounts.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		43B79D477A7A0202E8F2AF419EC9E812 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48894836333386FC69B3DB6C6608A81A /* Foundation.framework */; };
 		440BE028121B82EC6163DB27E727C5C8 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C85AFC2EED133B7807365298F065E1A /* Network.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		44A9A5019B2CA28DA508AA9016C24420 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D778EC6F790B98D36A74C5F0550DB0C3 /* Transaction.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		453D00BD8D2B6A6D87C4A2551E088459 /* KinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B83C158D30F2DEB6CF6C2E11257419E5 /* KinUtil.framework */; };
@@ -100,12 +97,14 @@
 		68C559C7E8FB2353D5903AEBA9833CA0 /* crypto_scalarmult.h in Headers */ = {isa = PBXBuildFile; fileRef = 95334CC1C3F0F10A09ED10EA2F0F185A /* crypto_scalarmult.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		6AA49EF94A18F56A236285EDB107E9C2 /* crypto_aead_chacha20poly1305.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FA4C2A106705C8A49F94871082576E /* crypto_aead_chacha20poly1305.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		6AA9DB37754AB24B9E8B993C68B17973 /* KeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E514A5D892B27E96A7FA9DF8A0331D7C /* KeychainSwift.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		6B30CE5B4476F09F8D8112DD18BE4591 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBA30CDE051BE4B5AD7A3230E9C7E2A /* Foundation.framework */; };
 		6DFB14F58438F047B3A8483CAA1C5714 /* WrappedKinSDKWatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA012340BAF4519BE1DA242F161C84D4 /* WrappedKinSDKWatchers.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		6EA93674A3E0401717D8ACC0AE68861F /* crypto_verify_64.h in Headers */ = {isa = PBXBuildFile; fileRef = E633A61499C107864CCFF4914AF9DE64 /* crypto_verify_64.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7305AB9C86A372BA7D9CF96E13F9F306 /* KinNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD2F1784171129EAA16A7916A8DFBA /* KinNetwork.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		736E2507B662A69E4097293BA144B2D8 /* KeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CF8110ADB35578E718A57E0519FE25 /* KeyStore.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		73700D1774E7EA01431440E36D278B10 /* crypto_sign.h in Headers */ = {isa = PBXBuildFile; fileRef = 88E424E1A5AE7F2A0AEC2D588ED281E6 /* crypto_sign.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		740A6C86E2A6F65EDF6DD45BE7C4100D /* randombytes_salsa20_random.h in Headers */ = {isa = PBXBuildFile; fileRef = DE399469AC7646867D4773C4B80C600A /* randombytes_salsa20_random.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		744CFE6618F96A38A80D3AA5927BF0ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBA30CDE051BE4B5AD7A3230E9C7E2A /* Foundation.framework */; };
 		773010E6281F17F2E9319E183BCAF802 /* WrappedKinCoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD9025F629636698A677FDCEF22630 /* WrappedKinCoreClient.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		7798BCFA340EDDF0E569928BA03F9656 /* StellarErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38EF3753803DB79ACD0844942DD4070 /* StellarErrors.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		77E8C8CA67C34B6F6B010B81DB1C16F0 /* crypto_core_curve25519.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EF08A00E184EC9726450E3AF504708C /* crypto_core_curve25519.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -115,6 +114,7 @@
 		7FA8B8C5E39A04AD2734BFC4F66A1CE8 /* PWHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = C635DF0749DFD39BD6CB07980CA00CB7 /* PWHash.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		802704BC6A6372CC488040C3B6C6267C /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD55E62D7002130CE34211AD7A87AFD /* Operations.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		80D1BA88B80FDEC44B2BF750897213CF /* StellarErrors-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 22531CDC94E3D0D5E7B729124D62F7C1 /* StellarErrors-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		813783165EC62F79659D2567CACBE7D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBA30CDE051BE4B5AD7A3230E9C7E2A /* Foundation.framework */; };
 		81659E1D474F6A8A7CA28357DF4A5845 /* Sodium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7B709AACE662C0DB0E62FCD82113C82 /* Sodium.framework */; };
 		8347F3D5DF314CFD959A6A87161FCB6B /* KinClientFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864179358A675E02189D380951D1B78A /* KinClientFactory.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		845626156D83C0DF8FE5CB9BBCAA9A38 /* Pods-KinMigrationModuleTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BE56735C7268DB4936A83EE0F0C00C48 /* Pods-KinMigrationModuleTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -130,6 +130,7 @@
 		8D679CD32AE304752D78CC3F9567EDB1 /* crypto_stream_xchacha20.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FFF416DF77FBA225CBA9F6616897381 /* crypto_stream_xchacha20.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8ED3238DF07DF1722734DFDDC729F9A1 /* crypto_stream_salsa208.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E4781FF93EA91F6DD5F47486CF16F9 /* crypto_stream_salsa208.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8F45CB3891FD18ED6162701946ABACCE /* crypto_core_salsa20.h in Headers */ = {isa = PBXBuildFile; fileRef = 263D0B42AF5BAD7F8603519F38C34A83 /* crypto_core_salsa20.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		90D9A5AFE1AF8ED5D5D9CB14BE70EA51 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBA30CDE051BE4B5AD7A3230E9C7E2A /* Foundation.framework */; };
 		918C4EE8C0843C5E463E70AE01080A09 /* WrappedKinCoreWatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430744610E872E327440A2810733F28A /* WrappedKinCoreWatchers.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		9212FC9A39FE1963AFACA2E215D056A2 /* StellarErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721A6DC241BCEB0D92381DC42048ED6A /* StellarErrors.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		9520D2236EDEBF2ECBB9D26E8E4F8F38 /* HorizonRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC343F299244CED21CD43BDF93C181A5 /* HorizonRequest.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -142,6 +143,7 @@
 		9F977473E1B12376FF4D4F70744706B4 /* TegKeychainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37761B830A5897F8198981489008148C /* TegKeychainConstants.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		A132B8979873C91F859B694E5A94C325 /* StellarResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE88CA8BF1F7C5D9C8E9828009009FEF /* StellarResults.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		A16F88D3233DC757829F612151ECEBAF /* crypto_aead_xchacha20poly1305.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F984599B61BB88D2E09B44DD6150BB8 /* crypto_aead_xchacha20poly1305.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		A7E21AD186BADBD38DA7FE7EDED2D93B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBA30CDE051BE4B5AD7A3230E9C7E2A /* Foundation.framework */; };
 		A93E29C38280969D28F228C97E79D7A4 /* Ledger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6443CAC3C7A3CB91354FC095B97DF597 /* Ledger.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		A9CD63467FCAF44FA68A7D2A97A4DC01 /* StellarOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545DE841DEDCA2DB23DF8E4CE6264F0C /* StellarOps.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		AA9C76556BE5E40C3D77787E1C65516C /* crypto_hash_sha512.h in Headers */ = {isa = PBXBuildFile; fileRef = 362BC51C4B956AC9068884CB4F3E1ACD /* crypto_hash_sha512.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -154,6 +156,7 @@
 		B2590938ECCBD325E2FEACD67D378BDD /* KinSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 629A22B2FC561AAEE134D5672F14AD6A /* KinSDK-dummy.m */; };
 		B2BB6EBEA9A11D9142142CE2A050A8A5 /* crypto_stream_salsa2012.h in Headers */ = {isa = PBXBuildFile; fileRef = 53266374CF365562092B9667E94CBE0A /* crypto_stream_salsa2012.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B3695E529EF0FA560A6F88EB287A0B78 /* crypto_stream.h in Headers */ = {isa = PBXBuildFile; fileRef = E442F5A719521BE53FFC55F506713D3D /* crypto_stream.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		B3DA7284B1CB34A307FBF3529545F3E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBA30CDE051BE4B5AD7A3230E9C7E2A /* Foundation.framework */; };
 		B47AB6238B5FC703A9C414D42307DEB1 /* Watchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BDC779CFF1AF12D4551B35E2A67522 /* Watchers.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		B62EB56237C5E344F2D792D3B300A04F /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E5A0DC01FF8AD6C2CF8FE4E723D718 /* Observable.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		B737BC6067B43307B552CABE32B5E941 /* sodium_lib.h in Headers */ = {isa = PBXBuildFile; fileRef = 966196E5231671D80360C65A5F9BCBF0 /* sodium_lib.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -188,10 +191,7 @@
 		D3F6DD6B7E8CA85830A1979CD8378990 /* ShortHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFE62FB32947E63455E0F05A5C94D29 /* ShortHash.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		D43D401B492A0F65DBE4B476095EC01D /* Aead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D410DA72E9AB1C4F0F524BD2888CFD9 /* Aead.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		D6A2A4B4EEEC29F5729842C6ECA778AE /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7C274D52C146A4AB3A1A405BAF7BBA /* Asset.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		D70CAF95FF70FBA4B8ADF1FDCE0F8425 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48894836333386FC69B3DB6C6608A81A /* Foundation.framework */; };
 		DDC3DB3666DCB188FE4FF2BE5652C556 /* crypto_scalarmult_ed25519.h in Headers */ = {isa = PBXBuildFile; fileRef = 665BA820FAE4A0ACD19D9D70455F2170 /* crypto_scalarmult_ed25519.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		DECB3DADE5E354DF8B0170E5515FFB32 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48894836333386FC69B3DB6C6608A81A /* Foundation.framework */; };
-		DECE257809D3D153F22ADDDD9EA5564F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48894836333386FC69B3DB6C6608A81A /* Foundation.framework */; };
 		E0C3B56DE27CD319862E41265290BBA0 /* TegKeychainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102EDDB64B4B7EE63841D37D2F5D3A34 /* TegKeychainConstants.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		E1FA97D882F3DD4246C9DC528BA365B8 /* StellarKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FC2112332A025A931B81D9E60DDE002 /* StellarKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E20CFB8B5C33BFF7A6222A5931577A17 /* KinMigrationModule-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E2C67B55E09F2E7726E4AF70F75BF3B /* KinMigrationModule-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -203,11 +203,10 @@
 		E46DACDECF261DAE63E11F008AD188A9 /* StellarErrors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8072253A4130AE502C3C9B37DEA9C02B /* StellarErrors-dummy.m */; };
 		E612E600E4BBF3516017255BAD181876 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD196BE258A6FF80CD4141058BFD150 /* Auth.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		E6D1803623D7F31CEDDC91CA60894073 /* Array+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FD6FBCA7143C52EC683FD0B3AC5357 /* Array+extensions.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		E7D2E35599B4E5652A41D9101F32D96D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48894836333386FC69B3DB6C6608A81A /* Foundation.framework */; };
 		E853BF0E5797F775ADA101850A0ABB0D /* crypto_auth_hmacsha512.h in Headers */ = {isa = PBXBuildFile; fileRef = 537598CBC624AA05866287B39D941B80 /* crypto_auth_hmacsha512.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		E8CD70CDF24EFEA01F902E1F3E983BEF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBA30CDE051BE4B5AD7A3230E9C7E2A /* Foundation.framework */; };
 		E8D7F3C3BC2322363AFADEC4B54AE332 /* crypto_scalarmult_curve25519.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A71807446B46E8220BD3B6EB2859767 /* crypto_scalarmult_curve25519.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		EA1A58ECFCEFF3A0D7D803241A6D0F74 /* KinCoreSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E07C580AD479E1F24E21E506969CD67 /* KinCoreSDK-dummy.m */; };
-		EA29671794D35E53B61DF9B0240E1AFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48894836333386FC69B3DB6C6608A81A /* Foundation.framework */; };
 		EB68ED049EB53F1529991E68F6272C21 /* KinError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CEEA6A9C022AFB9EAB413C8A37BF0C /* KinError.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		EB88A5FD6539B5919E4D145560FB877D /* StellarUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3827BEE4283F6ED84D67F22F52C1786 /* StellarUtils.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		EC2BCD84E17F206FF4FC61BD7906597D /* BCKeyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF754693FF5142039639B4D089462995 /* BCKeyUtils.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -215,10 +214,11 @@
 		EE3FBA64DDF9ACC028C9E68938847605 /* KinMigrationBI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384B481390F89BB49179859F87385DD /* KinMigrationBI.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		EF212491D6FC0F145D4E3664A4551F01 /* WrappedKinCoreAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DA880E71B57D108584A7AF56C2B7F7 /* WrappedKinCoreAccount.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		EF57F2862E09FAA09DF7D15BA67E0B92 /* TxBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6796EB42931881870C3746CFBA2A7A1D /* TxBuilder.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		F218BD594A8F5E5009C6B07D8ACB9517 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBA30CDE051BE4B5AD7A3230E9C7E2A /* Foundation.framework */; };
 		F379649F78CAB68792C7BFE83E6707B7 /* runtime.h in Headers */ = {isa = PBXBuildFile; fileRef = 767064C91B020C81D2E33FE91CBBEEBF /* runtime.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		F4B8DA623729594A167B814D4665D717 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBA30CDE051BE4B5AD7A3230E9C7E2A /* Foundation.framework */; };
 		F57CA67BF30A7718CA9687665106055C /* crypto_auth_hmacsha512256.h in Headers */ = {isa = PBXBuildFile; fileRef = 0EE88C6CFDFE35D3B448F8E561BD810C /* crypto_auth_hmacsha512256.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		F6735C6B6F17DA19096EE87A63C0EDD8 /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24767FC24D21D29B1BE9193E25E16C08 /* String+extensions.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		F6CBADA4E6C49355C54D99B552DDED6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48894836333386FC69B3DB6C6608A81A /* Foundation.framework */; };
 		F72A616FC5554950F548294A608E7B2C /* PublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7840C7E68A79C42412C5C2FB1D4300C /* PublicKey.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		F7727F37CEE104A5FF307B6BAB9BF6A4 /* KinAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57744696C550C7D18C4457D87269926 /* KinAccount.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		F7B4B12AA8D3CC29BB29FCC34DBF3254 /* crypto_kdf_blake2b.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F4B76E201D365A9DC0FF97CD6FC7AF5 /* crypto_kdf_blake2b.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -442,6 +442,7 @@
 		2BB2B643DBE3610F7E2DA243BA706192 /* Pods-KinMigrationSampleApp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-KinMigrationSampleApp.modulemap"; sourceTree = "<group>"; };
 		2CD55E62D7002130CE34211AD7A87AFD /* Operations.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Operations.swift; path = KinSDK/KinSDK/source/blockchain/types/Operations.swift; sourceTree = "<group>"; };
 		2D3CE4F7E5AB6C593D944FE0A6B9A629 /* SecretKeyGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SecretKeyGenerator.swift; path = Sodium/Generators/SecretKeyGenerator.swift; sourceTree = "<group>"; };
+		2DBA30CDE051BE4B5AD7A3230E9C7E2A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		2DCA082D6EFD8EAB20866EEA3097966F /* KeychainSwift.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainSwift.swift; path = "KinSDK/KinSDK/source/third-party/keychain-swift/KeychainSwift/KeychainSwift.swift"; sourceTree = "<group>"; };
 		2F4B76E201D365A9DC0FF97CD6FC7AF5 /* crypto_kdf_blake2b.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_kdf_blake2b.h; path = Sodium/libsodium/crypto_kdf_blake2b.h; sourceTree = "<group>"; };
 		3464A7AB8759243E9971E235D01EB4EB /* Bytes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Bytes.swift; path = Sodium/Bytes.swift; sourceTree = "<group>"; };
@@ -468,7 +469,6 @@
 		44F1B8311AA42C53281A246FCF327EF1 /* Pods-KinMigrationModuleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KinMigrationModuleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		453DA721D702C9D805AEE3B37CF1F8C6 /* SHA256.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SHA256.swift; path = "KinSDK/KinSDK/source/third-party/SHA256.swift"; sourceTree = "<group>"; };
 		46270546C56E3725BAC929CA5A5D3B5D /* KinAccounts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KinAccounts.swift; path = KinSDK/KinSDK/source/KinAccounts.swift; sourceTree = "<group>"; };
-		48894836333386FC69B3DB6C6608A81A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		49F8E9911A94D22311CEF4F09AF7A775 /* Sodium.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Sodium.modulemap; sourceTree = "<group>"; };
 		4A5E32DDF75DD24BF6C56615A7EAF536 /* Stream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Stream.swift; path = Sodium/Stream.swift; sourceTree = "<group>"; };
 		4B0DF3DEBECD2EB23917AC469339B134 /* NetworkId.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkId.swift; path = KinSDK/KinSDK/source/NetworkId.swift; sourceTree = "<group>"; };
@@ -671,7 +671,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29A3C5E1AF0B9A9EFDBCD7F072AD7597 /* Foundation.framework in Frameworks */,
+				813783165EC62F79659D2567CACBE7D7 /* Foundation.framework in Frameworks */,
 				FF3FF014351BCE70AB089ACBE75B0CC2 /* Sodium.framework in Frameworks */,
 				145FF39EF1A89103F38E12083EAEB495 /* StellarKit.framework in Frameworks */,
 			);
@@ -681,7 +681,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7D2E35599B4E5652A41D9101F32D96D /* Foundation.framework in Frameworks */,
+				744CFE6618F96A38A80D3AA5927BF0ED /* Foundation.framework in Frameworks */,
 				453D00BD8D2B6A6D87C4A2551E088459 /* KinUtil.framework in Frameworks */,
 				F9A502FB720CD6A195DCCA8AB31570FA /* Sodium.framework in Frameworks */,
 			);
@@ -691,7 +691,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6CBADA4E6C49355C54D99B552DDED6F /* Foundation.framework in Frameworks */,
+				A7E21AD186BADBD38DA7FE7EDED2D93B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,7 +699,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DECB3DADE5E354DF8B0170E5515FFB32 /* Foundation.framework in Frameworks */,
+				F4B8DA623729594A167B814D4665D717 /* Foundation.framework in Frameworks */,
 				28E412BEB5320D3040F5268C3E4CD31A /* KinUtil.framework in Frameworks */,
 				316228043456A15052B058B33A3B4C90 /* StellarErrors.framework in Frameworks */,
 			);
@@ -709,7 +709,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D70CAF95FF70FBA4B8ADF1FDCE0F8425 /* Foundation.framework in Frameworks */,
+				B3DA7284B1CB34A307FBF3529545F3E2 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,7 +717,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DECE257809D3D153F22ADDDD9EA5564F /* Foundation.framework in Frameworks */,
+				6B30CE5B4476F09F8D8112DD18BE4591 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,7 +725,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36D5F4EEC824B07A2321A4AC9024B80B /* Foundation.framework in Frameworks */,
+				F218BD594A8F5E5009C6B07D8ACB9517 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -733,7 +733,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				197C8C89385B163609DA0471DEDBFCA9 /* Foundation.framework in Frameworks */,
+				E8CD70CDF24EFEA01F902E1F3E983BEF /* Foundation.framework in Frameworks */,
 				87965585A5CFE98A689DE4B5E0323DC5 /* KinCoreSDK.framework in Frameworks */,
 				420860671EEDD4102D2F11C2BBF9E6CA /* KinSDK.framework in Frameworks */,
 				81659E1D474F6A8A7CA28357DF4A5845 /* Sodium.framework in Frameworks */,
@@ -744,7 +744,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43B79D477A7A0202E8F2AF419EC9E812 /* Foundation.framework in Frameworks */,
+				314EDB7FEC8B49C46C4A7FE5F6441EF5 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -752,7 +752,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA29671794D35E53B61DF9B0240E1AFD /* Foundation.framework in Frameworks */,
+				90D9A5AFE1AF8ED5D5D9CB14BE70EA51 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -853,14 +853,6 @@
 			path = KinMigrationModule/KinMigrationModule/WrappedKinSDK;
 			sourceTree = "<group>";
 		};
-		44E1EED1E10BE0DC8309141CE0C32783 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				48894836333386FC69B3DB6C6608A81A /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
 		451E820A5031886B82EBB928B9B51BCE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -870,7 +862,7 @@
 				C7B709AACE662C0DB0E62FCD82113C82 /* Sodium.framework */,
 				CB1D5273EDF7F79573B3772464C0D68A /* StellarErrors.framework */,
 				BEF88038EBFF2B3CC383747B5CD3A57D /* StellarKit.framework */,
-				44E1EED1E10BE0DC8309141CE0C32783 /* iOS */,
+				B41C4709CE0F31D34D5BA3C2C88AAC18 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1127,6 +1119,14 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/StellarErrors";
+			sourceTree = "<group>";
+		};
+		B41C4709CE0F31D34D5BA3C2C88AAC18 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				2DBA30CDE051BE4B5AD7A3230E9C7E2A /* Foundation.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		BEF3D42A312FA776F7986FF6FC71933E /* Products */ = {
@@ -1628,12 +1628,12 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -2073,7 +2073,354 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		07488D4657FB0A78086563621D425F8A /* Debug */ = {
+		2626DD785087FAED7C450463CB2EE9F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72601F3786C319A9C2463ADE15E2B816 /* Pods-KinMigrationModule.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-KinMigrationModule/Pods-KinMigrationModule-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-KinMigrationModule/Pods-KinMigrationModule.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		47ACCC838AC32BA4A399CDE0CF574B24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF82135161082D188FCEFED96982A577 /* KinCoreSDK.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/KinCoreSDK/KinCoreSDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/KinCoreSDK/KinCoreSDK-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/KinCoreSDK/KinCoreSDK.modulemap";
+				PRODUCT_MODULE_NAME = KinCoreSDK;
+				PRODUCT_NAME = KinCoreSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6880461EBC4D9BF8DDCEAEDC60A4F530 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3DE6F8B7340002F8436C13B3C6557C5C /* StellarErrors.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/StellarErrors/StellarErrors-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/StellarErrors/StellarErrors-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/StellarErrors/StellarErrors.modulemap";
+				PRODUCT_MODULE_NAME = StellarErrors;
+				PRODUCT_NAME = StellarErrors;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6E88821172B85149D60AC3705D4E2B32 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EA8637CA1F8A64A4F68C5BEB51D813A /* Sodium.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Sodium/Sodium-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Sodium/Sodium-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Sodium/Sodium.modulemap";
+				PRODUCT_MODULE_NAME = Sodium;
+				PRODUCT_NAME = Sodium;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6F690E912E99AA1813996B4D0D51B54F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF82135161082D188FCEFED96982A577 /* KinCoreSDK.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/KinCoreSDK/KinCoreSDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/KinCoreSDK/KinCoreSDK-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/KinCoreSDK/KinCoreSDK.modulemap";
+				PRODUCT_MODULE_NAME = KinCoreSDK;
+				PRODUCT_NAME = KinCoreSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		87B10A54E8DC04B44187EB6DC152817A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD10CACEDE4170AA7B3E3766B3C1ECBE /* Pods-KinMigrationSampleApp.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-KinMigrationSampleApp/Pods-KinMigrationSampleApp-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-KinMigrationSampleApp/Pods-KinMigrationSampleApp.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		890A678FEA7C87C1899471DFDF2046B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E56A2535387D2D244CA48631029BB46 /* KinSDK.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/KinSDK/KinSDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/KinSDK/KinSDK-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/KinSDK/KinSDK.modulemap";
+				PRODUCT_MODULE_NAME = KinSDK;
+				PRODUCT_NAME = KinSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8F17DC3A99F99FBAD606CE6963886315 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		8F50AD9FB702DA54872117FD6A495F7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EA8637CA1F8A64A4F68C5BEB51D813A /* Sodium.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Sodium/Sodium-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Sodium/Sodium-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Sodium/Sodium.modulemap";
+				PRODUCT_MODULE_NAME = Sodium;
+				PRODUCT_NAME = Sodium;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		916E0404255105F480DC4950B7625F7A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2132,14 +2479,14 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		077E35DCA42747FDE379D186F9479A2F /* Release */ = {
+		91DD3CE7DC7E0C5EB14ADC161C4E9F8E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DE6F8B7340002F8436C13B3C6557C5C /* StellarErrors.xcconfig */;
+			baseConfigurationReference = B745D6F6135F40D915A24394EC505C32 /* KinMigrationModule.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2150,8 +2497,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/StellarErrors/StellarErrors-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/StellarErrors/StellarErrors-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/KinMigrationModule/KinMigrationModule-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/KinMigrationModule/KinMigrationModule-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2159,9 +2506,9 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MODULEMAP_FILE = "Target Support Files/StellarErrors/StellarErrors.modulemap";
-				PRODUCT_MODULE_NAME = StellarErrors;
-				PRODUCT_NAME = StellarErrors;
+				MODULEMAP_FILE = "Target Support Files/KinMigrationModule/KinMigrationModule.modulemap";
+				PRODUCT_MODULE_NAME = KinMigrationModule;
+				PRODUCT_NAME = KinMigrationModule;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -2173,258 +2520,7 @@
 			};
 			name = Release;
 		};
-		0C01E18817F94CC5AE8AF6E16C699657 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5232CB715AC5DAA48055876F8E547B71 /* StellarKit.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/StellarKit/StellarKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/StellarKit/StellarKit-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/StellarKit/StellarKit.modulemap";
-				PRODUCT_MODULE_NAME = StellarKit;
-				PRODUCT_NAME = StellarKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		2626DD785087FAED7C450463CB2EE9F0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72601F3786C319A9C2463ADE15E2B816 /* Pods-KinMigrationModule.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-KinMigrationModule/Pods-KinMigrationModule-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-KinMigrationModule/Pods-KinMigrationModule.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		34605C15C9C1F3E74D5D858990B26E15 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DF82135161082D188FCEFED96982A577 /* KinCoreSDK.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/KinCoreSDK/KinCoreSDK-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/KinCoreSDK/KinCoreSDK-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/KinCoreSDK/KinCoreSDK.modulemap";
-				PRODUCT_MODULE_NAME = KinCoreSDK;
-				PRODUCT_NAME = KinCoreSDK;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		4FF297F1CE7D7B2555F5FAB8A5ABA20A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35AD0A0AB3F267AA81E4C14C5BEBDD8C /* KinUtil.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/KinUtil/KinUtil-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/KinUtil/KinUtil-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/KinUtil/KinUtil.modulemap";
-				PRODUCT_MODULE_NAME = KinUtil;
-				PRODUCT_NAME = KinUtil;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		73F4C0FFE97B3962BD07045F90C7A3B1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DF82135161082D188FCEFED96982A577 /* KinCoreSDK.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/KinCoreSDK/KinCoreSDK-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/KinCoreSDK/KinCoreSDK-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/KinCoreSDK/KinCoreSDK.modulemap";
-				PRODUCT_MODULE_NAME = KinCoreSDK;
-				PRODUCT_NAME = KinCoreSDK;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		7D90C9239E2988F19269B705BB4D1046 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DE6F8B7340002F8436C13B3C6557C5C /* StellarErrors.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/StellarErrors/StellarErrors-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/StellarErrors/StellarErrors-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/StellarErrors/StellarErrors.modulemap";
-				PRODUCT_MODULE_NAME = StellarErrors;
-				PRODUCT_NAME = StellarErrors;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		87B10A54E8DC04B44187EB6DC152817A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AD10CACEDE4170AA7B3E3766B3C1ECBE /* Pods-KinMigrationSampleApp.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-KinMigrationSampleApp/Pods-KinMigrationSampleApp-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-KinMigrationSampleApp/Pods-KinMigrationSampleApp.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		8C172A607BF7331C2C0BDDD217AD8385 /* Debug */ = {
+		A086E914B0AC1057F8DEE8B06C2B1B77 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B745D6F6135F40D915A24394EC505C32 /* KinMigrationModule.xcconfig */;
 			buildSettings = {
@@ -2459,69 +2555,9 @@
 			};
 			name = Debug;
 		};
-		A1962E6FF39BBAC201A2E5DDF99557DF /* Release */ = {
+		B3D434AAF78118D6F99EC50ECE1C16E3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.2;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Release;
-		};
-		ABEBA00C2DAC116DDE1C3BE5C206DAAE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6E56A2535387D2D244CA48631029BB46 /* KinSDK.xcconfig */;
+			baseConfigurationReference = 35AD0A0AB3F267AA81E4C14C5BEBDD8C /* KinUtil.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2532,8 +2568,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/KinSDK/KinSDK-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/KinSDK/KinSDK-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/KinUtil/KinUtil-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/KinUtil/KinUtil-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2541,18 +2577,19 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MODULEMAP_FILE = "Target Support Files/KinSDK/KinSDK.modulemap";
-				PRODUCT_MODULE_NAME = KinSDK;
-				PRODUCT_NAME = KinSDK;
+				MODULEMAP_FILE = "Target Support Files/KinUtil/KinUtil.modulemap";
+				PRODUCT_MODULE_NAME = KinUtil;
+				PRODUCT_NAME = KinUtil;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		B4F40A06169DB66FF1F7A7F062BE68A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2590,6 +2627,77 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		B6754F1286EA710B57B2719102327154 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35AD0A0AB3F267AA81E4C14C5BEBDD8C /* KinUtil.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/KinUtil/KinUtil-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/KinUtil/KinUtil-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/KinUtil/KinUtil.modulemap";
+				PRODUCT_MODULE_NAME = KinUtil;
+				PRODUCT_NAME = KinUtil;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BA0BDD8968C38BA0F48588C06A051DEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5232CB715AC5DAA48055876F8E547B71 /* StellarKit.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/StellarKit/StellarKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/StellarKit/StellarKit-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/StellarKit/StellarKit.modulemap";
+				PRODUCT_MODULE_NAME = StellarKit;
+				PRODUCT_NAME = StellarKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		CBBF3BCC12DF7200577BC08429F66776 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -2667,79 +2775,7 @@
 			};
 			name = Release;
 		};
-		D10286FCBEEAE4FE7DC0D80CD0A60C45 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35AD0A0AB3F267AA81E4C14C5BEBDD8C /* KinUtil.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/KinUtil/KinUtil-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/KinUtil/KinUtil-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/KinUtil/KinUtil.modulemap";
-				PRODUCT_MODULE_NAME = KinUtil;
-				PRODUCT_NAME = KinUtil;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		D524BFB9CC022AE39611CE8748E6AC55 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B745D6F6135F40D915A24394EC505C32 /* KinMigrationModule.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/KinMigrationModule/KinMigrationModule-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/KinMigrationModule/KinMigrationModule-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/KinMigrationModule/KinMigrationModule.modulemap";
-				PRODUCT_MODULE_NAME = KinMigrationModule;
-				PRODUCT_NAME = KinMigrationModule;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		D659D5338128DE676D05773A1AEA3790 /* Release */ = {
+		D1A2373A36D60AABC48AA7B33178D4B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5232CB715AC5DAA48055876F8E547B71 /* StellarKit.xcconfig */;
 			buildSettings = {
@@ -2769,11 +2805,10 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		F5006B15EAE7E5B0EFA5B8E47D046D7D /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2812,7 +2847,7 @@
 			};
 			name = Debug;
 		};
-		F5E222904CD68D162CEBC3ED9D4B38DD /* Release */ = {
+		F7A34F037D8ABC3AABA62E46D595EFE9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E56A2535387D2D244CA48631029BB46 /* KinSDK.xcconfig */;
 			buildSettings = {
@@ -2848,9 +2883,9 @@
 			};
 			name = Release;
 		};
-		F7BD7EAC04EC606FD52F0D8E61AF4953 /* Release */ = {
+		FC7C8C5916F325FD1EA1A8DB50CA9F3F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EA8637CA1F8A64A4F68C5BEB51D813A /* Sodium.xcconfig */;
+			baseConfigurationReference = 3DE6F8B7340002F8436C13B3C6557C5C /* StellarErrors.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2861,8 +2896,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Sodium/Sodium-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Sodium/Sodium-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/StellarErrors/StellarErrors-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/StellarErrors/StellarErrors-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2870,9 +2905,9 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MODULEMAP_FILE = "Target Support Files/Sodium/Sodium.modulemap";
-				PRODUCT_MODULE_NAME = Sodium;
-				PRODUCT_NAME = Sodium;
+				MODULEMAP_FILE = "Target Support Files/StellarErrors/StellarErrors.modulemap";
+				PRODUCT_MODULE_NAME = StellarErrors;
+				PRODUCT_NAME = StellarErrors;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -2884,49 +2919,14 @@
 			};
 			name = Release;
 		};
-		FCCBA3CC9754B03125BE6F28C180A6C2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EA8637CA1F8A64A4F68C5BEB51D813A /* Sodium.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Sodium/Sodium-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Sodium/Sodium-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/Sodium/Sodium.modulemap";
-				PRODUCT_MODULE_NAME = Sodium;
-				PRODUCT_NAME = Sodium;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
 		41133E598A0D2FBD81B409B5462B23D7 /* Build configuration list for PBXNativeTarget "KinMigrationModule" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8C172A607BF7331C2C0BDDD217AD8385 /* Debug */,
-				D524BFB9CC022AE39611CE8748E6AC55 /* Release */,
+				A086E914B0AC1057F8DEE8B06C2B1B77 /* Debug */,
+				91DD3CE7DC7E0C5EB14ADC161C4E9F8E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2934,8 +2934,8 @@
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				07488D4657FB0A78086563621D425F8A /* Debug */,
-				A1962E6FF39BBAC201A2E5DDF99557DF /* Release */,
+				916E0404255105F480DC4950B7625F7A /* Debug */,
+				8F17DC3A99F99FBAD606CE6963886315 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2943,8 +2943,8 @@
 		919EB59EEFEF9CBC1C3CA8ED461C6731 /* Build configuration list for PBXNativeTarget "KinSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				ABEBA00C2DAC116DDE1C3BE5C206DAAE /* Debug */,
-				F5E222904CD68D162CEBC3ED9D4B38DD /* Release */,
+				890A678FEA7C87C1899471DFDF2046B5 /* Debug */,
+				F7A34F037D8ABC3AABA62E46D595EFE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2952,8 +2952,8 @@
 		968837525B6242E1C9C26FB3D1D94FD6 /* Build configuration list for PBXNativeTarget "KinCoreSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				73F4C0FFE97B3962BD07045F90C7A3B1 /* Debug */,
-				34605C15C9C1F3E74D5D858990B26E15 /* Release */,
+				6F690E912E99AA1813996B4D0D51B54F /* Debug */,
+				47ACCC838AC32BA4A399CDE0CF574B24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2961,8 +2961,8 @@
 		9DDDC251393DABEA23631BDA4A21DF79 /* Build configuration list for PBXNativeTarget "StellarErrors" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7D90C9239E2988F19269B705BB4D1046 /* Debug */,
-				077E35DCA42747FDE379D186F9479A2F /* Release */,
+				6880461EBC4D9BF8DDCEAEDC60A4F530 /* Debug */,
+				FC7C8C5916F325FD1EA1A8DB50CA9F3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2970,8 +2970,8 @@
 		A1062DAD23B553E90B1ADC2EFDAD7DBB /* Build configuration list for PBXNativeTarget "KinUtil" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4FF297F1CE7D7B2555F5FAB8A5ABA20A /* Debug */,
-				D10286FCBEEAE4FE7DC0D80CD0A60C45 /* Release */,
+				B6754F1286EA710B57B2719102327154 /* Debug */,
+				B3D434AAF78118D6F99EC50ECE1C16E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2988,8 +2988,8 @@
 		AB45E489B42D614668803280D6B04E7B /* Build configuration list for PBXNativeTarget "StellarKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0C01E18817F94CC5AE8AF6E16C699657 /* Debug */,
-				D659D5338128DE676D05773A1AEA3790 /* Release */,
+				D1A2373A36D60AABC48AA7B33178D4B2 /* Debug */,
+				BA0BDD8968C38BA0F48588C06A051DEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2997,8 +2997,8 @@
 		BBA1C753997D83BD32B6C56F02430897 /* Build configuration list for PBXNativeTarget "Sodium" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FCCBA3CC9754B03125BE6F28C180A6C2 /* Debug */,
-				F7BD7EAC04EC606FD52F0D8E61AF4953 /* Release */,
+				6E88821172B85149D60AC3705D4E2B32 /* Debug */,
+				8F50AD9FB702DA54872117FD6A495F7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
