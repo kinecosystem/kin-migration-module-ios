@@ -1,6 +1,0 @@
-framework module Pods_KinMigrationModule {
-  umbrella header "Pods-KinMigrationModule-umbrella.h"
-
-  export *
-  module * { export * }
-}
