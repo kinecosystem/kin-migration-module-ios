@@ -11,10 +11,8 @@ Pod::Spec.new do |s|
   s.source_files = 'KinMigrationModule/KinMigrationModule/**/*.swift'
 
   s.dependency 'Sodium', '0.8.0'
-  # s.dependency 'KinSDK', '0.9.0'
-  # s.dependency 'KinCoreSDK', '0.8.0'
-  s.dependency 'KinSDK', :path => '../kin-sdk-ios'
-  s.dependency 'KinCoreSDK', :path => '../kin-core-ios'
+  s.dependency 'KinSDK', '0.9.1'
+  s.dependency 'KinCoreSDK', '0.8.1'
 
   s.ios.deployment_target = '8.0'
   s.swift_version = "5.0"

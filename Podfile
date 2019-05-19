@@ -9,8 +9,8 @@ workspace 'KinMigrationModule'
 target 'KinMigrationModule' do
   project 'KinMigrationModule/KinMigrationModule.xcodeproj'
 
-  pod 'KinSDK', :path => '../kin-sdk-ios'
-  pod 'KinCoreSDK', :path => '../kin-core-ios'
+  pod 'KinSDK'
+  pod 'KinCoreSDK'
   pod 'StellarKit'
   pod 'StellarErrors'
   pod 'KinUtil'
