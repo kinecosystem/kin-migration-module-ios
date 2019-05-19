@@ -160,12 +160,12 @@ extension KinMigrationManager {
     }
 
     fileprivate func startMigration() {
-        guard kinCoreClient.accounts.count > 0 && migratePublicAddress != nil else {
+        guard kinCoreClient.accounts.count > 0, let publicAddress = migratePublicAddress, !publicAddress.isEmpty else {
             completed(biReadyReason: .noAccountToMigrate)
             return
         }
 
-        guard let account = kinCoreClient.accounts.makeIterator().first(where: { $0.publicAddress == migratePublicAddress }) else {
+        guard let account = kinCoreClient.accounts.makeIterator().first(where: { $0.publicAddress == publicAddress }) else {
             failed(error: KinMigrationError.invalidPublicAddress)
             return
         }
