@@ -46,6 +46,22 @@ class WrappedKinSDKAccount: KinAccountProtocol {
         return promise
     }
 
+    func aggregateBalance() -> Promise<Kin> {
+        let promise = Promise<Kin>()
+
+        account.aggregatedBalance { kin, error in
+            if let kin = kin {
+                promise.signal(kin)
+            } else if let error = error {
+                promise.signal(KinError(error: error))
+            } else {
+                promise.signal(KinError.internalInconsistency)
+            }
+        }
+
+        return promise
+    }
+
     func balance() -> Promise<Kin> {
         let promise = Promise<Kin>()
 

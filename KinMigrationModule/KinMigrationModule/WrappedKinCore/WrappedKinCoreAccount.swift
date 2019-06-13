@@ -60,6 +60,10 @@ class WrappedKinCoreAccount: KinAccountProtocol {
         return promise
     }
 
+    func aggregateBalance() -> Promise<Kin> {
+        return Promise<Kin>(KinError.internalInconsistency)
+    }
+
     func balance() -> Promise<Kin> {
         let promise = Promise<Kin>()
 

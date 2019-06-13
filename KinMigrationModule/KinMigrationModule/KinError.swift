@@ -19,6 +19,8 @@ public enum KinError: Error {
     case paymentFailed (Error)
     case balanceQueryFailed (Error)
     case invalidAppId                      // KinSDK Only
+    case controlledAccountsQueryFailed(Error)     // KinSDK Only
+    case aggregateBalanceQueryFailed(Error)     // KinSDK Only
     case invalidAmount
     case insufficientFunds
     case accountDeleted
@@ -39,6 +41,8 @@ public enum KinError: Error {
     case dataDencodingFailed
     case destinationNotReadyForAsset (Error)
     case unknownError (Any?)
+    case invalidAccount
+    case decodeTransactionFailed
 
     // Other Errors
     case wrappedError (Error)
@@ -71,6 +75,10 @@ extension KinError: LocalizedError {
             return "Signing Failed"
         case .internalInconsistency:
             return "Internal Inconsistency"
+        case .controlledAccountsQueryFailed:
+            return "Controller Accounts Query Failed"
+        case .aggregateBalanceQueryFailed:
+            return "Aggregate Balance Query Failed"
         case .unknown:
             return "Unknown Error"
 
@@ -96,6 +104,10 @@ extension KinError: LocalizedError {
             return "Data Dencoding Failed"
         case .destinationNotReadyForAsset:
             return "Destination Not Ready For Asset"
+        case .decodeTransactionFailed:
+            return "Decode Transaction Failed"
+        case .invalidAccount:
+            return "Invalid Account"
         case .unknownError:
             return "Unknown Error"
 
@@ -179,8 +191,13 @@ extension KinError {
             return .signingFailed
         case .internalInconsistency:
             return .internalInconsistency
+        case .controlledAccountsQueryFailed(let e):
+            return KinError.mapError(e) ?? .controlledAccountsQueryFailed(e)
+        case .aggregatedBalanceQueryFailed(let e):
+            return KinError.mapError(e) ?? .aggregateBalanceQueryFailed(e)
         case .unknown:
             return .unknown
+
         }
     }
 
@@ -245,6 +262,10 @@ extension KinError {
             return .unknownError(object)
         case .internalInconsistency:
             return .internalInconsistency
+        case .invalidAccount:
+            return .invalidAccount
+        case .decodeTransactionFailed:
+            return .decodeTransactionFailed
         }
     }
 }

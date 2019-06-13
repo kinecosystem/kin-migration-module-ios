@@ -69,6 +69,7 @@ public protocol KinAccountProtocol {
     var extra: Data? { get set }
     func activate() -> Promise<Void> // KinCore only
     func status() -> Promise<AccountStatus>
+    func aggregateBalance() -> Promise<Kin>
     func balance() -> Promise<Kin>
     func burn() -> Promise<String?> // KinCore only
     func sendTransaction(to recipient: String, kin: Kin, memo: String?, fee: Stroop, whitelist: @escaping WhitelistClosure) -> Promise<TransactionId>
