@@ -168,8 +168,6 @@ extension KinMigrationManager {
         }
     }
 
-
-
     fileprivate func startMigration() {
         guard kinCoreClient.accounts.count > 0 else {
             completed(biReadyReason: .noAccountToMigrate)
