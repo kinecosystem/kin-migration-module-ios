@@ -50,6 +50,15 @@ public protocol KinMigrationManagerDelegate: NSObjectProtocol {
      - Parameter error: The error which stopped the migration process.
      */
     func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, error: Error)
+
+    func kinMigrationManager( shouldMigratePublicAddress: String, appId: String) -> Promise<Bool>
+
+}
+
+extension KinMigrationManagerDelegate {
+    func kinMigrationManager( shouldMigratePublicAddress: String, appId: String) -> Promise<Bool> {
+        return Promise<Bool>().signal(true)
+    }
 }
 
 public class KinMigrationManager {
@@ -66,7 +75,7 @@ public class KinMigrationManager {
      The version received from the `kinMigrationManagerNeedsVersion(_:)` delegate.
      */
     public fileprivate(set) var version: KinVersion?
-    
+
     public let serviceProvider: ServiceProviderProtocol
     public let appId: AppId
 
@@ -159,21 +168,31 @@ extension KinMigrationManager {
         }
     }
 
+
+
     fileprivate func startMigration() {
-        guard kinCoreClient.accounts.count > 0, let publicAddress = migratePublicAddress, !publicAddress.isEmpty else {
+        guard kinCoreClient.accounts.count > 0 else {
             completed(biReadyReason: .noAccountToMigrate)
             return
         }
 
-        guard let account = kinCoreClient.accounts.makeIterator().first(where: { $0.publicAddress == publicAddress }) else {
+        guard let account = kinCoreClient.accounts.makeIterator().first(where: { $0.publicAddress == migratePublicAddress }) else {
             failed(error: KinMigrationError.invalidPublicAddress)
             return
         }
 
-        biDelegate?.kinMigrationCallbackStart()
-        delegate?.kinMigrationManagerDidStart(self)
+        delegate?.kinMigrationManager(shouldMigratePublicAddress: migratePublicAddress!, appId: appId.value)
+            .then({ should in
 
-        startBurningAccount(account)
+                if(!should) {
+                    self.version = .kinCore
+                    self.completed(biReadyReason: .noAccountToMigrate)
+                } else {
+                    self.biDelegate?.kinMigrationCallbackStart()
+                    self.delegate?.kinMigrationManagerDidStart(self)
+                    self.startBurningAccount(account)
+                }
+            })
     }
 
     fileprivate func completed(biReadyReason: KinMigrationBIReadyReason) {
@@ -378,7 +397,7 @@ extension KinMigrationManager {
                 self.biDelegate?.kinMigrationRequestAccountMigrationFailed(error: error, publicAddress: account.publicAddress)
 
                 promise.signal(error)
-            }
+        }
 
         return promise
     }
