@@ -60,7 +60,7 @@ public protocol KinMigrationManagerDelegate: NSObjectProtocol {
 
 public extension KinMigrationManagerDelegate {
     func kinMigrationManager( shouldMigrate kinMigrationManager: KinMigrationManager) -> Promise<Bool> {
-        return Promise<Bool>().signal(true)
+        return Promise(true)
     }
 }
 
@@ -78,7 +78,7 @@ public class KinMigrationManager {
      The version received from the `kinMigrationManagerNeedsVersion(_:)` delegate.
      */
     public fileprivate(set) var version: KinVersion?
-    
+
     public let serviceProvider: ServiceProviderProtocol
     public let appId: AppId
 
@@ -183,16 +183,20 @@ extension KinMigrationManager {
         }
 
         shouldMigrate()
-        .then { result in
-            if result {
-                self.biDelegate?.kinMigrationCallbackStart()
-                self.delegate?.kinMigrationManagerDidStart(self)
-                self.startBurningAccount(account)
+            .then { result in
+                if result {
+                    self.biDelegate?.kinMigrationCallbackStart()
+                    self.delegate?.kinMigrationManagerDidStart(self)
+                    self.startBurningAccount(account)
+                }
+                else {
+                    self.version = .kinCore
+                    self.completed(biReadyReason: .noAccountToMigrate)
+                }
             }
-            else {
+            .error { error in
                 self.version = .kinCore
                 self.completed(biReadyReason: .noAccountToMigrate)
-            }
         }
     }
 
@@ -398,7 +402,7 @@ extension KinMigrationManager {
                 self.biDelegate?.kinMigrationRequestAccountMigrationFailed(error: error, publicAddress: account.publicAddress)
 
                 promise.signal(error)
-            }
+        }
 
         return promise
     }
@@ -434,6 +438,6 @@ extension KinMigrationManager {
 
 extension KinMigrationManager {
     fileprivate func shouldMigrate() -> Promise<Bool> {
-        return delegate?.kinMigrationManager(shouldMigrate: self) ?? Promise<Bool>().signal(true)
+        return delegate?.kinMigrationManager(shouldMigrate: self) ?? Promise(true)
     }
 }
