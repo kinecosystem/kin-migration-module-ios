@@ -50,6 +50,18 @@ public protocol KinMigrationManagerDelegate: NSObjectProtocol {
      - Parameter error: The error which stopped the migration process.
      */
     func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, error: Error)
+
+    /**
+     Allows delegate to refuse migration
+     - Parameter kinMigrationManager: The migration manager object providing this information.
+     */
+    func kinMigrationManager( shouldMigrate kinMigrationManager: KinMigrationManager) -> Promise<Bool>
+}
+
+public extension KinMigrationManagerDelegate {
+    func kinMigrationManager( shouldMigrate kinMigrationManager: KinMigrationManager) -> Promise<Bool> {
+        return Promise<Bool>().signal(true)
+    }
 }
 
 public class KinMigrationManager {
@@ -170,10 +182,18 @@ extension KinMigrationManager {
             return
         }
 
-        biDelegate?.kinMigrationCallbackStart()
-        delegate?.kinMigrationManagerDidStart(self)
-
-        startBurningAccount(account)
+        shouldMigrate()
+        .then { result in
+            if result {
+                self.biDelegate?.kinMigrationCallbackStart()
+                self.delegate?.kinMigrationManagerDidStart(self)
+                self.startBurningAccount(account)
+            }
+            else {
+                self.version = .kinCore
+                self.completed(biReadyReason: .noAccountToMigrate)
+            }
+        }
     }
 
     fileprivate func completed(biReadyReason: KinMigrationBIReadyReason) {
@@ -407,5 +427,13 @@ extension KinMigrationManager {
     public func deleteKeystore() {
         kinCoreClient.deleteKeystore()
         kinSDKClient.deleteKeystore()
+    }
+}
+
+// MARK: - Should migrate -
+
+extension KinMigrationManager {
+    fileprivate func shouldMigrate() -> Promise<Bool> {
+        return delegate?.kinMigrationManager(shouldMigrate: self) ?? Promise<Bool>().signal(true)
     }
 }
